@@ -324,7 +324,7 @@ def main():
         for obstacle in obstacles:
             obstacle.update()
             obstacle.draw(window)
-            if player.ch_rect.colliderect(obstacle.rect) and player.is_invincible() == False :
+            if player.ch_rect.colliderect(obstacle.rect) and player.is_invincible() == True:
                 life -= 1
                 player.take_damage()
 
