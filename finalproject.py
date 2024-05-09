@@ -1,4 +1,4 @@
-# 要先安裝pygame 在終端機輸入 mac :python3 -m pip install -U pygame --user
+# 要先安裝pygame，在終端機輸入 mac :python3 -m pip install -U pygame --user
 # windows : py -m pip install -U pygame --user
 # 導入函數庫
 import pygame
