@@ -14,24 +14,24 @@ WHITE = pygame.Color(255, 255, 255)
 BLACK = pygame.Color(0, 0, 0)
 SKYBLUE = pygame.Color(0, 127, 255)
 # import 圖片檔案
-BACKGROUND_LIST = [pygame.image.load(os.path.join("image/background", "1.jpg")), pygame.image.load(os.path.join("image/background", "2.jpg"))]
-CHARACTOR_LIST = [pygame.image.load(os.path.join("image/charactor", "Run1.png")),
-                pygame.image.load(os.path.join("image/charactor", "Run2.png"))]  # 跑步圖片大小 87*94
-JUMPING_IMG = pygame.image.load(os.path.join("image/charactor", "Jump.png"))  # 跳躍圖片大小 87*94
-DUCKING_LIST = [pygame.image.load(os.path.join("image/charactor", "Duck1.png")),
-                pygame.image.load(os.path.join("image/charactor", "Duck2.png"))]  #  蹲下大小 118*60
-ITEM = [pygame.image.load(os.path.join("image/item", "1.png")),
-        pygame.image.load(os.path.join("image/item", "2.png")),
-        pygame.image.load(os.path.join("image/item", "3.png"))]
+BACKGROUND_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/background", "1.jpg")), pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/background", "2.jpg"))]
+CHARACTOR_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "Run1.png")),
+                pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "Run2.png"))]  # 跑步圖片大小 87*94
+JUMPING_IMG = pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "Jump.png"))  # 跳躍圖片大小 87*94
+DUCKING_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "Duck1.png")),
+                pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "Duck2.png"))]  #  蹲下大小 118*60
+ITEM = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item", "1.png")),
+        pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item", "2.png")),
+        pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item", "3.png"))]
 #  大障礙物
-LARGEOBSTACLE = [pygame.image.load(os.path.join("image/largeobstacle", "obstacle1.png")),
-             pygame.image.load(os.path.join("image/largeobstacle", "obstacle2.png")),
-             pygame.image.load(os.path.join("image/largeobstacle", "obstacle3.png"))]
+LARGEOBSTACLE = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/largeobstacle", "obstacle1.png")),
+             pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/largeobstacle", "obstacle2.png")),
+             pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/largeobstacle", "obstacle3.png"))]
 # 小障礙物
-SMALLOBSTACLE = [pygame.image.load(os.path.join("image/smallobstacle", "obstacle1.png")),
-             pygame.image.load(os.path.join("image/smallobstacle", "obstacle2.png"))]
-FLYOBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "obstacle1.png")),
-             pygame.image.load(os.path.join("image/flyobstacle", "obstacle2.png"))]
+SMALLOBSTACLE = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/smallobstacle", "obstacle1.png")),
+             pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/smallobstacle", "obstacle2.png"))]
+FLYOBSTACLE = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/flyobstacle", "obstacle1.png")),
+             pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/flyobstacle", "obstacle2.png"))]
            #  小：68*71 大：99*95 
 # 建立視窗(背景長/寬 ＝ 1000/660)
 window_height = 650
