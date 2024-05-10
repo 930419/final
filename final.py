@@ -3,6 +3,7 @@
 # 導入函數庫
 import pygame
 import os
+import sys
 import random
 import time
 # 初始化pygame
@@ -33,6 +34,16 @@ SMALLOBSTACLE = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image
 FLYOBSTACLE = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/flyobstacle", "obstacle1.png")),
              pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/flyobstacle", "obstacle2.png"))]
            #  小：68*71 大：99*95 
+# 讀取最高分
+def load_highest_score():
+    score_file_path = os.path.join("Documents\\GitHub\\final", "score_record.txt")
+    if os.path.exists(score_file_path):
+        with open(score_file_path, "r") as score_file:
+            try:
+                high_score = int(score_file.read())
+            except:
+                high_score = 0
+    return high_score
 # 建立視窗(背景長/寬 ＝ 1000/660)
 window_height = 650
 window_width = 1000
@@ -206,14 +217,17 @@ def menu():
         pygame.draw.rect(window, BLACK, medium_button_rect, 2)
         pygame.draw.rect(window, BLACK, hard_button_rect, 2)
 
-        # 繪製難度選擇按鈕的文本
+        # 繪製難度選擇按鈕及最高分的文本
         easy_text = Text("EASY", 30, BLACK, (200, 225))
         medium_text = Text("MEDIUM", 30, BLACK, (200, 325))
         hard_text = Text("HARD", 30, BLACK, (200, 425))
-
+        high_score = load_highest_score()
+        highest_score_text = Text(f"Highest Score:{high_score}",40, BLACK, (200, 525))
+        
         easy_text.draw(window)
         medium_text.draw(window)
         hard_text.draw(window)
+        highest_score_text.draw(window)
 
         pygame.display.update()
         
@@ -367,9 +381,16 @@ def gameover():
     window.fill(WHITE)  # 用白色填充整個視窗
     game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
     score_text = Text("Your Score: " + str(points), 40, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
+    high_score = load_highest_score()
+    if points > high_score:
+        high_score = points
+        with open(os.path.join("Documents\\GitHub\\final", "score_record.txt"), "w") as file:
+            file.write(str(points))
+    highest_score_2_text = Text("Highest Score: " + str(high_score), 40, BLACK, (window_width // 2, window_height // 2 + 50))  # 顯示分數
     continue_text = Text("Press Enter to Continue", 30, BLACK, (window_width // 2, window_height // 2 + 100))  # 提示玩家按 Enter 鍵繼續
     game_over_text.draw(window)
     score_text.draw(window)
+    highest_score_2_text.draw(window)
     continue_text.draw(window)
     pygame.display.update()
 
