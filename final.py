@@ -139,7 +139,11 @@ class Charactor:
             self.invincible_timer -= 1
     def take_damage(self):  # 無敵狀態
         if self.invincible_timer <= 0:  # 如果不在無敵時間內
-            self.invincible_timer = 30 
+            self.invincible_timer = 30
+    def muteki(self) :
+        if self.invincible_timer <= 0:  # 如果不在無敵時間內
+            self.invincible_timer = 300
+
     def is_invincible(self):
         return self.invincible_timer > 0
     def draw(self, screen):
@@ -338,9 +342,12 @@ def main():
         for obstacle in obstacles:
             obstacle.update()
             obstacle.draw(window)
-            if player.ch_rect.colliderect(obstacle.rect) and player.is_invincible() == True:
-                life -= 1
-                player.take_damage()
+            if player.ch_rect.colliderect(obstacle.rect): 
+                if player.is_invincible():
+                    continue
+                else:
+                    life -= 1
+                    player.take_damage()
 
             if obstacle.rect.x < -obstacle.rect.width:
                 obstacles.remove(obstacle)
@@ -366,10 +373,9 @@ def main():
                 life += 1  # 增加生命值
                 items.remove(item)  # 移除已經碰撞的道具
             elif player.ch_rect.colliderect(item.rect) and random_item == 1:
-                invincible_timer = 600
+                player.muteki()
             if item.rect.x < -item.rect.width:
                 items.remove(item)
-
         pygame.display.update()
 
         clock.tick(60)
