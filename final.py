@@ -6,7 +6,6 @@ import os
 import sys
 import random
 import time
-from pygame.locals import *
 # 初始化pygame
 def initialize_game():
     pygame.init()
@@ -231,14 +230,12 @@ def menu():
         easy_text = Text("EASY", 30, BLACK, (200, 225))
         medium_text = Text("MEDIUM", 30, BLACK, (200, 325))
         hard_text = Text("HARD", 30, BLACK, (200, 425))
-        resource_text = Text("background music: Music Atelier Amacha", 25, BLACK, (200, 25))
         high_score = load_highest_score()
         highest_score_text = Text(f"Highest Score:{high_score}",40, BLACK, (200, 525))
         
         easy_text.draw(window)
         medium_text.draw(window)
         hard_text.draw(window)
-        resource_text.draw(window)
         highest_score_text.draw(window)
 
         pygame.display.update()
