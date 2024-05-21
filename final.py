@@ -15,15 +15,20 @@ WHITE = pygame.Color(255, 255, 255)
 BLACK = pygame.Color(0, 0, 0)
 SKYBLUE = pygame.Color(0, 127, 255)
 # import 圖片檔案
-BACKGROUND_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/background", "1.jpg")), pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/background", "2.jpg"))]
-CHARACTOR_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "Run1.png")),
-                pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "Run2.png"))]  # 跑步圖片大小 87*94
-JUMPING_IMG = pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "Jump.png"))  # 跳躍圖片大小 87*94
-DUCKING_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "Duck1.png")),
-                pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "Duck2.png"))]  #  蹲下大小 118*60
+BACKGROUND_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/background", "1.jpg")), pygame.image.load(os.path.join("image/background", "2.jpg"))]
+CHARACTOR_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "snail-1-right.png")),
+                pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "snail-2-right.png"))]  # 跑步圖片大小 87*94
+JUMPING_IMG = pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "snail-jump-right.png"))  # 跳躍圖片大小 87*94
+DUCKING_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "snail-hedge-right.png"))]  #  蹲下大小 118*60
 ITEM = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item", "1.png")),
         pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item", "2.png")),
         pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item", "3.png"))]
+LIFE_BAR = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/life_bar", "Life bar-5-0.png")),
+            pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/life_bar", "Life bar-5-1.png")),
+            pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/life_bar", "Life bar-5-2.png")),
+            pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/life_bar", "Life bar-5-3.png")),
+            pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/life_bar", "Life bar-5-4.png")),
+            pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/life_bar", "Life bar-5-5.png"))]
 #  大障礙物
 LARGEOBSTACLE = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/largeobstacle", "obstacle1.png")),
              pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/largeobstacle", "obstacle2.png")),
@@ -270,7 +275,7 @@ def main():
     obstacles = []
     run = True
     x_bg_pos, y_bg_pos = 0, 0
-    x_heart, y_heart = 80, 50
+    x_heart, y_heart = 33, 50
     items = []
     countdown = 3
 
@@ -310,11 +315,20 @@ def main():
             window.blit(BACKGROUND_LIST[bg], (x_bg_pos + window_width, y_bg_pos))
             x_bg_pos = 0
         
-#  生命值  心的大小是30*30
-        window.blit(ITEM[0], (x_heart, y_heart))
-        heart = Text(str(life), 30, BLACK, (95, 65))
-        heart.draw(window)
-        if life <= 0:
+#  生命值  
+        
+        if life == 5:
+            window.blit(LIFE_BAR[5], (x_heart, y_heart))
+        elif life == 4:
+            window.blit(LIFE_BAR[4], (x_heart, y_heart))
+        elif life == 3:
+            window.blit(LIFE_BAR[3], (x_heart, y_heart))
+        elif life == 2:
+            window.blit(LIFE_BAR[2], (x_heart, y_heart))
+        elif life == 1:
+            window.blit(LIFE_BAR[1], (x_heart, y_heart))
+        elif life == 0:
+            window.blit(LIFE_BAR[0], (x_heart, y_heart))
             run = False
 #  分數計算
         oripoint +=1
