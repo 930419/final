@@ -15,7 +15,7 @@ WHITE = pygame.Color(255, 255, 255)
 BLACK = pygame.Color(0, 0, 0)
 SKYBLUE = pygame.Color(0, 127, 255)
 # import 圖片檔案
-BACKGROUND_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/background", "1.jpg")), pygame.image.load(os.path.join("image/background", "2.jpg"))]
+BACKGROUND_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/background", "1.jpg")), pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/background", "2.jpg"))]
 CHARACTOR_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "snail-1-right.png")),
                 pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "snail-2-right.png"))]  # 跑步圖片大小 87*94
 JUMPING_IMG = pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "snail-jump-right.png"))  # 跳躍圖片大小 87*94
@@ -23,12 +23,12 @@ DUCKING_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/
 ITEM = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item", "1.png")),
         pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item", "2.png")),
         pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item", "3.png"))]
-LIFE_BAR = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/life_bar", "Life bar-5-0.png")),
-            pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/life_bar", "Life bar-5-1.png")),
-            pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/life_bar", "Life bar-5-2.png")),
-            pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/life_bar", "Life bar-5-3.png")),
-            pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/life_bar", "Life bar-5-4.png")),
-            pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/life_bar", "Life bar-5-5.png"))]
+LIFE_BAR = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item/life_bar", "Life bar-5-0.png")),
+            pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item/life_bar", "Life bar-5-1.png")),
+            pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item/life_bar", "Life bar-5-2.png")),
+            pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item/life_bar", "Life bar-5-3.png")),
+            pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item/life_bar", "Life bar-5-4.png")),
+            pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item/life_bar", "Life bar-5-5.png"))]
 #  大障礙物
 LARGEOBSTACLE = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/largeobstacle", "obstacle1.png")),
              pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/largeobstacle", "obstacle2.png")),
