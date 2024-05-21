@@ -4,6 +4,7 @@
 import pygame
 import os
 import sys
+from pygame.locals import *
 import random
 import time
 # 初始化pygame
@@ -39,6 +40,12 @@ SMALLOBSTACLE = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image
 FLYOBSTACLE = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/flyobstacle", "obstacle1.png")),
              pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/flyobstacle", "obstacle2.png"))]
            #  小：68*71 大：99*95 
+
+#讀取音樂
+def load_bg_music(path):
+    pygame.mixer.init()
+    pygame.mixer.music.load(path)
+    
 # 讀取最高分
 def load_highest_score():
     score_file_path = os.path.join("Documents\\GitHub\\final", "score_record.txt")
@@ -208,7 +215,6 @@ class star:
 #  標題目錄
 def menu():
     global game_difficulty
-
     text_position = (600, window_height // 2) # 螢幕中心
     run = True
     while run :
@@ -230,12 +236,14 @@ def menu():
         easy_text = Text("EASY", 30, BLACK, (200, 225))
         medium_text = Text("MEDIUM", 30, BLACK, (200, 325))
         hard_text = Text("HARD", 30, BLACK, (200, 425))
+        resource_text = Text("background music: Music Atelier Amacha", 25, BLACK, (200, 25))
         high_score = load_highest_score()
         highest_score_text = Text(f"Highest Score:{high_score}",40, BLACK, (200, 525))
         
         easy_text.draw(window)
         medium_text.draw(window)
         hard_text.draw(window)
+        resource_text.draw(window)
         highest_score_text.draw(window)
 
         pygame.display.update()
@@ -297,7 +305,9 @@ def main():
     elif game_difficulty == HARD:
         game_speed = 20
         life = 1
-   
+#  播放音樂
+    load_bg_music(os.path.join("Documents\\GitHub\\final\\music", "bg_music_in_game.ogg"))
+    pygame.mixer.music.play(-1)
     
  #  開始迴圈
     while run:
@@ -401,7 +411,9 @@ def gameover():
     window.fill(WHITE)  # 用白色填充整個視窗
     game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
     score_text = Text("Your Score: " + str(points), 40, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
+    pygame.mixer.music.stop()  # 停止撥放音樂
     high_score = load_highest_score()
+    load_bg_music(os.path.join("Documents\\GitHub\\final\\music", "bg_music_in_game.ogg"))
     if points > high_score:
         high_score = points
         with open(os.path.join("Documents\\GitHub\\final", "score_record.txt"), "w") as file:
