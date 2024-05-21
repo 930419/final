@@ -217,6 +217,9 @@ def menu():
     global game_difficulty
     text_position = (600, window_height // 2) # 螢幕中心
     run = True
+    load_bg_music(os.path.join("Documents\\GitHub\\final\\music", "bg_music_in_menu.ogg"))
+    pygame.mixer.music.play(-1)
+
     while run :
         window.fill(WHITE)
         window.blit(BACKGROUND_LIST[0], (0, 0))
@@ -286,9 +289,11 @@ def main():
     x_heart, y_heart = 33, 50
     items = []
     countdown = 3
+    count_down_sound = pygame.mixer.Sound(os.path.join("Documents\\GitHub\\final\\music/sounds", "count_down.wav"))
 
     while countdown > 0:
         window.blit(BACKGROUND_LIST[bg], (x_bg_pos, y_bg_pos))
+        count_down_sound.play()
         player.draw(window)
         count_text = Text(f"{countdown}", 300, BLACK, (485, 300))
         count_text.draw(window)
