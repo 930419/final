@@ -18,9 +18,9 @@ SKYBLUE = pygame.Color(0, 127, 255)
 # import 圖片檔案
 BACKGROUND_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/background", "1.jpg")), pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/background", "2.jpg"))]
 CHARACTOR_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "snail-1-right.png")),
-                pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "snail-2-right.png"))]  # 跑步圖片大小 87*94
-JUMPING_IMG = pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "snail-jump-right.png"))  # 跳躍圖片大小 87*94
-DUCKING_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "snail-hedge-right.png"))]  #  蹲下大小 118*60
+                pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "snail-2-right.png"))]  # 跑步圖片大小 100*100
+JUMPING_IMG = pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "snail-jump-right.png"))  # 跳躍圖片大小 100*100
+DUCKING_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "snail-hedge-right.png"))]  #  蹲下大小 163*100
 ITEM = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item", "1.png")),
         pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item", "2.png")),
         pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item", "3.png"))]
@@ -110,7 +110,7 @@ class Charactor:
         self.step_index += 1
 
     def duck(self):
-        self.image = self.duck_img_list[self.step_index // 5]  # 依 step_index 蹲下圖片，每五個step_index換一張圖
+        self.image = self.duck_img_list[0]  # 不換圖了
         self.ch_rect = self.image.get_rect()
         self.ch_rect.x = self.x_ch_pos
         self.ch_rect.y = self.y_ch_posduck
