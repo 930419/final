@@ -16,30 +16,30 @@ WHITE = pygame.Color(255, 255, 255)
 BLACK = pygame.Color(0, 0, 0)
 SKYBLUE = pygame.Color(0, 127, 255)
 # import 圖片檔案
-BACKGROUND_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/background", "3forest.jpg")), pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/background", "4autumn.jpg"))
-                   , pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/background", "5winter.jpg")), pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/background", "6city.jpg"))]
-CHARACTOR_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "snail-1-right.png")),
-                pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "snail-2-right.png"))]  # 跑步圖片大小 100*100
-JUMPING_IMG = pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "snail-jump-right.png"))  # 跳躍圖片大小 100*100
-DUCKING_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/charactor", "snail-hedge-right.png"))]  #  蹲下大小 163*100
-ITEM = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item", "1.png")),
-        pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item", "2.png")),
-        pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item", "3.png"))]
-LIFE_BAR = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item/life_bar", "Life bar-5-0.png")),
-            pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item/life_bar", "Life bar-5-1.png")),
-            pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item/life_bar", "Life bar-5-2.png")),
-            pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item/life_bar", "Life bar-5-3.png")),
-            pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item/life_bar", "Life bar-5-4.png")),
-            pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/item/life_bar", "Life bar-5-5.png"))]
+BACKGROUND_LIST = [pygame.image.load(os.path.join("image/background", "3forest.jpg")), pygame.image.load(os.path.join("image/background", "4autumn.jpg"))
+                   , pygame.image.load(os.path.join("image/background", "5winter.jpg")), pygame.image.load(os.path.join("image/background", "6city.jpg"))]
+CHARACTOR_LIST = [pygame.image.load(os.path.join("image/charactor", "snail-1-right.png")),
+                pygame.image.load(os.path.join("image/charactor", "snail-2-right.png"))]  # 跑步圖片大小 100*100
+JUMPING_IMG = pygame.image.load(os.path.join("image/charactor", "snail-jump-right.png"))  # 跳躍圖片大小 100*100
+DUCKING_LIST = [pygame.image.load(os.path.join("image/charactor", "snail-hedge-right.png"))]  #  蹲下大小 163*100
+ITEM = [pygame.image.load(os.path.join("image/item", "1.png")),
+        pygame.image.load(os.path.join("image/item", "2.png")),
+        pygame.image.load(os.path.join("image/item", "3.png"))]
+LIFE_BAR = [pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-0.png")),
+            pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-1.png")),
+            pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-2.png")),
+            pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-3.png")),
+            pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-4.png")),
+            pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-5.png"))]
 #  大障礙物
-LARGEOBSTACLE = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/largeobstacle", "obstacle1.png")),
-             pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/largeobstacle", "obstacle2.png")),
-             pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/largeobstacle", "obstacle3.png"))]
+LARGEOBSTACLE = [pygame.image.load(os.path.join("image/largeobstacle", "obstacle1.png")),
+             pygame.image.load(os.path.join("image/largeobstacle", "obstacle2.png")),
+             pygame.image.load(os.path.join("image/largeobstacle", "obstacle3.png"))]
 # 小障礙物
-SMALLOBSTACLE = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/smallobstacle", "obstacle1.png")),
-             pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/smallobstacle", "obstacle2.png"))]
-FLYOBSTACLE = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/flyobstacle", "obstacle1.png")),
-             pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/flyobstacle", "obstacle2.png"))]
+SMALLOBSTACLE = [pygame.image.load(os.path.join("image/smallobstacle", "obstacle1.png")),
+             pygame.image.load(os.path.join("image/smallobstacle", "obstacle2.png"))]
+FLYOBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "obstacle1.png")),
+             pygame.image.load(os.path.join("image/flyobstacle", "obstacle2.png"))]
            #  小：68*71 大：99*95 
 
 #讀取音樂
@@ -49,7 +49,7 @@ def load_bg_music(path):
     
 # 讀取最高分
 def load_highest_score():
-    score_file_path = os.path.join("Documents\\GitHub\\final", "score_record.txt")
+    score_file_path = os.path.join("", "score_record.txt")
     if os.path.exists(score_file_path):
         with open(score_file_path, "r") as score_file:
             try:
@@ -218,7 +218,7 @@ def menu():
     global game_difficulty
     text_position = (600, window_height // 2) # 螢幕中心
     run = True
-    load_bg_music(os.path.join("Documents\\GitHub\\final\\music", "bg_music_in_menu.ogg"))
+    load_bg_music(os.path.join("music", "bg_music_in_menu.ogg"))
     pygame.mixer.music.play(-1)
 
     while run :
@@ -290,7 +290,7 @@ def main():
     x_heart, y_heart = 33, 50
     items = []
     countdown = 3
-    count_down_sound = pygame.mixer.Sound(os.path.join("Documents\\GitHub\\final\\music/sounds", "count_down.wav"))
+    count_down_sound = pygame.mixer.Sound(os.path.join("music/sounds", "count_down.wav"))
 
     while countdown > 0:
         window.blit(BACKGROUND_LIST[bg], (x_bg_pos, y_bg_pos))
@@ -312,7 +312,7 @@ def main():
         game_speed = 20
         life = 1
 #  播放音樂
-    load_bg_music(os.path.join("Documents\\GitHub\\final\\music", "bg_music_in_game.ogg"))
+    load_bg_music(os.path.join("music", "bg_music_in_game.ogg"))
     pygame.mixer.music.play(-1)
     
  #  開始迴圈
@@ -419,7 +419,7 @@ def gameover():
     score_text = Text("Your Score: " + str(points), 40, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
     pygame.mixer.music.stop()  # 停止撥放音樂
     high_score = load_highest_score()
-    load_bg_music(os.path.join("Documents\\GitHub\\final\\music", "bg_music_in_game.ogg"))
+    load_bg_music(os.path.join("music", "bg_music_in_game.ogg"))
     if points > high_score:
         high_score = points
         with open(os.path.join("Documents\\GitHub\\final", "score_record.txt"), "w") as file:
