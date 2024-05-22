@@ -26,12 +26,12 @@ DUCKING_LIST = [pygame.image.load(os.path.join("image/charactor", "snail-hedge-r
 ITEM = [pygame.image.load(os.path.join("image/item", "1.png")),
         pygame.image.load(os.path.join("image/item", "2.png")),
         pygame.image.load(os.path.join("image/item", "3.png"))]
-LIFE_BAR = [pygame.image.load(os.path.join("image/life_bar", "Life bar-5-0.png")),
-            pygame.image.load(os.path.join("image/life_bar", "Life bar-5-1.png")),
-            pygame.image.load(os.path.join("image/life_bar", "Life bar-5-2.png")),
-            pygame.image.load(os.path.join("image/life_bar", "Life bar-5-3.png")),
-            pygame.image.load(os.path.join("image/life_bar", "Life bar-5-4.png")),
-            pygame.image.load(os.path.join("image/life_bar", "Life bar-5-5.png"))]
+LIFE_BAR = [pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-0.png")),
+            pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-1.png")),
+            pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-2.png")),
+            pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-3.png")),
+            pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-4.png")),
+            pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-5.png"))]
 #  大障礙物
 LARGEOBSTACLE = [pygame.image.load(os.path.join("image/largeobstacle", "obstacle1.png")),
              pygame.image.load(os.path.join("image/largeobstacle", "obstacle2.png")),
