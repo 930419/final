@@ -14,8 +14,8 @@ WHITE = pygame.Color(255, 255, 255)
 BLACK = pygame.Color(0, 0, 0)
 SKYBLUE = pygame.Color(0, 127, 255)
 # import 圖片檔案
-BACKGROUND_LIST = [pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/background", "3forest.jpg")), pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/background", "4autumn.jpg"))
-                   , pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/background", "5winter.jpg")), pygame.image.load(os.path.join("Documents\\GitHub\\final\\image/background", "6city.jpg"))]
+BACKGROUND_LIST = [pygame.image.load(os.path.join("image/background", "3forest.jpg")), pygame.image.load(os.path.join("image/background", "4autumn.jpg"))
+                   , pygame.image.load(os.path.join("image/background", "5winter.jpg")), pygame.image.load(os.path.join("image/background", "6city.jpg"))]
 CHARACTOR_LIST = [pygame.image.load(os.path.join("image/charactor", "snail-1-right.png")),
                 pygame.image.load(os.path.join("image/charactor", "snail-2-right.png")),]
 DAMAGE_LIST = [pygame.image.load(os.path.join("image/charactor", "snail-debuff-1-right.png")),
