@@ -384,7 +384,7 @@ class star2:
         self.type = 2  # 道具類型，這裡預設為 0
         self.rect = self.image_list[self.type].get_rect()  # 道具的矩形區域
         self.rect.x = window_width  # 道具出現的 x 座標
-        self.rect.y = random.randint(150, 320)  # 道具出現的 y 座標
+        self.rect.y = random.randint(150, 310)  # 道具出現的 y 座標
     def update(self):
         self.rect.x -= game_speed  # 道具向左移動的速度
     def draw(self, screen: pygame.Surface):
@@ -624,6 +624,7 @@ def mainsingle():
                 items.remove(item)  # 移除已經碰撞的道具
             elif player.ch_rect.colliderect(item.rect) and itemtype == 1:
                 player.muteki_time()
+                items.remove(item) 
             if item.rect.x < -item.rect.width:
                 items.remove(item)
           # coin main
@@ -812,6 +813,7 @@ def mainDuo():
                 items1.remove(item)  # 移除已經碰撞的道具
             elif player1.ch_rect.colliderect(item.rect) and itemtype1 == 1:
                 player1.muteki_time()
+                items1.remove(item) 
             if item.rect.x < -item.rect.width:
                 items1.remove(item)
 # 玩家二在遊戲迴圈中生成道具
@@ -839,6 +841,7 @@ def mainDuo():
                 items2.remove(item)  # 移除已經碰撞的道具
             elif player2.ch_rect.colliderect(item.rect) and itemtype2 == 1:
                 player2.muteki_time()
+                items2.remove(item) 
             if item.rect.x < -item.rect.width:
                 items2.remove(item)
           # coin main
