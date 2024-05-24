@@ -531,11 +531,11 @@ def mainsingle():
         game_speed = 7
         life =5
     elif game_difficulty == MEDIUM:
-        game_speed = 14
-        life = 3
+        game_speed = 10
+        life = 4
     elif game_difficulty == HARD:
-        game_speed = 20
-        life = 1
+        game_speed = 13
+        life = 3
    
     
  #  開始迴圈
