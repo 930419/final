@@ -568,12 +568,12 @@ def mainsingle():
             run = False
 #  分數計算
         oripoint +=1
-        if oripoint % 4 == 0:
+        if oripoint % 2 == 0:
             points += 1
         score_position = (80, 20)
         score = Text("Points: " + str(points), 30, BLACK, score_position)
         score.draw(window)
-        if points % 300 == 0 and game_speed <= 40:
+        if points % 400 == 0 and game_speed <= 40:
             game_speed += 1
 #  角色操作
         user_input = pygame.key.get_pressed()  # 接收玩家指令
@@ -730,12 +730,12 @@ def mainDuo():
         
 #  分數計算
         oripoint +=1
-        if oripoint % 4 == 0:
+        if oripoint % 2 == 0:
             points += 1
         score_position = (80, 20)
         score = Text("Points: " + str(points), 30, BLACK, score_position)
         score.draw(window)
-        if points % 300 == 0 and game_speed <= 40:
+        if points % 200 == 0 and game_speed <= 40:
             game_speed += 1
 #  角色操作
         user_input = pygame.key.get_pressed()  # 接收玩家指令
