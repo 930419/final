@@ -514,7 +514,10 @@ def mainsingle():
     x_heart, y_heart = 33, 50
     items = []
     countdown = 3
-
+    paused = False
+    restart = False
+    exit = False
+    
     while countdown > 0:
         window.blit(BACKGROUND_LIST[bg], (x_bg_pos, y_bg_pos))
         player.draw(window)
@@ -540,6 +543,17 @@ def mainsingle():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    paused = not paused
+                #elif event.key == pygame.K_r and paused:
+                #    paused = False
+                #    initialize_game()
+                #elif event.key == pygame.K_e and paused:
+                #    paused = False
+        if paused:
+            life -= 2
+            continue
 #  背景移動
         x_bg_pos -= game_speed 
         if oripoint % 3200 == 0 and points != 0: 
