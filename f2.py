@@ -546,13 +546,27 @@ def mainsingle():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_k:
                     paused = not paused
-                #elif event.key == pygame.K_r and paused:
-                #    paused = False
-                #    initialize_game()
-                #elif event.key == pygame.K_e and paused:
-                #    paused = False
+                elif event.key == pygame.K_r and paused:
+                    restart = True
+                    initialize_game()
+                elif event.key == pygame.K_e and paused:
+                    exit = True
+        if restart:
+            mainsingle()
+        if exit:
+            break
         if paused:
+            image = pygame.image.load(os.path.join("image/window", "paused_window.png"))
+            window.blit(image, (200,150))
+            continue_text = Text("press k again to continue", 50, BLACK, (500, 230))
+            restart_text = Text("press r to restart", 50, BLACK, (500, 330))
+            exit_text =  Text("press e to exit", 50, BLACK, (500, 430))
+            continue_text.draw(window)
+            restart_text.draw(window)
+            exit_text.draw(window)
+            pygame.display.update()
             continue
+
 #  背景移動
         x_bg_pos -= game_speed 
         if oripoint % 3200 == 0 and points != 0: 
@@ -563,7 +577,9 @@ def mainsingle():
         if x_bg_pos <= -window_width:
             window.blit(BACKGROUND_LIST[bg], (x_bg_pos + window_width, y_bg_pos))
             x_bg_pos = 0
-        
+# 暫停文字提示
+        pause_text = Text("press k to pause", 30, BLACK, (890, 20))
+        pause_text.draw(window)
 #  生命值 
 
         if life == 5:
@@ -671,6 +687,9 @@ def mainDuo():
     items1 = []
     items2 = []
     countdown = 3
+    restart = False
+    paused = False
+    exit = False
     pygame.draw.line(window, BLACK, (0, 325), (1000, 325), 3)
 
 
@@ -696,6 +715,30 @@ def mainDuo():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_k:
+                    paused = not paused
+                elif event.key == pygame.K_r and paused:
+                    restart = True
+                    initialize_game()
+                elif event.key == pygame.K_e and paused:
+                    exit = True
+        if restart:
+            mainDuo()
+        if exit:
+            winner = 0
+            break
+        if paused:
+            image = pygame.image.load(os.path.join("image/window", "paused_window.png"))
+            window.blit(image, (200,150))
+            continue_text = Text("press k again to continue", 50, BLACK, (500, 230))
+            restart_text = Text("press r to restart", 50, BLACK, (500, 330))
+            exit_text =  Text("press e to exit", 50, BLACK, (500, 430))
+            continue_text.draw(window)
+            restart_text.draw(window)
+            exit_text.draw(window)
+            pygame.display.update()
+            continue
 #  背景移動
         x_bg_pos -= game_speed 
         if oripoint % 3200 == 0 and points != 0: 
@@ -707,7 +750,10 @@ def mainDuo():
         if x_bg_pos <= -window_width:
             window.blit(BACKGROUND_LIST[bg], (x_bg_pos + window_width, y_bg_pos))
             x_bg_pos = 0
-        
+            
+# 暫停文字提示
+        pause_text = Text("press k to pause", 30, BLACK, (890, 20))
+        pause_text.draw(window) 
 #  生命值 
 
         if life1 == 5:
@@ -891,6 +937,8 @@ def gameover():
             winner_text = Text("winner is 1P", 40, BLACK, (window_width // 2, window_height // 2))
         elif winner == 2:  
             winner_text = Text("winner is 2P", 40, BLACK, (window_width // 2, window_height // 2))
+        elif winner == 0:  
+            winner_text = Text("draw", 40, BLACK, (window_width // 2, window_height // 2))
     
         continue_text = Text("Press Enter to Continue", 30, BLACK, (window_width // 2, window_height // 2 + 100))  # 提示玩家按 Enter 鍵繼續
         game_over_text.draw(window)
