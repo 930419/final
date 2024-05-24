@@ -35,13 +35,13 @@ LIFE_BAR = [pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-0.
             pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-4.png")),
             pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-5.png"))]
 #  大障礙物
-LARGEOBSTACLE = [pygame.image.load(os.path.join("image/largeobstacle", "obstacle1.png")),
+LARGEOBSTACLE = [pygame.image.load(os.path.join("image/largeobstacle", "cityb.png")),
              pygame.image.load(os.path.join("image/largeobstacle", "obstacle2.png")),
              pygame.image.load(os.path.join("image/largeobstacle", "obstacle3.png"))]
 # 小障礙物
-SMALLOBSTACLE = [pygame.image.load(os.path.join("image/smallobstacle", "obstacle1.png")),
+SMALLOBSTACLE = [pygame.image.load(os.path.join("image/smallobstacle", "citys.png")),
              pygame.image.load(os.path.join("image/smallobstacle", "obstacle2.png"))]
-FLYOBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "obstacle1.png")),
+FLYOBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "cityf.png")),
              pygame.image.load(os.path.join("image/flyobstacle", "obstacle2.png"))]
            #  小：68*71 大：99*95 
 def load_highest_score():
