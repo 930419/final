@@ -952,12 +952,27 @@ def gameover():
             high_score = points
             with open(os.path.join("score", f"{game_difficulty}.txt"), "w") as file:
                 file.write(str(points))
-        highest_score_2_text = Text("Highest Score: " + str(high_score), 40, BLACK, (window_width // 2, window_height // 2 + 50))  # 顯示分數
-        continue_text = Text("Press Enter to Continue", 30, BLACK, (window_width // 2, window_height // 2 + 100))  # 提示玩家按 Enter 鍵繼續
+        record_or_not_text = Text("Do you want to record your score?", 40, BLACK, (window_width // 2, window_height // 2 + 50))
+        y_or_n_text = Text("Press y to record / Press n to leave", 30, BLACK, (window_width // 2, window_height // 2 + 90))
         game_over_text.draw(window)
-        score_text.draw(window)
-        highest_score_2_text.draw(window)
-        continue_text.draw(window)
+        record_or_not_text.draw(window)
+        y_or_n_text.draw(window)
+        pygame.display.update()
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_n:  # 如果玩家按下 n 鍵
+                        menu()
+                    elif event.key == pygame.K_y:  # 如果玩家按下 y 鍵
+                        window.fill(WHITE)
+                        enter_name_text = Text("Enter your name: ____________________", 30, BLACK, (window_width // 2, window_height // 2))
+                        enter_name_text.draw(window)
+                        # 如果名字重複就break
+                        pygame.display.update()
 
     elif game_mode == 2:
         game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
@@ -972,16 +987,16 @@ def gameover():
         game_over_text.draw(window)
         winner_text.draw(window)
         continue_text.draw(window)
-    pygame.display.update()
+        pygame.display.update()
 
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:  # 如果玩家按下 Enter 鍵
-                    menu()
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:  # 如果玩家按下 Enter 鍵
+                        menu()
 
 # 執行程式碼
 if __name__ == "__main__":
