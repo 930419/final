@@ -529,12 +529,13 @@ def mainsingle():
 #  難度調整
     if game_difficulty == EASY:
         game_speed = 7
-        life =5
+        life = 5
     elif game_difficulty == MEDIUM:
         game_speed = 10
         life = 4
     elif game_difficulty == HARD:
         game_speed = 13
+        life = 3
     
  #  開始迴圈
     while run:
@@ -726,6 +727,18 @@ def mainDuo():
                 run = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_k:
+                    if paused:
+                        countdown = 3
+                        while countdown > 0:
+                            window.blit(BACKGROUND_LIST[bg], (x_bg_pos, y_bg_pos))
+                            window.blit(BACKGROUND_LIST[bg], (x_bg_pos + window_width, y_bg_pos))
+                            player1.draw(window)
+                            player2.draw(window)
+                            count_text = Text(f"{countdown}", 300, BLACK, (485, 300))
+                            count_text.draw(window)
+                            pygame.display.update()
+                            time.sleep(1)
+                            countdown -= 1
                     paused = not paused
                 elif event.key == pygame.K_r and paused:
                     restart = True
@@ -928,16 +941,16 @@ def gameover():
     if game_mode == 1:
         game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
         score_text = Text("Your Score: " + str(points), 40, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
-        high_score = load_highest_score(f"{game_difficulty}.txt")
-        if points > high_score:
-            high_score = points
-            with open(os.path.join("score_record.txt"), "w") as file:
-                file.write(str(points))
-        highest_score_2_text = Text("Highest Score: " + str(high_score), 40, BLACK, (window_width // 2, window_height // 2 + 50))  # 顯示分數
+        #high_score = load_highest_score(f"{game_difficulty}.txt")
+        #if points > high_score:
+        #    high_score = points
+        #    with open(os.path.join("score_record.txt"), "w") as file:
+        #        file.write(str(points))
+        #highest_score_2_text = Text("Highest Score: " + str(high_score), 40, BLACK, (window_width // 2, window_height // 2 + 50))  # 顯示分數
         continue_text = Text("Press Enter to Continue", 30, BLACK, (window_width // 2, window_height // 2 + 100))  # 提示玩家按 Enter 鍵繼續
         game_over_text.draw(window)
         score_text.draw(window)
-        highest_score_2_text.draw(window)
+        #highest_score_2_text.draw(window)
         continue_text.draw(window)
 
     elif game_mode == 2:
