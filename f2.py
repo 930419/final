@@ -44,8 +44,8 @@ SMALLOBSTACLE = [pygame.image.load(os.path.join("image/smallobstacle", "citys.pn
 FLYOBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "cityf.png")),
              pygame.image.load(os.path.join("image/flyobstacle", "obstacle2.png"))]
            #  小：68*71 大：99*95 
-def load_highest_score():
-    score_file_path = os.path.join("score_record.txt")
+def load_highest_score(which_score):
+    score_file_path = os.path.join("sore", which_score)
     if os.path.exists(score_file_path):
         with open(score_file_path, "r") as score_file:
             try:
@@ -472,13 +472,13 @@ def difficulty():
         easy_text = Text("EASY", 30, BLACK, (200, 225))
         medium_text = Text("MEDIUM", 30, BLACK, (200, 325))
         hard_text = Text("HARD", 30, BLACK, (200, 425))
-        high_score = load_highest_score()
-        highest_score_text = Text(f"Highest Score:{high_score}",40, BLACK, (200, 525))
+        # high_score = load_highest_score(f"{game_difficulty}.txt")
+        # highest_score_text = Text(f"Highest Score:{high_score}",40, BLACK, (200, 525))
         
         easy_text.draw(window)
         medium_text.draw(window)
         hard_text.draw(window)
-        highest_score_text.draw(window)
+        # highest_score_text.draw(window)
 
         pygame.display.update()
         
@@ -535,8 +535,6 @@ def mainsingle():
         life = 4
     elif game_difficulty == HARD:
         game_speed = 13
-        life = 3
-   
     
  #  開始迴圈
     while run:
@@ -545,6 +543,17 @@ def mainsingle():
                 run = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_k:
+                    if paused:
+                        countdown = 3
+                        while countdown > 0:
+                            window.blit(BACKGROUND_LIST[bg], (x_bg_pos, y_bg_pos))
+                            window.blit(BACKGROUND_LIST[bg], (x_bg_pos + window_width, y_bg_pos))
+                            player.draw(window)
+                            count_text = Text(f"{countdown}", 300, BLACK, (485, 300))
+                            count_text.draw(window)
+                            pygame.display.update()
+                            time.sleep(1)
+                            countdown -= 1
                     paused = not paused
                 elif event.key == pygame.K_r and paused:
                     restart = True
@@ -919,7 +928,7 @@ def gameover():
     if game_mode == 1:
         game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
         score_text = Text("Your Score: " + str(points), 40, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
-        high_score = load_highest_score()
+        high_score = load_highest_score(f"{game_difficulty}.txt")
         if points > high_score:
             high_score = points
             with open(os.path.join("score_record.txt"), "w") as file:
