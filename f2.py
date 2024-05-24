@@ -544,7 +544,7 @@ def mainsingle():
             if event.type == pygame.QUIT:
                 run = False
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
+                if event.key == pygame.K_k:
                     paused = not paused
                 #elif event.key == pygame.K_r and paused:
                 #    paused = False
@@ -552,7 +552,6 @@ def mainsingle():
                 #elif event.key == pygame.K_e and paused:
                 #    paused = False
         if paused:
-            life -= 2
             continue
 #  背景移動
         x_bg_pos -= game_speed 
