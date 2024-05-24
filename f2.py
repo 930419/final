@@ -397,7 +397,7 @@ class Coin:
         self.rect = self.image_list[self.type].get_rect()  # 道具的矩形區域
         self.rect.x = window_width  # 道具出現的 x 座標
         self.rect.y = 500 # 道具出現的 y 座標
-    def update():
+    def update(self):
         self.rect.x -= game_speed  # 道具向左移動的速度
     def draw(self, screen: pygame.Surface):
         screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y))  # 繪製道具
