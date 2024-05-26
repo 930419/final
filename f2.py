@@ -941,6 +941,44 @@ def mainDuo():
 
     gameover()
 
+def enter_your_name(enter_name_text, enter_rect):
+    name = str()
+    entering = False
+    cursor_pos = 0
+    finish_enter = False
+    while not finish_enter:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:  # 左鍵點擊
+                    mouse_pos = pygame.mouse.get_pos()
+                    if enter_rect.collidepoint(mouse_pos):
+                        entering = True
+                    else:
+                        entering = False
+            if entering:
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        name = ""
+                        finish_enter = True
+                        break
+                    elif event.key == pygame.K_BACKSPACE:
+                        name = name[:-1]
+                    else:
+                        name += event.unicode
+                        cursor_pos += 10
+                    window.fill(WHITE)
+                    enter_name_text.draw(window)
+                    pygame.draw.rect(window, BLACK, enter_rect, 2)
+                    x_pos = window_width // 2 - 70
+                    y_pos = window_height // 2
+                    name_text = Text(name, 30, BLACK, (x_pos + 0.5 * cursor_pos, y_pos))
+                    name_text.draw(window)
+                    pygame.draw.line(window, SKYBLUE, (x_pos + cursor_pos, y_pos + 20), (x_pos + cursor_pos, y_pos - 20), 2)
+                    pygame.display.update()
+    return name
 
 def gameover():
     window.fill(WHITE)  # 用白色填充整個視窗
@@ -969,10 +1007,15 @@ def gameover():
                         menu()
                     elif event.key == pygame.K_y:  # 如果玩家按下 y 鍵
                         window.fill(WHITE)
-                        enter_name_text = Text("Enter your name: ____________________", 30, BLACK, (window_width // 2, window_height // 2))
+                        enter_name_text = Text("Enter your name: ______________________________", 30, BLACK, (window_width // 2, window_height // 2))
                         enter_name_text.draw(window)
+                        enter_rect = pygame.Rect(window_width // 2 - 80, window_height // 2 - 20, 335, 40)
+                        pygame.draw.rect(window, BLACK, enter_rect, 2)
+                        pygame.draw.line(window, SKYBLUE, (window_width // 2 - 70, window_height // 2 + 20), (window_width // 2 - 70, window_height // 2 - 20), 2)
                         # 如果名字重複就break
                         pygame.display.update()
+                        name = enter_your_name(enter_name_text, enter_rect)
+                        print(name)
 
     elif game_mode == 2:
         game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
