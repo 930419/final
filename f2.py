@@ -946,6 +946,8 @@ def enter_your_name(enter_name_text, enter_rect):
     entering = False
     cursor_pos = 0
     finish_enter = False
+    x_pos = window_width // 2 - 70
+    y_pos = window_height // 2
     while not finish_enter:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -966,17 +968,21 @@ def enter_your_name(enter_name_text, enter_rect):
                         break
                     elif event.key == pygame.K_BACKSPACE:
                         name = name[:-1]
+                        if cursor_pos > 0:
+                            cursor_pos -= 10
                     else:
                         name += event.unicode
                         cursor_pos += 10
                     window.fill(WHITE)
                     enter_name_text.draw(window)
                     pygame.draw.rect(window, BLACK, enter_rect, 2)
-                    x_pos = window_width // 2 - 70
-                    y_pos = window_height // 2
-                    name_text = Text(name, 30, BLACK, (x_pos + 0.5 * cursor_pos, y_pos))
-                    name_text.draw(window)
-                    pygame.draw.line(window, SKYBLUE, (x_pos + cursor_pos, y_pos + 20), (x_pos + cursor_pos, y_pos - 20), 2)
+                    name_font = pygame.font.SysFont('freesansbold.ttf', 30)
+                    name_surface = name_font.render(name, True, BLACK)
+                    name_rect = name_surface.get_rect()
+                    name_rect.bottomleft = (x_pos, y_pos + 10)
+                    window.blit(name_surface, name_rect)
+                    cursor_x, cursor_y = name_rect.topright
+                    pygame.draw.line(window, SKYBLUE, (cursor_x + 2, cursor_y), ( cursor_x + 2, cursor_y + 20), 2)
                     pygame.display.update()
     return name
 
@@ -1011,7 +1017,7 @@ def gameover():
                         enter_name_text.draw(window)
                         enter_rect = pygame.Rect(window_width // 2 - 80, window_height // 2 - 20, 335, 40)
                         pygame.draw.rect(window, BLACK, enter_rect, 2)
-                        pygame.draw.line(window, SKYBLUE, (window_width // 2 - 70, window_height // 2 + 20), (window_width // 2 - 70, window_height // 2 - 20), 2)
+                        pygame.draw.line(window, SKYBLUE, (window_width // 2 - 70, window_height // 2 + 10), (window_width // 2 - 70, window_height // 2 - 10), 2)
                         # 如果名字重複就break
                         pygame.display.update()
                         name = enter_your_name(enter_name_text, enter_rect)
