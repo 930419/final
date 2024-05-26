@@ -6,6 +6,7 @@ import os
 import random
 import time
 import sys
+import csv
 # 初始化pygame
 def initialize_game():
     pygame.init()
@@ -44,15 +45,21 @@ SMALLOBSTACLE = [pygame.image.load(os.path.join("image/smallobstacle", "citys.pn
 FLYOBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "cityf.png")),
              pygame.image.load(os.path.join("image/flyobstacle", "obstacle2.png"))]
            #  小：68*71 大：99*95 
-def load_highest_score(which_score):
+def load_sorted_score_list(which_score):
+    score_list = list()
     score_file_path = os.path.join("score", which_score)
     if os.path.exists(score_file_path):
-        with open(score_file_path, "r") as score_file:
+        with open(score_file_path, newline='', encoding='utf-8-sig') as score_file:
             try:
-                high_score = int(score_file.read())
+                rows = csv.reader(score_file)
+                for row in rows:
+                    score_list.append([row[0], int(row[1])])
+                score_list.sort(key = lambda x:x[1], reverse=True)
             except:
-                high_score = 0
-    return high_score
+                pass
+        score_file.close()
+    return score_list
+
 # 建立視窗(背景長/寬 ＝ 1000/660)
 window_height = 650
 window_width = 1000
@@ -472,12 +479,29 @@ def difficulty():
         easy_text = Text("EASY", 30, BLACK, (200, 225))
         medium_text = Text("MEDIUM", 30, BLACK, (200, 325))
         hard_text = Text("HARD", 30, BLACK, (200, 425))
-        easy_high_score = load_highest_score("1.txt")
-        easy_highest_score_text = Text(f"Highest Score:{easy_high_score}",30, BLACK, (200, 185))
-        medium_high_score = load_highest_score("2.txt")
-        medium_highest_score_text = Text(f"Highest Score:{medium_high_score}",30, BLACK, (200, 285))
-        hard_high_score = load_highest_score("3.txt")
-        hard_highest_score_text = Text(f"Highest Score:{hard_high_score}",30, BLACK, (200, 385))
+        
+        # 顯示各關目前最高分
+        easy_score_list = load_sorted_score_list("1.csv")
+        if len(easy_score_list) > 0:
+            easy_highest_name = easy_score_list[0][0]
+            easy_highest_score = easy_score_list[0][1]
+            easy_highest_score_text = Text(f"Highest Score: {easy_highest_name} {easy_highest_score}",30, BLACK, (200, 185))
+        else:
+            easy_highest_score_text = Text(f"Highest Score: no record", 30, BLACK, (200, 185))
+        medium_score_list = load_sorted_score_list("2.csv")
+        if len(medium_score_list) > 0:
+            medium_highest_name = medium_score_list[0][0]
+            medium_highest_score = medium_score_list[0][1]
+            medium_highest_score_text = Text(f"Highest Score: {medium_highest_name} {medium_highest_score}",30, BLACK, (200, 285))
+        else:
+            medium_highest_score_text = Text(f"Highest Score: no record", 30, BLACK, (200, 285))
+        hard_score_list = load_sorted_score_list("3.txt")
+        if len(hard_score_list) > 0:
+            hard_highest_name = hard_score_list[0][0]
+            hard_highest_score = hard_score_list[0][1]
+            hard_highest_score_text = Text(f"Highest Score: {hard_highest_name} {hard_highest_score}",30, BLACK, (200, 385))
+        else:
+            hard_highest_score_text = Text(f"Highest Score: no record", 30, BLACK, (200, 385))
         
         easy_text.draw(window)
         medium_text.draw(window)
@@ -485,7 +509,7 @@ def difficulty():
         easy_highest_score_text.draw(window)
         medium_highest_score_text.draw(window)
         hard_highest_score_text.draw(window)
-
+        
         pygame.display.update()
         
         for event in pygame.event.get():
@@ -944,10 +968,16 @@ def mainDuo():
 def enter_your_name(enter_name_text, enter_rect):
     name = str()
     entering = False
-    cursor_pos = 0
     finish_enter = False
     x_pos = window_width // 2 - 70
     y_pos = window_height // 2
+    active = True
+    cursor_timer = pygame.time.get_ticks()
+    name_font = pygame.font.SysFont('freesansbold.ttf', 30)
+    name_surface = name_font.render(name, True, BLACK)
+    name_rect = name_surface.get_rect()
+    name_rect.bottomleft = (x_pos, y_pos + 10)
+    cursor_x, cursor_y = name_rect.topright
     while not finish_enter:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -963,46 +993,83 @@ def enter_your_name(enter_name_text, enter_rect):
             if entering:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
-                        name = ""
                         finish_enter = True
                         break
                     elif event.key == pygame.K_BACKSPACE:
                         name = name[:-1]
-                        if cursor_pos > 0:
-                            cursor_pos -= 10
                     else:
                         name += event.unicode
-                        cursor_pos += 10
-                    window.fill(WHITE)
-                    enter_name_text.draw(window)
-                    pygame.draw.rect(window, BLACK, enter_rect, 2)
-                    name_font = pygame.font.SysFont('freesansbold.ttf', 30)
-                    name_surface = name_font.render(name, True, BLACK)
-                    name_rect = name_surface.get_rect()
-                    name_rect.bottomleft = (x_pos, y_pos + 10)
-                    window.blit(name_surface, name_rect)
-                    cursor_x, cursor_y = name_rect.topright
-                    pygame.draw.line(window, SKYBLUE, (cursor_x + 2, cursor_y), ( cursor_x + 2, cursor_y + 20), 2)
-                    pygame.display.update()
+        window.fill(WHITE)
+        enter_name_text.draw(window)
+        pygame.draw.rect(window, WHITE, enter_rect, 2)
+        name_surface = name_font.render(name, True, BLACK)
+        name_rect = name_surface.get_rect()
+        name_rect.bottomleft = (x_pos, y_pos + 10)
+        window.blit(name_surface, name_rect)
+        cursor_x, cursor_y = name_rect.topright
+        current_time = pygame.time.get_ticks()
+        if current_time - cursor_timer > 500:  # 每500毫秒切換一次
+            active = not active
+            cursor_timer = current_time
+        if active:
+            pygame.draw.line(window, SKYBLUE, (cursor_x + 2, cursor_y), ( cursor_x + 2, cursor_y + 20), 2)
+        pygame.display.update()
     return name
 
+def show_rank(score_list, y_already):
+    x_pos = 50
+    y_pos = 70
+    name_font = pygame.font.SysFont('freesansbold.ttf', 30)
+    window.fill(WHITE)
+    for i in range(len(score_list)):
+        record = f"{i + 1}: {score_list[i][0]} {score_list[i][1]}"
+        record_surface = name_font.render(record, True, BLACK)
+        record_rect = record_surface.get_rect()
+        record_rect.topleft = (x_pos, y_pos)
+        window.blit(record_surface, record_rect)
+        y_pos += 40
+        if (i + 1) % 14 == 0:
+            x_pos += 250
+            y_pos = 70
+    n_text = Text("Press Tab again to go back", 30, BLACK, (820, 20))
+    n_text.draw(window)
+    pygame.display.update()  
+    leave_rank = False
+    
+    while not leave_rank:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_TAB:
+                    window.fill(WHITE)
+                    game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
+                    if y_already:
+                        y_or_n_or_tab_text = Text("Press n to leave / Press Tab to check ranks", 30, BLACK, (window_width // 2, window_height // 2 + 90))
+                    else:
+                        record_or_not_text = Text("Do you want to record your score?", 40, BLACK, (window_width // 2, window_height // 2 + 50))
+                        record_or_not_text.draw(window)
+                        y_or_n_or_tab_text = Text("Press y to record / Press n to leave / Press Tab to check ranks", 30, BLACK, (window_width // 2, window_height // 2 + 90))
+                    game_over_text.draw(window)
+                    y_or_n_or_tab_text.draw(window)
+                    pygame.display.update()
+                    leave_rank = True
+                    break
+    
 def gameover():
     window.fill(WHITE)  # 用白色填充整個視窗
     if game_mode == 1:
         game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
-        score_text = Text("Your Score: " + str(points), 40, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
-        high_score = load_highest_score(f"{game_difficulty}.txt")
-        if points > high_score:
-            high_score = points
-            with open(os.path.join("score", f"{game_difficulty}.txt"), "w") as file:
-                file.write(str(points))
         record_or_not_text = Text("Do you want to record your score?", 40, BLACK, (window_width // 2, window_height // 2 + 50))
-        y_or_n_text = Text("Press y to record / Press n to leave", 30, BLACK, (window_width // 2, window_height // 2 + 90))
+        y_or_n_or_tab_text = Text("Press y to record / Press n to leave / Press Tab to check ranks", 30, BLACK, (window_width // 2, window_height // 2 + 90))
         game_over_text.draw(window)
         record_or_not_text.draw(window)
-        y_or_n_text.draw(window)
+        y_or_n_or_tab_text.draw(window)
+        y_already = False
         pygame.display.update()
-
+        
+        score_list = load_sorted_score_list(f"{game_difficulty}.csv")
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -1012,16 +1079,40 @@ def gameover():
                     if event.key == pygame.K_n:  # 如果玩家按下 n 鍵
                         menu()
                     elif event.key == pygame.K_y:  # 如果玩家按下 y 鍵
+                        y_already = True
                         window.fill(WHITE)
                         enter_name_text = Text("Enter your name: ______________________________", 30, BLACK, (window_width // 2, window_height // 2))
                         enter_name_text.draw(window)
                         enter_rect = pygame.Rect(window_width // 2 - 80, window_height // 2 - 20, 335, 40)
-                        pygame.draw.rect(window, BLACK, enter_rect, 2)
+                        pygame.draw.rect(window, WHITE, enter_rect, 2)
                         pygame.draw.line(window, SKYBLUE, (window_width // 2 - 70, window_height // 2 + 10), (window_width // 2 - 70, window_height // 2 - 10), 2)
-                        # 如果名字重複就break
                         pygame.display.update()
                         name = enter_your_name(enter_name_text, enter_rect)
-                        print(name)
+                        already_record = False
+                        already_record_index = int()
+                        for i in range(len(score_list)):
+                            if score_list[i][0] == name:
+                                already_record = True
+                                already_record_index = i
+                                break
+                        if already_record:
+                            if points > score_list[already_record_index][1]:
+                                score_list[already_record_index][1] = points
+                        else:
+                            score_list.append([name, points])
+                        score_list.sort(key = lambda x:x[1], reverse=True)
+                        with open(os.path.join("score", f"{game_difficulty}.csv"), "w", newline="", encoding="utf-8-sig") as file:
+                            writer = csv.writer(file)
+                            writer.writerows(score_list)
+                        file.close()  # 存入分數
+                        window.fill(WHITE)
+                        score_recorded_text = Text("Score recorded!", 80, BLACK, (window_width // 2, window_height // 2 - 100))
+                        tab_or_n_text = Text("Press Tab to check ranks / Press n to leave", 30, BLACK, (window_width // 2, window_height // 2 + 50))
+                        score_recorded_text.draw(window)
+                        tab_or_n_text.draw(window)
+                        pygame.display.update()
+                    elif event.key == pygame.K_TAB:
+                        show_rank(score_list, y_already)
 
     elif game_mode == 2:
         game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
