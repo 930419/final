@@ -312,10 +312,10 @@ def main():
         game_speed = 7
         life =5
     elif game_difficulty == MEDIUM:
-        game_speed = 14
+        game_speed = 10
         life = 3
     elif game_difficulty == HARD:
-        game_speed = 20
+        game_speed = 13
         life = 1
 #  播放音樂
     load_bg_music(os.path.join("music", "bg_music_in_game.ogg"))
