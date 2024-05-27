@@ -1044,15 +1044,22 @@ def show_rank(score_list, y_already):
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_TAB:
                     window.fill(WHITE)
-                    game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
                     if y_already:
-                        y_or_n_or_tab_text = Text("Press n to leave / Press Tab to check ranks", 30, BLACK, (window_width // 2, window_height // 2 + 90))
+                        score_recorded_text = Text("Score recorded!", 80, BLACK, (window_width // 2, window_height // 2 - 100))
+                        score_text = Text(f"Your score: {points}", 40, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
+                        tab_or_n_text = Text("Press Tab to check ranks / Press n to leave", 30, BLACK, (window_width // 2, window_height // 2 + 50))
+                        score_recorded_text.draw(window)
+                        score_text.draw(window)
+                        tab_or_n_text.draw(window)
                     else:
+                        game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
+                        score_text = Text(f"Your score: {points}", 40, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
                         record_or_not_text = Text("Do you want to record your score?", 40, BLACK, (window_width // 2, window_height // 2 + 50))
-                        record_or_not_text.draw(window)
                         y_or_n_or_tab_text = Text("Press y to record / Press n to leave / Press Tab to check ranks", 30, BLACK, (window_width // 2, window_height // 2 + 90))
-                    game_over_text.draw(window)
-                    y_or_n_or_tab_text.draw(window)
+                        game_over_text.draw(window)
+                        score_text.draw(window)
+                        record_or_not_text.draw(window)
+                        y_or_n_or_tab_text.draw(window)
                     pygame.display.update()
                     leave_rank = True
                     break
@@ -1061,9 +1068,11 @@ def gameover():
     window.fill(WHITE)  # 用白色填充整個視窗
     if game_mode == 1:
         game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
+        score_text = Text(f"Your score: {points}", 40, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
         record_or_not_text = Text("Do you want to record your score?", 40, BLACK, (window_width // 2, window_height // 2 + 50))
         y_or_n_or_tab_text = Text("Press y to record / Press n to leave / Press Tab to check ranks", 30, BLACK, (window_width // 2, window_height // 2 + 90))
         game_over_text.draw(window)
+        score_text.draw(window)
         record_or_not_text.draw(window)
         y_or_n_or_tab_text.draw(window)
         y_already = False
@@ -1107,8 +1116,10 @@ def gameover():
                         file.close()  # 存入分數
                         window.fill(WHITE)
                         score_recorded_text = Text("Score recorded!", 80, BLACK, (window_width // 2, window_height // 2 - 100))
+                        score_text = Text(f"Your score: {points}", 40, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
                         tab_or_n_text = Text("Press Tab to check ranks / Press n to leave", 30, BLACK, (window_width // 2, window_height // 2 + 50))
                         score_recorded_text.draw(window)
+                        score_text.draw(window)
                         tab_or_n_text.draw(window)
                         pygame.display.update()
                     elif event.key == pygame.K_TAB:
