@@ -362,7 +362,7 @@ class flyobs2(Obstacle):
         self.rect.y = 100 # Y座標位置
 class blurobs(Obstacle):
     def __init__(self, image_list : list):
-        self.type = bg  
+        self.type = 0
         super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
         self.rect.y = 400 # Y座標位置
 #  道具處理
@@ -562,6 +562,8 @@ def mainsingle():
     paused = False
     restart = False
     exit = False
+    start_time = 0
+    FOG = pygame.image.load(os.path.join("image/background", "fog.png"))
     
     while countdown > 0:
         window.blit(BACKGROUND_LIST[bg], (x_bg_pos, y_bg_pos))
@@ -687,11 +689,7 @@ def mainsingle():
                 if player.is_takingdamage() or player.is_invincible():
                     continue
                 elif obstacletype == 1:
-                    FOG = pygame.image.load(os.path.join("image/background", "fog.png"))
-                    fog_time = 60
-                    while fog_time > 0:
-                        window.blit(FOG, (0, 0))
-                        fog_time -= 1
+                    start_time = pygame.time.get_ticks() + 3000                   
                     obstacles.remove(obstacle)
                 else:
                     life -= 1
@@ -699,6 +697,11 @@ def mainsingle():
 
             if obstacle.rect.x < -obstacle.rect.width:
                 obstacles.remove(obstacle)
+                
+        if pygame.time.get_ticks() <= start_time:
+            window.blit(FOG, (0, 0))
+        else:
+            start_time = 0
 #  道具
         random_item = random.randint(0, 1)
     # 在遊戲迴圈中生成道具
@@ -722,7 +725,7 @@ def mainsingle():
                     life += 1  # 增加生命值
                 items.remove(item)  # 移除已經碰撞的道具
             elif player.ch_rect.colliderect(item.rect) and itemtype == 1:
-                player.muteki_time()
+                #player.muteki_time()
                 items.remove(item) 
             if item.rect.x < -item.rect.width:
                 items.remove(item)
