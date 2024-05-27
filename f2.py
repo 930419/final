@@ -47,6 +47,7 @@ FLYOBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "cityf.png"))
            #  小：68*71 大：99*95 
 # 遮蔽視線障礙物
 BLUROBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "cloud.png"))]
+FOG = [pygame.image.load(os.path.join("image/background", "fog.png"))]
 def load_sorted_score_list(which_score):
     score_list = list()
     score_file_path = os.path.join("score", which_score)
@@ -415,6 +416,17 @@ class Coin:
         self.rect.x -= game_speed  # 道具向左移動的速度
     def draw(self, screen: pygame.Surface):
         screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y))  # 繪製道具
+class fog:
+    def __init__(self, image_list: list):
+        self.image_list = image_list  # 道具圖片列表
+        self.type = 0  # 道具類型，這裡預設為 0
+        self.rect = self.image_list[self.type].get_rect()  # 道具的矩形區域
+        self.rect.x = window_width  # 道具出現的 x 座標
+        self.rect.y = 0 # 道具出現的 y 座標
+    def update(self):
+        self.rect.x -= game_speed  # 道具向左移動的速度
+    def draw(self, screen: pygame.Surface):
+        screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y))  # 繪製道具
 
 
 #  標題目錄
@@ -678,8 +690,8 @@ def mainsingle():
                 if player.is_takingdamage() or player.is_invincible():
                     continue
                 elif obstacletype == 1:
-                    fog = pygame.image.load(os.path.join("image/flyobstacle", "fog-P2P.png"))
-                    blurobs(fog).draw(window)
+                    fog(FOG).draw(window)
+                    fog(FOG).update()
                     obstacles.remove(obstacle)
                 else:
                     life -= 1
