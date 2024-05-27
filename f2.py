@@ -36,14 +36,20 @@ LIFE_BAR = [pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-0.
             pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-4.png")),
             pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-5.png"))]
 #  大障礙物
-LARGEOBSTACLE = [pygame.image.load(os.path.join("image/largeobstacle", "cityb.png")),
-             pygame.image.load(os.path.join("image/largeobstacle", "obstacle2.png")),
-             pygame.image.load(os.path.join("image/largeobstacle", "obstacle3.png"))]
+LARGEOBSTACLE = [pygame.image.load(os.path.join("image/largeobstacle", "forestb.png")),
+             pygame.image.load(os.path.join("image/largeobstacle", "autumnb.png")),
+             pygame.image.load(os.path.join("image/largeobstacle", "winterb.png")),
+             pygame.image.load(os.path.join("image/largeobstacle", "cityb.png"))]
 # 小障礙物
-SMALLOBSTACLE = [pygame.image.load(os.path.join("image/smallobstacle", "citys.png")),
-             pygame.image.load(os.path.join("image/smallobstacle", "obstacle2.png"))]
-FLYOBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "cityf.png")),
-             pygame.image.load(os.path.join("image/flyobstacle", "obstacle2.png"))]
+SMALLOBSTACLE = [pygame.image.load(os.path.join("image/largeobstacle", "forests.png")),
+             pygame.image.load(os.path.join("image/largeobstacle", "autumns.png")),
+             pygame.image.load(os.path.join("image/largeobstacle", "winters.png")),
+             pygame.image.load(os.path.join("image/largeobstacle", "citys.png"))]
+
+FLYOBSTACLE = [pygame.image.load(os.path.join("image/largeobstacle", "forestf.png")),
+             pygame.image.load(os.path.join("image/largeobstacle", "autumnf.png")),
+             pygame.image.load(os.path.join("image/largeobstacle", "winterf.png")),
+             pygame.image.load(os.path.join("image/largeobstacle", "cityf.png"))]
            #  小：68*71 大：99*95 
 def load_sorted_score_list(which_score):
     score_list = list()
