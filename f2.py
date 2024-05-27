@@ -53,7 +53,6 @@ FLYOBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "forestf.png"
            #  小：68*71 大：99*95 
 # 遮蔽視線障礙物
 BLUROBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "cloud.png"))]
-FOG = [pygame.image.load(os.path.join("image/flyobstacle", "fog-P2P.png"))]
 def load_sorted_score_list(which_score):
     score_list = list()
     score_file_path = os.path.join("score", which_score)
@@ -565,6 +564,7 @@ def mainsingle():
     bg = 0
     player = Charactor1()
     obstacles = []
+    fog_pic = []
     run = True
     x_bg_pos, y_bg_pos = 0, 0
     x_heart, y_heart = 33, 50
@@ -689,7 +689,8 @@ def mainsingle():
             else:
                 obstacles.append(blurobs(BLUROBSTACLE))
                 obstacletype = 1
-
+             
+                
         for obstacle in obstacles:
             obstacle.update()
             obstacle.draw(window)
@@ -697,8 +698,11 @@ def mainsingle():
                 if player.is_takingdamage() or player.is_invincible():
                     continue
                 elif obstacletype == 1:
-                    fog(FOG).draw(window)
-                    fog(FOG).update()
+                    FOG = pygame.image.load(os.path.join("image/background", "fog.png"))
+                    fog_time = 60
+                    while fog_time > 0:
+                        window.blit(FOG, (0, 0))
+                        fog_time -= 1
                     obstacles.remove(obstacle)
                 else:
                     life -= 1
