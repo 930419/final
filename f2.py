@@ -53,7 +53,7 @@ FLYOBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "forestf.png"
            #  小：68*71 大：99*95 
 # 遮蔽視線障礙物
 BLUROBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "cloud.png"))]
-FOG = [pygame.image.load(os.path.join("image/background", "fog.png"))]
+FOG = [pygame.image.load(os.path.join("image/flyobstacle", "fog-P2P.png"))]
 def load_sorted_score_list(which_score):
     score_list = list()
     score_file_path = os.path.join("score", which_score)
@@ -422,6 +422,7 @@ class Coin:
         self.rect.x -= game_speed  # 道具向左移動的速度
     def draw(self, screen: pygame.Surface):
         screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y))  # 繪製道具
+# 特殊情況
 class fog:
     def __init__(self, image_list: list):
         self.image_list = image_list  # 道具圖片列表
