@@ -338,12 +338,12 @@ class largeobs(Obstacle):
         self.rect.y = 500  # Y座標位置
 class smallobs(Obstacle):
     def __init__(self, image_list : list):
-        self.type = bg  # 三種小仙人掌型態隨機選取一種
+        self.type = bg  # 不同背景不同種類的障礙物
         super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
         self.rect.y = 510 # Y座標位置
 class flyobs(Obstacle):
     def __init__(self, image_list : list):
-        self.type = bg  # 三種小仙人掌型態隨機選取一種
+        self.type = bg  
         super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
         self.rect.y = 400 # Y座標位置
 class largeobs2(Obstacle):
@@ -353,7 +353,7 @@ class largeobs2(Obstacle):
         self.rect.y = 200  # Y座標位置
 class smallobs2(Obstacle):
     def __init__(self, image_list : list):
-        self.type = bg  # 三種小仙人掌型態隨機選取一種
+        self.type = bg  # 
         super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
         self.rect.y = 210 # Y座標位置
 class flyobs2(Obstacle):
@@ -363,7 +363,7 @@ class flyobs2(Obstacle):
         self.rect.y = 100 # Y座標位置
 class blurobs(Obstacle):
     def __init__(self, image_list : list):
-        self.type = bg  # 三種小仙人掌型態隨機選取一種
+        self.type = bg  
         super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
         self.rect.y = 400 # Y座標位置
 #  道具處理
@@ -411,17 +411,6 @@ class star2:
         self.rect.x -= game_speed  # 道具向左移動的速度
     def draw(self, screen: pygame.Surface):
         screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y)) 
-class Coin:
-    def __init__(self, image_list: list):
-        self.image_list = image_list  # 道具圖片列表
-        self.type = 2  # 道具類型，這裡預設為 0
-        self.rect = self.image_list[self.type].get_rect()  # 道具的矩形區域
-        self.rect.x = window_width  # 道具出現的 x 座標
-        self.rect.y = 500 # 道具出現的 y 座標
-    def update(self):
-        self.rect.x -= game_speed  # 道具向左移動的速度
-    def draw(self, screen: pygame.Surface):
-        screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y))  # 繪製道具
 # 特殊情況
 class fog:
     def __init__(self, image_list: list):
@@ -733,7 +722,6 @@ def mainsingle():
                 items.remove(item) 
             if item.rect.x < -item.rect.width:
                 items.remove(item)
-          # coin main
 
 
         pygame.display.update()
