@@ -725,7 +725,7 @@ def mainsingle():
                     life += 1  # 增加生命值
                 items.remove(item)  # 移除已經碰撞的道具
             elif player.ch_rect.colliderect(item.rect) and itemtype == 1:
-                #player.muteki_time()
+                player.muteki_time()
                 items.remove(item) 
             if item.rect.x < -item.rect.width:
                 items.remove(item)
