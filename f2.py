@@ -1047,7 +1047,7 @@ def show_rank(score_list, y_already):
                     if y_already:
                         score_recorded_text = Text("Score recorded!", 80, BLACK, (window_width // 2, window_height // 2 - 100))
                         score_text = Text(f"Your score: {points}", 40, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
-                        tab_or_n_text = Text("Press Tab to check ranks / Press n to leave", 30, BLACK, (window_width // 2, window_height // 2 + 50))
+                        tab_or_n_text = Text("Press n to leave / Press Tab to check ranks", 30, BLACK, (window_width // 2, window_height // 2 + 50))
                         score_recorded_text.draw(window)
                         score_text.draw(window)
                         tab_or_n_text.draw(window)
@@ -1117,7 +1117,7 @@ def gameover():
                         window.fill(WHITE)
                         score_recorded_text = Text("Score recorded!", 80, BLACK, (window_width // 2, window_height // 2 - 100))
                         score_text = Text(f"Your score: {points}", 40, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
-                        tab_or_n_text = Text("Press Tab to check ranks / Press n to leave", 30, BLACK, (window_width // 2, window_height // 2 + 50))
+                        tab_or_n_text = Text("Press n to leave / Press Tab to check ranks", 30, BLACK, (window_width // 2, window_height // 2 + 50))
                         score_recorded_text.draw(window)
                         score_text.draw(window)
                         tab_or_n_text.draw(window)
