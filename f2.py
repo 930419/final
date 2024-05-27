@@ -1017,6 +1017,8 @@ def enter_your_name(enter_name_text, enter_rect):
                     else:
                         name += event.unicode
         window.fill(WHITE)
+        finish_text = Text("Press Enter when finish entering", 30, BLACK, (window_width // 2, window_height // 2 + 50))
+        finish_text.draw(window)
         enter_name_text.draw(window)
         pygame.draw.rect(window, WHITE, enter_rect, 2)
         name_surface = name_font.render(name, True, BLACK)
@@ -1028,7 +1030,7 @@ def enter_your_name(enter_name_text, enter_rect):
         if current_time - cursor_timer > 500:  # 每500毫秒切換一次
             active = not active
             cursor_timer = current_time
-        if active:
+        if active and entering:
             pygame.draw.line(window, SKYBLUE, (cursor_x + 2, cursor_y), ( cursor_x + 2, cursor_y + 20), 2)
         pygame.display.update()
     return name
