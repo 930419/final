@@ -45,6 +45,8 @@ SMALLOBSTACLE = [pygame.image.load(os.path.join("image/smallobstacle", "citys.pn
 FLYOBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "cityf.png")),
              pygame.image.load(os.path.join("image/flyobstacle", "obstacle2.png"))]
            #  小：68*71 大：99*95 
+# 遮蔽視線障礙物
+BLUROBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "cloud.png"))]
 def load_sorted_score_list(which_score):
     score_list = list()
     score_file_path = os.path.join("score", which_score)
@@ -352,6 +354,11 @@ class flyobs2(Obstacle):
         self.type = bg  # 三種小仙人掌型態隨機選取一種
         super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
         self.rect.y = 100 # Y座標位置
+class blurobs(Obstacle):
+    def __init__(self, image_list : list):
+        self.type = bg  # 三種小仙人掌型態隨機選取一種
+        super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
+        self.rect.y = 400 # Y座標位置
 #  道具處理
 class Heart:
     def __init__(self, image_list: list):
@@ -650,13 +657,19 @@ def mainsingle():
         player.draw(window)  
 #  障礙物
         if len(obstacles) == 0:  # 生成障礙物
-            rand = random.randint(0, 2)
-            if rand == 0:
+            rand = random.randint(0, 6)
+            if rand == 0 or rand == 1:
                 obstacles.append(smallobs(SMALLOBSTACLE))
-            elif rand == 1:
+                obstacletype = 0
+            elif rand == 2 or rand == 3:
                 obstacles.append(largeobs(LARGEOBSTACLE))
-            elif rand == 2:
+                obstacletype = 0
+            elif rand == 4 or rand == 5:
                 obstacles.append(flyobs(FLYOBSTACLE))
+                obstacletype = 0
+            else:
+                obstacles.append(blurobs(BLUROBSTACLE))
+                obstacletype = 1
 
         for obstacle in obstacles:
             obstacle.update()
@@ -664,6 +677,10 @@ def mainsingle():
             if player.ch_rect.colliderect(obstacle.rect): 
                 if player.is_takingdamage() or player.is_invincible():
                     continue
+                elif obstacletype == 1:
+                    fog = pygame.image.load(os.path.join("image/flyobstacle", "fog-P2P.png"))
+                    blurobs(fog).draw(window)
+                    obstacles.remove(obstacle)
                 else:
                     life -= 1
                     player.take_damage()
