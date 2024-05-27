@@ -32,14 +32,20 @@ LIFE_BAR = [pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-0.
             pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-4.png")),
             pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-5.png"))]
 #  大障礙物
-LARGEOBSTACLE = [pygame.image.load(os.path.join("image/largeobstacle", "obstacle1.png")),
-             pygame.image.load(os.path.join("image/largeobstacle", "obstacle2.png")),
-             pygame.image.load(os.path.join("image/largeobstacle", "obstacle3.png"))]
+LARGEOBSTACLE = [pygame.image.load(os.path.join("image/largeobstacle", "forestb.png")),
+             pygame.image.load(os.path.join("image/largeobstacle", "autumnb.png")),
+             pygame.image.load(os.path.join("image/largeobstacle", "winterb.png")),
+             pygame.image.load(os.path.join("image/largeobstacle", "cityb.png"))]
 # 小障礙物
-SMALLOBSTACLE = [pygame.image.load(os.path.join("image/smallobstacle", "obstacle1.png")),
-             pygame.image.load(os.path.join("image/smallobstacle", "obstacle2.png"))]
-FLYOBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "obstacle1.png")),
-             pygame.image.load(os.path.join("image/flyobstacle", "obstacle2.png"))]
+SMALLOBSTACLE = [pygame.image.load(os.path.join("image/smallobstacle", "forests.png")),
+             pygame.image.load(os.path.join("image/smallobstacle", "autumns.png")),
+             pygame.image.load(os.path.join("image/smallobstacle", "winters.png")),
+             pygame.image.load(os.path.join("image/smallobstacle", "citys.png"))]
+
+FLYOBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "forestf.png")),
+             pygame.image.load(os.path.join("image/flyobstacle", "autumnf.png")),
+             pygame.image.load(os.path.join("image/flyobstacle", "winterf.png")),
+             pygame.image.load(os.path.join("image/flyobstacle", "cityf.png"))]
            #  小：68*71 大：99*95 
 
 #讀取音樂
@@ -306,10 +312,10 @@ def main():
         game_speed = 7
         life =5
     elif game_difficulty == MEDIUM:
-        game_speed = 14
+        game_speed = 10
         life = 3
     elif game_difficulty == HARD:
-        game_speed = 20
+        game_speed = 13
         life = 1
 #  播放音樂
     load_bg_music(os.path.join("music", "bg_music_in_game.ogg"))
