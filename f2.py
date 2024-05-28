@@ -83,7 +83,7 @@ game_difficulty = EASY
 # 文字處理
 class Text:
     def __init__(self, text, size, color, position=(0, 0)):
-        self.font = pygame.font.SysFont('freesansbold.ttf', size)  # 字體大小(參數)與字型
+        self.font = pygame.font.Font('fonts/PixelEmulator.ttf', size)  # 字體大小(參數)與字型
         self.surface = self.font.render(text, True, color)  # 印出的字串(參數)與呈現
         self.rect = self.surface.get_rect()  # 文字框起
         self.rect.center = position  # 文字的中心位置(參數)
@@ -435,7 +435,7 @@ def menu():
     while run :
         window.fill(WHITE)
         window.blit(BACKGROUND_LIST[0], (0, 0))
-        start_text = Text("Choose the Game mode", 40, BLACK, text_position)
+        start_text = Text("Choose the Game mode", 36, BLACK, text_position)
         start_text.draw(window)
         # 設置人數選擇按鈕的背景
         single_button_rect = MENU_BUTTON.get_rect(topleft=(100, 200))
@@ -474,13 +474,15 @@ def menu():
     sys.exit()
 def difficulty():
     global game_difficulty
-    text_position = (600, window_height // 2) # 螢幕中心
+    text_position1 = (650, (window_height//2) - 50)  # For "Choose The"
+    text_position2 = (650, (window_height//2) + 50)  # For "Game Difficulty"
     run = True
     while run :
         window.fill(WHITE)
         window.blit(BACKGROUND_LIST[0], (0, 0))
-        start_text = Text("Choose the Game Difficulty", 40, BLACK, text_position)
-        start_text.draw(window)
+        start_text_L1 = Text("Choose The", 40, BLACK, text_position1)
+        start_text_L2 = Text("Game Difficulty", 40, BLACK, text_position2)
+        start_text_L1.draw(window), start_text_L2.draw(window)
 
         # 繪製難度選擇按鈕及框框
         easy_button_rect = MENU_BUTTON.get_rect(topleft=(100, 200))
@@ -501,23 +503,23 @@ def difficulty():
         if len(easy_score_list) > 0:
             easy_highest_name = easy_score_list[0][0]
             easy_highest_score = easy_score_list[0][1]
-            easy_highest_score_text = Text(f"Highest Score: {easy_highest_name} {easy_highest_score}",24, BLACK, (200, 185))
+            easy_highest_score_text = Text(f"Highest Score: {easy_highest_name} {easy_highest_score}",18, BLACK, (200, 185))
         else:
-            easy_highest_score_text = Text(f"Highest Score: no record", 24, BLACK, (200, 185))
+            easy_highest_score_text = Text(f"Highest Score: no record", 18, BLACK, (200, 185))
         medium_score_list = load_sorted_score_list("2.csv")
         if len(medium_score_list) > 0:
             medium_highest_name = medium_score_list[0][0]
             medium_highest_score = medium_score_list[0][1]
-            medium_highest_score_text = Text(f"Highest Score: {medium_highest_name} {medium_highest_score}",24, BLACK, (200, 285))
+            medium_highest_score_text = Text(f"Highest Score: {medium_highest_name} {medium_highest_score}",18, BLACK, (200, 285))
         else:
-            medium_highest_score_text = Text(f"Highest Score: no record", 24, BLACK, (200, 285))
+            medium_highest_score_text = Text(f"Highest Score: no record", 18, BLACK, (200, 285))
         hard_score_list = load_sorted_score_list("3.txt")
         if len(hard_score_list) > 0:
             hard_highest_name = hard_score_list[0][0]
             hard_highest_score = hard_score_list[0][1]
-            hard_highest_score_text = Text(f"Highest Score: {hard_highest_name} {hard_highest_score}",24, BLACK, (200, 385))
+            hard_highest_score_text = Text(f"Highest Score: {hard_highest_name} {hard_highest_score}",18, BLACK, (200, 385))
         else:
-            hard_highest_score_text = Text(f"Highest Score: no record", 24, BLACK, (200, 385))
+            hard_highest_score_text = Text(f"Highest Score: no record", 18, BLACK, (200, 385))
         
         easy_text.draw(window)
         medium_text.draw(window)
