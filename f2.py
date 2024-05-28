@@ -80,6 +80,12 @@ MEDIUM = 2
 HARD = 3
 game_difficulty = EASY
 
+# 文字大小
+TITLE = 48
+HEADING = 32
+SUBHEADING = 28
+BODY = 24
+
 # 文字處理
 class Text:
     def __init__(self, text, size, color, position=(0, 0)):
@@ -89,6 +95,18 @@ class Text:
         self.rect.center = position  # 文字的中心位置(參數)
     def draw(self, screen):
         screen.blit(self.surface, self.rect)
+
+
+class Text_body:
+    def __init__(self, text, size, color, position=(0, 0)):
+        self.font = pygame.font.Font('fonts/AgencyFB-Bold.ttf', size)  # 字體大小(參數)與字型
+        self.surface = self.font.render(text, True, color)  # 印出的字串(參數)與呈現
+        self.rect = self.surface.get_rect()  # 文字框起
+        self.rect.center = position  # 文字的中心位置(參數)
+    def draw(self, screen):
+        screen.blit(self.surface, self.rect)
+
+
 #  角色處理
 class Charactor1:
     x_ch_pos = 80
@@ -429,14 +447,17 @@ class fog:
 def menu():
     global game_difficulty
     global game_mode
+    global TITLE, HEADING
 
-    text_position = (600, window_height // 2) # 螢幕中心
+    text_position1 = (650, (window_height//2) - 50)  # Choose The
+    text_position2 = (650, (window_height//2) + 50)  # Game Difficulty
     run = True
     while run :
         window.fill(WHITE)
         window.blit(BACKGROUND_LIST[0], (0, 0))
-        start_text = Text("Choose the Game mode", 36, BLACK, text_position)
-        start_text.draw(window)
+        start_text_L1 = Text("Choose The", TITLE, BLACK, text_position1)
+        start_text_L2 = Text("Game Mode", TITLE, BLACK, text_position2)
+        start_text_L1.draw(window), start_text_L2.draw(window)
         # 設置人數選擇按鈕的背景
         single_button_rect = MENU_BUTTON.get_rect(topleft=(100, 200))
         Duo_button_rect = MENU_BUTTON.get_rect(topleft=(100, 400))
@@ -445,9 +466,9 @@ def menu():
         window.blit(MENU_BUTTON, Duo_button_rect.topleft)
         
         # 繪製難度選擇按鈕及最高分的文本
-        Single_text = Text("Single", 30, BLACK, (200, 225))
+        Single_text = Text("Single", HEADING, BLACK, (200, 225))
         
-        Duo_text = Text("Duo", 30, BLACK, (200, 425))
+        Duo_text = Text("Duo", HEADING, BLACK, (200, 425))
         Single_text.draw(window)
         Duo_text.draw(window)
 
@@ -472,16 +493,20 @@ def menu():
  
     pygame.quit()
     sys.exit()
+
+
 def difficulty():
     global game_difficulty
+    global TITLE, HEADING, BODY
+    
     text_position1 = (650, (window_height//2) - 50)  # For "Choose The"
     text_position2 = (650, (window_height//2) + 50)  # For "Game Difficulty"
     run = True
     while run :
         window.fill(WHITE)
         window.blit(BACKGROUND_LIST[0], (0, 0))
-        start_text_L1 = Text("Choose The", 40, BLACK, text_position1)
-        start_text_L2 = Text("Game Difficulty", 40, BLACK, text_position2)
+        start_text_L1 = Text("Choose The", TITLE, BLACK, text_position1)
+        start_text_L2 = Text("Game Difficulty", TITLE, BLACK, text_position2)
         start_text_L1.draw(window), start_text_L2.draw(window)
 
         # 繪製難度選擇按鈕及框框
@@ -494,32 +519,32 @@ def difficulty():
         window.blit(MENU_BUTTON, hard_button_rect.topleft)
 
         # 繪製難度選擇按鈕及最高分的文本
-        easy_text = Text("EASY", 30, BLACK, (200, 225))
-        medium_text = Text("MEDIUM", 30, BLACK, (200, 325))
-        hard_text = Text("HARD", 30, BLACK, (200, 425))
+        easy_text = Text("EASY", HEADING, BLACK, (200, 225))
+        medium_text = Text("MEDIUM", HEADING, BLACK, (200, 325))
+        hard_text = Text("HARD", HEADING, BLACK, (200, 425))
         
         # 顯示各關目前最高分
         easy_score_list = load_sorted_score_list("1.csv")
         if len(easy_score_list) > 0:
             easy_highest_name = easy_score_list[0][0]
             easy_highest_score = easy_score_list[0][1]
-            easy_highest_score_text = Text(f"Highest Score: {easy_highest_name} {easy_highest_score}",18, BLACK, (200, 185))
+            easy_highest_score_text = Text_body(f"Highest Score: {easy_highest_name} {easy_highest_score}",BODY, BLACK, (200, 185))
         else:
-            easy_highest_score_text = Text(f"Highest Score: no record", 18, BLACK, (200, 185))
+            easy_highest_score_text = Text_body(f"Highest Score: no record", BODY, BLACK, (200, 185))
         medium_score_list = load_sorted_score_list("2.csv")
         if len(medium_score_list) > 0:
             medium_highest_name = medium_score_list[0][0]
             medium_highest_score = medium_score_list[0][1]
-            medium_highest_score_text = Text(f"Highest Score: {medium_highest_name} {medium_highest_score}",18, BLACK, (200, 285))
+            medium_highest_score_text = Text_body(f"Highest Score: {medium_highest_name} {medium_highest_score}",BODY, BLACK, (200, 285))
         else:
-            medium_highest_score_text = Text(f"Highest Score: no record", 18, BLACK, (200, 285))
+            medium_highest_score_text = Text_body(f"Highest Score: no record", BODY, BLACK, (200, 285))
         hard_score_list = load_sorted_score_list("3.txt")
         if len(hard_score_list) > 0:
             hard_highest_name = hard_score_list[0][0]
             hard_highest_score = hard_score_list[0][1]
-            hard_highest_score_text = Text(f"Highest Score: {hard_highest_name} {hard_highest_score}",18, BLACK, (200, 385))
+            hard_highest_score_text = Text_body(f"Highest Score: {hard_highest_name} {hard_highest_score}",BODY, BLACK, (200, 385))
         else:
-            hard_highest_score_text = Text(f"Highest Score: no record", 18, BLACK, (200, 385))
+            hard_highest_score_text = Text_body(f"Highest Score: no record", BODY, BLACK, (200, 385))
         
         easy_text.draw(window)
         medium_text.draw(window)
@@ -619,9 +644,9 @@ def mainsingle():
         if paused:
             image = pygame.image.load(os.path.join("image/window", "paused_window.png"))
             window.blit(image, (200,150))
-            continue_text = Text("press k again to continue", 50, BLACK, (500, 230))
-            restart_text = Text("press r to restart", 50, BLACK, (500, 330))
-            exit_text =  Text("press e to exit", 50, BLACK, (500, 430))
+            continue_text = Text("press k again to continue", TITLE, BLACK, (500, 230))
+            restart_text = Text("press r to restart", TITLE, BLACK, (500, 330))
+            exit_text =  Text("press e to exit", TITLE, BLACK, (500, 430))
             continue_text.draw(window)
             restart_text.draw(window)
             exit_text.draw(window)
@@ -639,7 +664,7 @@ def mainsingle():
             window.blit(BACKGROUND_LIST[bg], (x_bg_pos + window_width, y_bg_pos))
             x_bg_pos = 0
 # 暫停文字提示
-        pause_text = Text("press k to pause", 30, BLACK, (890, 20))
+        pause_text = Text_body("press k to pause", SUBHEADING, BLACK, (900, 25))
         pause_text.draw(window)
 #  生命值 
 
@@ -660,8 +685,8 @@ def mainsingle():
         oripoint +=1
         if oripoint % 2 == 0:
             points += 1
-        score_position = (80, 20)
-        score = Text("Points: " + str(points), 30, BLACK, score_position)
+        score_position = (115, 25)
+        score = Text("Points: " + str(points), SUBHEADING, BLACK, score_position)
         score.draw(window)
         if points % 400 == 0 and game_speed <= 40:
             game_speed += 1
@@ -746,6 +771,8 @@ def mainDuo():
     global points
     global bg
     global winner
+    global TITLE, SUBHEADING
+    
     mid = (window_width//2, window_height//2)
     clock = pygame.time.Clock()
     points = 0
@@ -777,12 +804,12 @@ def mainDuo():
         pygame.display.update()
         time.sleep(1)
         countdown -= 1
+        
 #  難度調整
     if game_difficulty == EASY:
         game_speed = 7
         life1 = 5
         life2 = 5
-    
    
     
  #  開始迴圈
@@ -818,9 +845,9 @@ def mainDuo():
         if paused:
             image = pygame.image.load(os.path.join("image/window", "paused_window.png"))
             window.blit(image, (200,150))
-            continue_text = Text("press k again to continue", 50, BLACK, (500, 230))
-            restart_text = Text("press r to restart", 50, BLACK, (500, 330))
-            exit_text =  Text("press e to exit", 50, BLACK, (500, 430))
+            continue_text = Text("press k again to continue", TITLE, BLACK, (500, 230))
+            restart_text = Text("press r to restart", TITLE, BLACK, (500, 330))
+            exit_text =  Text("press e to exit", TITLE, BLACK, (500, 430))
             continue_text.draw(window)
             restart_text.draw(window)
             exit_text.draw(window)
@@ -839,7 +866,7 @@ def mainDuo():
             x_bg_pos = 0
             
 # 暫停文字提示
-        pause_text = Text("press k to pause", 30, BLACK, (890, 20))
+        pause_text = Text("press k to pause", SUBHEADING, BLACK, (900, 25))
         pause_text.draw(window) 
 #  生命值 
 
@@ -878,8 +905,8 @@ def mainDuo():
         oripoint +=1
         if oripoint % 2 == 0:
             points += 1
-        score_position = (80, 20)
-        score = Text("Points: " + str(points), 30, BLACK, score_position)
+        score_position = (115, 25)
+        score = Text("Points: " + str(points), SUBHEADING, BLACK, score_position)
         score.draw(window)
         if points % 200 == 0 and game_speed <= 40:
             game_speed += 1
@@ -1001,6 +1028,8 @@ def mainDuo():
     gameover()
 
 def enter_your_name(enter_name_text, enter_rect):
+    global HEADING
+    
     name = str()
     entering = False
     finish_enter = False
@@ -1008,7 +1037,7 @@ def enter_your_name(enter_name_text, enter_rect):
     y_pos = window_height // 2
     active = True
     cursor_timer = pygame.time.get_ticks()
-    name_font = pygame.font.SysFont('freesansbold.ttf', 30)
+    name_font = pygame.font.Font('/Users/bertinaaaron/Downloads/Fonts/AgencyFB-Bold.ttf', HEADING)
     name_surface = name_font.render(name, True, BLACK)
     name_rect = name_surface.get_rect()
     name_rect.bottomleft = (x_pos, y_pos + 10)
@@ -1035,7 +1064,7 @@ def enter_your_name(enter_name_text, enter_rect):
                     else:
                         name += event.unicode
         window.fill(WHITE)
-        finish_text = Text("Press Enter when finish entering", 30, BLACK, (window_width // 2, window_height // 2 + 50))
+        finish_text = Text("Press Enter when finish entering", HEADING, BLACK, (window_width // 2, window_height // 2 + 50))
         finish_text.draw(window)
         enter_name_text.draw(window)
         pygame.draw.rect(window, WHITE, enter_rect, 2)
@@ -1053,11 +1082,15 @@ def enter_your_name(enter_name_text, enter_rect):
         pygame.display.update()
     return name
 
+
 def show_rank(score_list, y_already):
+    global TITLE, HEADING, BODY
+    
     x_pos = 50
     y_pos = 70
-    name_font = pygame.font.SysFont('freesansbold.ttf', 30)
+    name_font = pygame.font.Font('/Users/bertinaaaron/Downloads/Fonts/AgencyFB-Bold.ttf', HEADING)
     window.fill(WHITE)
+    
     for i in range(len(score_list)):
         record = f"{i + 1}: {score_list[i][0]} {score_list[i][1]}"
         record_surface = name_font.render(record, True, BLACK)
@@ -1068,7 +1101,7 @@ def show_rank(score_list, y_already):
         if (i + 1) % 14 == 0:
             x_pos += 250
             y_pos = 70
-    n_text = Text("Press Tab again to go back", 30, BLACK, (820, 20))
+    n_text = Text("Press Tab again to go back", HEADING, BLACK, (820, 20))
     n_text.draw(window)
     pygame.display.update()  
     leave_rank = False
@@ -1083,16 +1116,16 @@ def show_rank(score_list, y_already):
                     window.fill(WHITE)
                     if y_already:
                         score_recorded_text = Text("Score recorded!", 80, BLACK, (window_width // 2, window_height // 2 - 100))
-                        score_text = Text(f"Your score: {points}", 40, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
-                        tab_or_n_text = Text("Press n to leave / Press Tab to check ranks", 30, BLACK, (window_width // 2, window_height // 2 + 50))
+                        score_text = Text(f"Your score: {points}", TITLE, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
+                        tab_or_n_text = Text_body("Press n to leave / Press Tab to check ranks", BODY, BLACK, (window_width // 2, window_height // 2 + 50))
                         score_recorded_text.draw(window)
                         score_text.draw(window)
                         tab_or_n_text.draw(window)
                     else:
                         game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
-                        score_text = Text(f"Your score: {points}", 40, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
-                        record_or_not_text = Text("Do you want to record your score?", 40, BLACK, (window_width // 2, window_height // 2 + 50))
-                        y_or_n_or_tab_text = Text("Press y to record / Press n to leave / Press Tab to check ranks", 30, BLACK, (window_width // 2, window_height // 2 + 90))
+                        score_text = Text(f"Your score: {points}", TITLE, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
+                        record_or_not_text = Text_body("Do you want to record your score?", TITLE, BLACK, (window_width // 2, window_height // 2 + 50))
+                        y_or_n_or_tab_text = Text_body("Press y to record / Press n to leave / Press Tab to check ranks", BODY, BLACK, (window_width // 2, window_height // 2 + 90))
                         game_over_text.draw(window)
                         score_text.draw(window)
                         record_or_not_text.draw(window)
@@ -1105,9 +1138,9 @@ def gameover():
     window.fill(WHITE)  # 用白色填充整個視窗
     if game_mode == 1:
         game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
-        score_text = Text(f"Your score: {points}", 40, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
-        record_or_not_text = Text("Do you want to record your score?", 40, BLACK, (window_width // 2, window_height // 2 + 50))
-        y_or_n_or_tab_text = Text("Press y to record / Press n to leave / Press Tab to check ranks", 30, BLACK, (window_width // 2, window_height // 2 + 90))
+        score_text = Text(f"Your score: {points}", TITLE, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
+        record_or_not_text = Text_body("Do you want to record your score?", TITLE, BLACK, (window_width // 2, window_height // 2 + 90))
+        y_or_n_or_tab_text = Text_body("Press y to record / Press n to leave / Press Tab to check ranks", BODY, BLACK, (window_width // 2, window_height // 2 + 150))
         game_over_text.draw(window)
         score_text.draw(window)
         record_or_not_text.draw(window)
@@ -1127,7 +1160,7 @@ def gameover():
                     elif event.key == pygame.K_y:  # 如果玩家按下 y 鍵
                         y_already = True
                         window.fill(WHITE)
-                        enter_name_text = Text("Enter your name: ______________________________", 30, BLACK, (window_width // 2, window_height // 2))
+                        enter_name_text = Text("Enter your name: ______________________________", HEADING, BLACK, (window_width // 2, window_height // 2))
                         enter_name_text.draw(window)
                         enter_rect = pygame.Rect(window_width // 2 - 80, window_height // 2 - 20, 335, 40)
                         pygame.draw.rect(window, WHITE, enter_rect, 2)
@@ -1153,8 +1186,8 @@ def gameover():
                         file.close()  # 存入分數
                         window.fill(WHITE)
                         score_recorded_text = Text("Score recorded!", 80, BLACK, (window_width // 2, window_height // 2 - 100))
-                        score_text = Text(f"Your score: {points}", 40, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
-                        tab_or_n_text = Text("Press n to leave / Press Tab to check ranks", 30, BLACK, (window_width // 2, window_height // 2 + 50))
+                        score_text = Text(f"Your score: {points}", TITLE, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
+                        tab_or_n_text = Text_body("Press n to leave / Press Tab to check ranks", BODY, BLACK, (window_width // 2, window_height // 2 + 50))
                         score_recorded_text.draw(window)
                         score_text.draw(window)
                         tab_or_n_text.draw(window)
@@ -1165,13 +1198,13 @@ def gameover():
     elif game_mode == 2:
         game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
         if winner == 1:
-            winner_text = Text("winner is 1P", 40, BLACK, (window_width // 2, window_height // 2))
+            winner_text = Text("winner is 1P", TITLE, BLACK, (window_width // 2, window_height // 2))
         elif winner == 2:  
-            winner_text = Text("winner is 2P", 40, BLACK, (window_width // 2, window_height // 2))
+            winner_text = Text("winner is 2P", TITLE, BLACK, (window_width // 2, window_height // 2))
         elif winner == 0:  
-            winner_text = Text("draw", 40, BLACK, (window_width // 2, window_height // 2))
+            winner_text = Text("draw", TITLE, BLACK, (window_width // 2, window_height // 2))
     
-        continue_text = Text("Press Enter to Continue", 30, BLACK, (window_width // 2, window_height // 2 + 100))  # 提示玩家按 Enter 鍵繼續
+        continue_text = Text("Press Enter to Continue", 24, BLACK, (window_width // 2, window_height // 2 + 100))  # 提示玩家按 Enter 鍵繼續
         game_over_text.draw(window)
         winner_text.draw(window)
         continue_text.draw(window)
