@@ -363,7 +363,7 @@ class flyobs(Obstacle):
     def __init__(self, image_list : list):
         self.type = bg  
         super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
-        self.rect.y = 400 # Y座標位置
+        self.rect.y = 405 # Y座標位置
 class largeobs2(Obstacle):
     def __init__(self, image_list : list):
         self.type = bg  # 不同背景不同種類的障礙物
@@ -378,7 +378,7 @@ class flyobs2(Obstacle):
     def __init__(self, image_list : list):
         self.type = bg  # 三種小仙人掌型態隨機選取一種
         super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
-        self.rect.y = 100 # Y座標位置
+        self.rect.y = 105 # Y座標位置
 class blurobs(Obstacle):
     def __init__(self, image_list : list):
         self.type = 0
@@ -413,7 +413,7 @@ class Heart2:
         self.type = 0  # 道具類型，這裡預設為 0
         self.rect = self.image_list[self.type].get_rect()  # 道具的矩形區域
         self.rect.x = window_width  # 道具出現的 x 座標
-        self.rect.y = random.randint(150, 320)  # 道具出現的 y 座標
+        self.rect.y = random.randint(150, 300)  # 道具出現的 y 座標
     def update(self):
         self.rect.x -= game_speed  # 道具向左移動的速度
     def draw(self, screen: pygame.Surface):
@@ -424,7 +424,7 @@ class star2:
         self.type = 2  # 道具類型，這裡預設為 0
         self.rect = self.image_list[self.type].get_rect()  # 道具的矩形區域
         self.rect.x = window_width  # 道具出現的 x 座標
-        self.rect.y = random.randint(150, 310)  # 道具出現的 y 座標
+        self.rect.y = random.randint(150, 280)  # 道具出現的 y 座標
     def update(self):
         self.rect.x -= game_speed  # 道具向左移動的速度
     def draw(self, screen: pygame.Surface):
@@ -570,6 +570,8 @@ def difficulty():
                     elif hard_button_rect.collidepoint(mouse_pos):
                         game_difficulty = HARD
                         mainsingle()
+    pygame.quit()
+    sys.exit()
 # 主程式
 def mainsingle():
     global game_speed
