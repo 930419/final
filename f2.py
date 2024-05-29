@@ -653,9 +653,9 @@ def mainsingle():
         if paused:
             image = pygame.image.load(os.path.join("image/window", "paused_window.png"))
             window.blit(image, (200,150))
-            continue_text = Text("press k again to continue", TITLE, BLACK, (500, 230))
-            restart_text = Text("press r to restart", TITLE, BLACK, (500, 330))
-            exit_text =  Text("press e to exit", TITLE, BLACK, (500, 430))
+            continue_text = Text_body("press k again to continue", TITLE, BLACK, (500, 230))
+            restart_text = Text_body("press r to restart", TITLE, BLACK, (500, 330))
+            exit_text =  Text_body("press e to exit", TITLE, BLACK, (500, 430))
             continue_text.draw(window)
             restart_text.draw(window)
             exit_text.draw(window)
