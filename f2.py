@@ -1037,7 +1037,7 @@ def enter_your_name(enter_name_text, enter_rect):
     y_pos = window_height // 2
     active = True
     cursor_timer = pygame.time.get_ticks()
-    name_font = pygame.font.Font('/Users/bertinaaaron/Downloads/Fonts/AgencyFB-Bold.ttf', HEADING)
+    name_font = pygame.font.Font('Fonts/AgencyFB-Bold.ttf', HEADING)
     name_surface = name_font.render(name, True, BLACK)
     name_rect = name_surface.get_rect()
     name_rect.bottomleft = (x_pos, y_pos + 10)
@@ -1088,7 +1088,7 @@ def show_rank(score_list, y_already):
     
     x_pos = 50
     y_pos = 70
-    name_font = pygame.font.Font('/Users/bertinaaaron/Downloads/Fonts/AgencyFB-Bold.ttf', HEADING)
+    name_font = pygame.font.Font('Fonts/AgencyFB-Bold.ttf', HEADING)
     window.fill(WHITE)
     
     for i in range(len(score_list)):
