@@ -538,7 +538,7 @@ def difficulty():
             medium_highest_score_text = Text_body(f"Highest Score: {medium_highest_name} {medium_highest_score}",BODY, BLACK, (200, 285))
         else:
             medium_highest_score_text = Text_body(f"Highest Score: no record", BODY, BLACK, (200, 285))
-        hard_score_list = load_sorted_score_list("3.txt")
+        hard_score_list = load_sorted_score_list("3.csv")
         if len(hard_score_list) > 0:
             hard_highest_name = hard_score_list[0][0]
             hard_highest_score = hard_score_list[0][1]
@@ -655,7 +655,7 @@ def mainsingle():
 
 #  背景移動
         x_bg_pos -= game_speed 
-        if oripoint % 3200 == 0 and points != 0: 
+        if oripoint % 800 == 0 and points != 0: 
             bg = (bg + 1) % len(BACKGROUND_LIST)
         window.blit(BACKGROUND_LIST[bg], (x_bg_pos, y_bg_pos))
         window.blit(BACKGROUND_LIST[bg], (x_bg_pos + window_width, y_bg_pos))
@@ -1033,8 +1033,8 @@ def enter_your_name(enter_name_text, enter_rect):
     name = str()
     entering = False
     finish_enter = False
-    x_pos = window_width // 2 - 70
-    y_pos = window_height // 2
+    x_pos = window_width // 2 +70
+    y_pos = window_height // 2 + 18
     active = True
     cursor_timer = pygame.time.get_ticks()
     name_font = pygame.font.Font('Fonts/AgencyFB-Bold.ttf', HEADING)
