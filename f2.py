@@ -55,7 +55,7 @@ FLYOBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "forestf.png"
 # 遮蔽視線障礙物
 BLUROBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "cloud.png"))]
 
-# 讀取音樂
+# 讀取背景音樂
 def load_bg_music(path):
     pygame.mixer.init()
     pygame.mixer.music.load(path)
@@ -454,16 +454,21 @@ class fog:
 def menu():
     global game_difficulty
     global game_mode
-    global TITLE, HEADING
+    global TITLE, HEADING, BODY
 
     text_position1 = (650, (window_height//2) - 50)  # Choose The
     text_position2 = (650, (window_height//2) + 50)  # Game Difficulty
     run = True
+
+    load_bg_music(os.path.join("music", "bg_music_in_menu.ogg"))
+    pygame.mixer.music.play(-1)
+
     while run :
         window.fill(WHITE)
         window.blit(BACKGROUND_LIST[0], (0, 0))
         start_text_L1 = Text("Choose The", TITLE, BLACK, text_position1)
         start_text_L2 = Text("Game Mode", TITLE, BLACK, text_position2)
+        resource_text = Text_body("background music: Music Atelier Amacha", BODY, BLACK, (200, 25))
         start_text_L1.draw(window), start_text_L2.draw(window)
         # 設置人數選擇按鈕的背景
         single_button_rect = MENU_BUTTON.get_rect(topleft=(100, 200))
@@ -478,7 +483,7 @@ def menu():
         Duo_text = Text("Duo", HEADING, BLACK, (200, 425))
         Single_text.draw(window)
         Duo_text.draw(window)
-
+        resource_text.draw(window)
 
 
         pygame.display.update()
@@ -529,7 +534,7 @@ def difficulty():
         easy_text = Text("EASY", HEADING, BLACK, (200, 225))
         medium_text = Text("MEDIUM", HEADING, BLACK, (200, 325))
         hard_text = Text("HARD", HEADING, BLACK, (200, 425))
-        
+        resource_text = Text_body("background music: Music Atelier Amacha", BODY, BLACK, (200, 25))
         # 顯示各關目前最高分
         easy_score_list = load_sorted_score_list("1.csv")
         if len(easy_score_list) > 0:
@@ -559,6 +564,7 @@ def difficulty():
         easy_highest_score_text.draw(window)
         medium_highest_score_text.draw(window)
         hard_highest_score_text.draw(window)
+        resource_text.draw(window)
         
         pygame.display.update()
         
@@ -602,9 +608,17 @@ def mainsingle():
     exit = False
     start_time = 0
     FOG = pygame.image.load(os.path.join("image/background", "fog.png"))
+    count_down_sound = pygame.mixer.Sound(os.path.join("music/sounds", "count_down.wav"))
+    small_obstacle_sound = pygame.mixer.Sound(os.path.join("music/sounds", "small.wav"))
+    large_obstacle_sound = pygame.mixer.Sound(os.path.join("music/sounds", "big.wav"))
+    fly_obstacle_sound = pygame.mixer.Sound(os.path.join("music/sounds", "fly.wav"))
+    star_sound = pygame.mixer.Sound(os.path.join("music/sounds", "star.wav"))
+    heart_sound = pygame.mixer.Sound(os.path.join("music/sounds", "heart.wav"))
+    fog_sound = pygame.mixer.Sound(os.path.join("music/sounds", "blur.wav"))
     
     while countdown > 0:
         window.blit(BACKGROUND_LIST[bg], (x_bg_pos, y_bg_pos))
+        count_down_sound.play()
         player.draw(window)
         count_text = Text(f"{countdown}", 300, BLACK, (485, 300))
         count_text.draw(window)
@@ -621,7 +635,10 @@ def mainsingle():
     elif game_difficulty == HARD:
         game_speed = 13
         life = 3
-    
+
+    load_bg_music(os.path.join("music", "bg_music_in_game.ogg"))
+    pygame.mixer.music.play(-1)
+
  #  開始迴圈
     while run:
         for event in pygame.event.get():
@@ -727,10 +744,12 @@ def mainsingle():
                 if player.is_takingdamage() or player.is_invincible():
                     continue
                 elif obstacletype == 1:
+                    fog_sound.play()
                     start_time = pygame.time.get_ticks() + 3000                   
                     obstacles.remove(obstacle)
                 else:
                     life -= 1
+                    large_obstacle_sound.play()
                     player.take_damage()
 
             if obstacle.rect.x < -obstacle.rect.width:
@@ -759,10 +778,12 @@ def mainsingle():
 
     # 檢測角色和道具的碰撞
             if player.ch_rect.colliderect(item.rect) and itemtype == 0:
+                heart_sound.play()
                 if life < 5:
                     life += 1  # 增加生命值
                 items.remove(item)  # 移除已經碰撞的道具
             elif player.ch_rect.colliderect(item.rect) and itemtype == 1:
+                star_sound.play()
                 player.muteki_time()
                 items.remove(item) 
             if item.rect.x < -item.rect.width:
@@ -802,9 +823,16 @@ def mainDuo():
     paused = False
     exit = False
     pygame.draw.line(window, BLACK, (0, 325), (1000, 325), 3)
-
+    count_down_sound = pygame.mixer.Sound(os.path.join("music/sounds", "count_down.wav"))
+    small_obstacle_sound = pygame.mixer.Sound(os.path.join("music/sounds", "small.wav"))
+    large_obstacle_sound = pygame.mixer.Sound(os.path.join("music/sounds", "big.wav"))
+    fly_obstacle_sound = pygame.mixer.Sound(os.path.join("music/sounds", "fly.wav"))
+    star_sound = pygame.mixer.Sound(os.path.join("music/sounds", "star.wav"))
+    heart_sound = pygame.mixer.Sound(os.path.join("music/sounds", "heart.wav"))
+    fog_sound_ = pygame.mixer.Sound(os.path.join("music/sounds", "blur.wav"))
 
     while countdown > 0:
+        count_down_sound.play()
         window.blit(BACKGROUND_LIST[bg], (x_bg_pos, y_bg_pos))
         player1.draw(window)
         player2.draw(window)
@@ -819,7 +847,9 @@ def mainDuo():
         game_speed = 7
         life1 = 5
         life2 = 5
-   
+
+    load_bg_music(os.path.join("music", "bg_music_in_game.ogg"))
+    pygame.mixer.music.play(-1)
     
  #  開始迴圈
     while run:
@@ -1145,6 +1175,8 @@ def show_rank(score_list, y_already):
     
 def gameover():
     window.fill(WHITE)  # 用白色填充整個視窗
+    pygame.mixer.music.stop()  # 停止撥放音樂
+
     if game_mode == 1:
         game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
         score_text = Text(f"Your score: {points}", TITLE, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
