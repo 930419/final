@@ -1160,7 +1160,7 @@ def gameover():
                     elif event.key == pygame.K_y:  # 如果玩家按下 y 鍵
                         y_already = True
                         window.fill(WHITE)
-                        enter_name_text = Text("Enter your name: ______________________________", HEADING, BLACK, (window_width // 2, window_height // 2))
+                        enter_name_text = Text("Enter your name: _______________________", HEADING, BLACK, (window_width // 2, window_height // 2))
                         enter_name_text.draw(window)
                         enter_rect = pygame.Rect(window_width // 2 - 80, window_height // 2 - 20, 335, 40)
                         pygame.draw.rect(window, WHITE, enter_rect, 2)
