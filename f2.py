@@ -1251,7 +1251,6 @@ def gameover():
                         tab_or_n_text.draw(window)
                         pygame.display.update()
                     elif event.key == pygame.K_TAB:
-                        print("?")
                         show_rank(score_list, y_already)
 
     elif game_mode == 2:
