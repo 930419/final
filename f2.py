@@ -1133,21 +1133,25 @@ def enter_your_name(enter_name_text, enter_rect):
 def show_rank(score_list, y_already):
     global TITLE, HEADING, BODY
     
-    x_pos = 50
-    y_pos = 70
-    name_font = pygame.font.Font('Fonts/AgencyFB-Bold.ttf', BODY)
+    x_pos = 190
+    y_pos = 90
+    name_font = pygame.font.Font('Fonts/AgencyFB-Bold.ttf', SUBHEADING)
     window.fill(WHITE)
-    
-    for i in range(len(score_list)):
+    score_range = int()
+    if len(score_list) > 10:
+        score_range = 10
+    else:
+        score_range = len(score_list)
+    for i in range(score_range):
         record = f"{i + 1}: {score_list[i][0]} {score_list[i][1]}"
         record_surface = name_font.render(record, True, BLACK)
         record_rect = record_surface.get_rect()
         record_rect.topleft = (x_pos, y_pos)
         window.blit(record_surface, record_rect)
-        y_pos += 40
-        if (i + 1) % 14 == 0:
-            x_pos += 250
-            y_pos = 70
+        y_pos += 50
+        # if (i + 1) % 14 == 0:
+        #    x_pos += 250
+        #    y_pos = 70
     n_text = Text_body("Press Tab again to go back", SUBHEADING, BLACK, (850, 20))
     n_text.draw(window)
     pygame.display.update()  
