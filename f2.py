@@ -154,7 +154,7 @@ class Charactor1:
 
     def duck(self):
         duck_sound = pygame.mixer.Sound(os.path.join("music/sounds", "duck.wav"))
-        duck_sound.play()
+        pygame.mixer.Channel(0).play(duck_sound)
         self.image = self.duck_img_list[0]  
         self.ch_rect = self.image.get_rect()
         self.ch_rect.x = self.x_ch_pos
@@ -163,7 +163,7 @@ class Charactor1:
 
     def jump(self):
         jump_sound = pygame.mixer.Sound(os.path.join("music/sounds", "jump.wav"))
-        jump_sound.play()
+        pygame.mixer.Channel(1).play(jump_sound)
         self.image = self.jump_img
         if self.ch_jump:
             self.ch_rect.y -= self.fall * 4  
@@ -272,7 +272,7 @@ class Charactor2:
 
     def duck(self):
         duck_sound = pygame.mixer.Sound(os.path.join("music/sounds", "duck.wav"))
-        duck_sound.play()
+        pygame.mixer.Channel(0).play(duck_sound)
         self.image = self.duck_img_list[0]
         self.ch_rect = self.image.get_rect()
         self.ch_rect.x = self.x_ch_pos
@@ -281,7 +281,7 @@ class Charactor2:
 
     def jump(self):
         jump_sound = pygame.mixer.Sound(os.path.join("music/sounds", "jump.wav"))
-        jump_sound.play()
+        pygame.mixer.Channel(1).play(jump_sound)
         self.image = self.jump_img
         if self.ch_jump:
             self.ch_rect.y -= self.fall * 4  
@@ -626,7 +626,7 @@ def mainsingle():
     
     while countdown > 0:
         window.blit(BACKGROUND_LIST[bg], (x_bg_pos, y_bg_pos))
-        count_down_sound.play()
+        pygame.mixer.Channel(2).play(count_down_sound)
         player.draw(window)
         count_text = Text(f"{countdown}", 300, BLACK, (485, 300))
         count_text.draw(window)
@@ -752,12 +752,12 @@ def mainsingle():
                 if player.is_takingdamage() or player.is_invincible():
                     continue
                 elif obstacletype == 1:
-                    fog_sound.play()
+                    pygame.mixer.Channel(3).play(fog_sound)
                     start_time = pygame.time.get_ticks() + 3000                   
                     obstacles.remove(obstacle)
                 else:
                     life -= 1
-                    large_obstacle_sound.play()
+                    pygame.mixer.Channel(4).play(large_obstacle_sound)
                     player.take_damage()
 
             if obstacle.rect.x < -obstacle.rect.width:
@@ -786,12 +786,12 @@ def mainsingle():
 
     # 檢測角色和道具的碰撞
             if player.ch_rect.colliderect(item.rect) and itemtype == 0:
-                heart_sound.play()
+                pygame.mixer.Channel(5).play(heart_sound)
                 if life < 5:
                     life += 1  # 增加生命值
                 items.remove(item)  # 移除已經碰撞的道具
             elif player.ch_rect.colliderect(item.rect) and itemtype == 1:
-                star_sound.play()
+                pygame.mixer.Channel(6).play(star_sound)
                 player.muteki_time()
                 items.remove(item) 
             if item.rect.x < -item.rect.width:
@@ -840,7 +840,7 @@ def mainDuo():
     fog_sound_ = pygame.mixer.Sound(os.path.join("music/sounds", "blur.wav"))
 
     while countdown > 0:
-        count_down_sound.play()
+        pygame.mixer.Channel(2).play(count_down_sound)
         window.blit(BACKGROUND_LIST[bg], (x_bg_pos, y_bg_pos))
         player1.draw(window)
         player2.draw(window)
@@ -892,9 +892,9 @@ def mainDuo():
         if paused:
             image = pygame.image.load(os.path.join("image/window", "paused_window.png"))
             window.blit(image, (200,150))
-            continue_text = Text("press k again to continue", TITLE, BLACK, (500, 230))
-            restart_text = Text("press r to restart", TITLE, BLACK, (500, 330))
-            exit_text =  Text("press e to exit", TITLE, BLACK, (500, 430))
+            continue_text = Text_body("press k again to continue", TITLE, BLACK, (500, 230))
+            restart_text = Text_body("press r to restart", TITLE, BLACK, (500, 330))
+            exit_text =  Text_body("press e to exit", TITLE, BLACK, (500, 430))
             continue_text.draw(window)
             restart_text.draw(window)
             exit_text.draw(window)
@@ -913,7 +913,7 @@ def mainDuo():
             x_bg_pos = 0
             
 # 暫停文字提示
-        pause_text = Text("press k to pause", SUBHEADING, BLACK, (900, 25))
+        pause_text = Text_body("press k to pause", SUBHEADING, BLACK, (900, 25))
         pause_text.draw(window) 
 #  生命值 
 
@@ -981,6 +981,7 @@ def mainDuo():
                 if player1.is_invincible() or player1.is_takingdamage():
                     continue
                 else:
+                    pygame.mixer.Channel(4).play(large_obstacle_sound)
                     life1 -= 1
                     player1.take_damage()
 
@@ -1003,6 +1004,7 @@ def mainDuo():
                 if player2.is_invincible() or player2.is_takingdamage():
                     continue
                 else:
+                    pygame.mixer.Channel(4).play(large_obstacle_sound)
                     life2 -= 1
                     player2.take_damage()
 
@@ -1013,9 +1015,11 @@ def mainDuo():
     # 在遊戲迴圈中生成道具
         if len(items1) == 0 and random.randint(0, 1000) < 2 and random_item1 == 0:  # 機率2%
             items1.append(Heart(ITEM))
+            pygame.mixer.Channel(5).play(heart_sound)
             itemtype1 = 0  # 加入新的道具到道具列表中
         elif len(items1) == 0 and random.randint(0, 1000) < 10 and random_item1 == 1:  # 機率1%
-            items1.append(star(ITEM)) 
+            items1.append(star(ITEM))
+            pygame.mixer.Channel(6).play(star_sound)
             itemtype1 = 1 # 加入新的道具到道具列表中
 
 
@@ -1041,9 +1045,11 @@ def mainDuo():
         random_item2 = random.randint(0, 1)
         if len(items2) == 0 and random.randint(0, 1000) < 2 and random_item2 == 0:  # 機率2%
             items2.append(Heart2(ITEM))
+            pygame.mixer.Channel(5).play(heart_sound)
             itemtype2 = 0  # 加入新的道具到道具列表中
         elif len(items2) == 0 and random.randint(0, 1000) < 10 and random_item2 == 1:  # 機率1%
             items2.append(star2(ITEM))
+            pygame.mixer.Channel(6).play(star_sound)
             itemtype2 = 1  # 加入新的道具到道具列表中
 
 
