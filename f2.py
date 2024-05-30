@@ -1139,7 +1139,7 @@ def enter_your_name(enter_name_text, enter_rect):
 def show_rank(score_list, y_already):
     global TITLE, HEADING, BODY
     
-    x_pos = 190
+    x_pos = window_width // 2
     y_pos = 90
     name_font = pygame.font.Font('Fonts/AgencyFB-Bold.ttf', SUBHEADING)
     window.fill(WHITE)
@@ -1154,12 +1154,14 @@ def show_rank(score_list, y_already):
         record_rect = record_surface.get_rect()
         record_rect.topleft = (x_pos, y_pos)
         window.blit(record_surface, record_rect)
-        y_pos += 50
+        y_pos += 60
         # if (i + 1) % 14 == 0:
         #    x_pos += 250
         #    y_pos = 70
-    n_text = Text_body("Press Tab again to go back", SUBHEADING, BLACK, (850, 20))
-    n_text.draw(window)
+    n1_text = Text_body("Press F3 again", SUBHEADING, BLACK, (850, 20))
+    n2_text = Text_body("to go back", SUBHEADING, BLACK, (850, 20))
+    n1_text.draw(window)
+    n2_text.draw(window)
     pygame.display.update()  
     leave_rank = False
     
@@ -1169,12 +1171,12 @@ def show_rank(score_list, y_already):
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_TAB:
+                if event.key == pygame.K_F3:
                     window.fill(WHITE)
                     if y_already:
                         score_recorded_text = Text("Score recorded!", 80, BLACK, (window_width // 2, window_height // 2 - 100))
                         score_text = Text(f"Your score: {points}", TITLE, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
-                        tab_or_n_text = Text_body("Press n to leave / Press Tab to check ranks", BODY, BLACK, (window_width // 2, window_height // 2 + 50))
+                        tab_or_n_text = Text_body("Press n to leave / Press F3 to check ranks", BODY, BLACK, (window_width // 2, window_height // 2 + 50))
                         score_recorded_text.draw(window)
                         score_text.draw(window)
                         tab_or_n_text.draw(window)
@@ -1182,7 +1184,7 @@ def show_rank(score_list, y_already):
                         game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
                         score_text = Text(f"Your score: {points}", TITLE, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
                         record_or_not_text = Text_body("Do you want to record your score?", TITLE, BLACK, (window_width // 2, window_height // 2 + 50))
-                        y_or_n_or_tab_text = Text_body("Press y to record / Press n to leave / Press Tab to check ranks", BODY, BLACK, (window_width // 2, window_height // 2 + 90))
+                        y_or_n_or_tab_text = Text_body("Press y to record / Press n to leave / Press F3 to check ranks", BODY, BLACK, (window_width // 2, window_height // 2 + 90))
                         game_over_text.draw(window)
                         score_text.draw(window)
                         record_or_not_text.draw(window)
@@ -1199,7 +1201,7 @@ def gameover():
         game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
         score_text = Text(f"Your score: {points}", TITLE, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
         record_or_not_text = Text_body("Do you want to record your score?", TITLE, BLACK, (window_width // 2, window_height // 2 + 90))
-        y_or_n_or_tab_text = Text_body("Press y to record / Press n to leave / Press Tab to check ranks", BODY, BLACK, (window_width // 2, window_height // 2 + 150))
+        y_or_n_or_tab_text = Text_body("Press y to record / Press n to leave / Press F3 to check ranks", BODY, BLACK, (window_width // 2, window_height // 2 + 150))
         game_over_text.draw(window)
         score_text.draw(window)
         record_or_not_text.draw(window)
@@ -1245,12 +1247,13 @@ def gameover():
                         window.fill(WHITE)
                         score_recorded_text = Text("Score recorded!", 80, BLACK, (window_width // 2, window_height // 2 - 100))
                         score_text = Text(f"Your score: {points}", TITLE, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
-                        tab_or_n_text = Text_body("Press n to leave / Press Tab to check ranks", BODY, BLACK, (window_width // 2, window_height // 2 + 50))
+                        tab_or_n_text = Text_body("Press n to leave / Press F3 to check ranks", BODY, BLACK, (window_width // 2, window_height // 2 + 50))
                         score_recorded_text.draw(window)
                         score_text.draw(window)
                         tab_or_n_text.draw(window)
                         pygame.display.update()
-                    elif event.key == pygame.K_TAB:
+                    elif event.key == pygame.K_F3:
+                        print("?")
                         show_rank(score_list, y_already)
 
     elif game_mode == 2:
