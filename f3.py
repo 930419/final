@@ -405,16 +405,30 @@ class flyobs2(Obstacle):
         self.type = bg  # 三種小仙人掌型態隨機選取一種
         super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
         self.rect.y = 170 # Y座標位置
-class blurobs(Obstacle):
-    def __init__(self, image_list : list):
-        self.type = 0
-        super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
-        self.rect.y = 400 # Y座標位置
+class blurobs:
+    def __init__(self, imageList : list):
+        self.image_list = imageList  # 以變數儲存障礙物類型
+        self.type = 0  # 以變數儲存障礙物樣貌
+        self.rect = self.image_list[self.type].get_rect()  # 將障礙物框起
+        self.rect.x = window_width  # 障礙物X座標位置
+        self.rect.y = 400 
+    def update(self):
+        self.rect.x -= game_speed
+    def draw(self, screen : pygame.surface):
+        screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y))
+    
+
 class blurobs2(Obstacle):
-    def __init__(self, image_list : list):
-        self.type = 0
-        super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
-        self.rect.y = 200 # Y座標位置
+    def __init__(self, imageList : list):
+        self.image_list = imageList  # 以變數儲存障礙物類型
+        self.type = 0  # 以變數儲存障礙物樣貌
+        self.rect = self.image_list[self.type].get_rect()  # 將障礙物框起
+        self.rect.x = window_width  # 障礙物X座標位置
+        self.rect.y = 200 
+    def update(self):
+        self.rect.x -= game_speed
+    def draw(self, screen : pygame.surface):
+        screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y))
 #  道具處理
 class Heart:
     def __init__(self, image_list: list):
@@ -784,7 +798,7 @@ def mainsingle():
     bg = 0
     player = Charactor1()
     obstacles = []
-    fog_pic = []
+    blur = []
     run = True
     x_bg_pos, y_bg_pos = 0, 0
     x_heart, y_heart = 33, 50
@@ -920,7 +934,7 @@ def mainsingle():
         player.draw(window)  
     #  障礙物
         if len(obstacles) == 0:  # 生成障礙物
-            rand = random.randint(0, 6)
+            rand = random.randint(0, 5)
             if rand == 0 or rand == 1:
                 obstacles.append(smallobs(SMALLOBSTACLE))
                 obstacletype = 0
@@ -930,21 +944,13 @@ def mainsingle():
             elif rand == 4 or rand == 5:
                 obstacles.append(flyobs(FLYOBSTACLE))
                 obstacletype = 0
-            else:
-                obstacles.append(blurobs(BLUROBSTACLE))
-                obstacletype = 1
-             
-                
         for obstacle in obstacles:
             obstacle.update()
             obstacle.draw(window)
             if player.ch_rect.colliderect(obstacle.rect): 
                 if player.is_takingdamage() or player.is_invincible():
                     continue
-                if obstacletype == 1:
-                    pygame.mixer.Channel(3).play(fog_sound)
-                    fog.startfog()
-                    obstacles.remove(obstacle)
+                
                 else:
                     life -= 1
                     pygame.mixer.Channel(4).play(large_obstacle_sound)
@@ -952,9 +958,26 @@ def mainsingle():
 
             if obstacle.rect.x < -obstacle.rect.width:
                 obstacles.remove(obstacle)
+    # fog
+
+        if len(blurs) == 0:
+            randfog = random.randint(0, 100)
+            if randfog < 2:
+                blurs.append(blurobs(BLUROBSTACLE))
+        for blur in blurs:
+            blur.update()
+            blur.draw(window)
+            if player.ch_rect.colliderect(blur.rect): 
+                    pygame.mixer.Channel(3).play(fog_sound)
+                    fog.startfog()
+                    blurs.remove(blur)
+            if blur.rect.x < -blur.rect.width:
+                blurs.remove(blur)
+
         fog.update()       
         if fog.isfog():
             fog.draw(window)
+    #  道具
     #  道具
         random_item = random.randint(0, 1)
     # 在遊戲迴圈中生成道具
@@ -1012,6 +1035,8 @@ def mainDuo():
     x_bg_pos, y_bg_pos = 0, 0
     x_heart2, y_heart2 = 33, 50
     x_heart1, y_heart1 = 33, 375
+    blurs1 = []
+    blurs2 = []
     items1 = []
     items2 = []
     countdown = 3
@@ -1163,9 +1188,8 @@ def mainDuo():
         user_input = pygame.key.get_pressed()  # 接收玩家指令
         player2.update(user_input)  # 依據玩家指令更新的動作
         player2.draw(window)  
-    #  障礙物
         if len(obstacles1) == 0:  # 生成障礙物
-            rand1 = random.randint(0, 6)
+            rand1 = random.randint(0, 5)
             if rand1 == 0 or rand1 == 1:
                 obstacles1.append(smallobs(SMALLOBSTACLE))
                 obstacletype = 0
@@ -1175,9 +1199,7 @@ def mainDuo():
             elif rand1 == 4 or rand1 == 5:
                 obstacles1.append(flyobs(FLYOBSTACLE))
                 obstacletype = 0
-            else:
-                obstacles1.append(blurobs(BLUROBSTACLE))
-                obstacletype = 1
+
              
         #  玩家一障礙物        
         for obstacle in obstacles1:
@@ -1186,10 +1208,6 @@ def mainDuo():
             if player1.ch_rect.colliderect(obstacle.rect): 
                 if player1.is_takingdamage() or player1.is_invincible():
                     continue
-                if obstacletype == 1:
-                    pygame.mixer.Channel(3).play(fog_sound)
-                    fog1.startfog()
-                    obstacles1.remove(obstacle)
                 else:
                     pygame.mixer.Channel(4).play(large_obstacle_sound)
                     life1 -= 1
@@ -1197,12 +1215,25 @@ def mainDuo():
 
             if obstacle.rect.x < -obstacle.rect.width:
                 obstacles1.remove(obstacle)
+        if len(blurs1) == 0:
+            randfog = random.randint(0, 100)
+            if randfog < 2:
+                blurs1.append(blurobs(BLUROBSTACLE))
+        for blur in blurs1:
+            blur.update()
+            blur.draw(window)
+            if player1.ch_rect.colliderect(blur.rect): 
+                pygame.mixer.Channel(3).play(fog_sound)
+                fog1.startfog()
+                blurs1.remove(blur)
+            if blur.rect.x < -blur.rect.width:
+                blurs1.remove(blur)
         fog1.update()       
         if fog1.isfog():
             fog1.draw(window)
 
         if len(obstacles2) == 0:  # 生成障礙物
-            rand2 = random.randint(0, 6)
+            rand2 = random.randint(0, 5)
             if rand2 == 0 or rand1 == 1:
                 obstacles2.append(smallobs2(SMALLOBSTACLE))
                 obstacletype = 0
@@ -1212,21 +1243,14 @@ def mainDuo():
             elif rand2 == 4 or rand2 == 5:
                 obstacles2.append(flyobs2(FLYOBSTACLE))
                 obstacletype = 0
-            else:
-                obstacles2.append(blurobs2(BLUROBSTACLE))
-                obstacletype = 1
              
-        #  玩家二障礙物        
+       #  玩家二障礙物        
         for obstacle in obstacles2:
             obstacle.update()
             obstacle.draw(window)
             if player2.ch_rect.colliderect(obstacle.rect): 
                 if player2.is_takingdamage() or player1.is_invincible():
                     continue
-                if obstacletype == 1:
-                    pygame.mixer.Channel(3).play(fog_sound)
-                    fog2.startfog()
-                    obstacles2.remove(obstacle)
                 else:
                     pygame.mixer.Channel(4).play(large_obstacle_sound)
                     life2 -= 1
@@ -1234,6 +1258,20 @@ def mainDuo():
 
             if obstacle.rect.x < -obstacle.rect.width:
                 obstacles2.remove(obstacle)
+
+        if len(blurs2) == 0:
+            randfog2 = random.randint(0, 100)
+            if randfog2 < 2:
+                blurs2.append(blurobs2(BLUROBSTACLE))
+        for blur in blurs2:
+            blur.update()
+            blur.draw(window)
+            if player2.ch_rect.colliderect(blur.rect): 
+                pygame.mixer.Channel(3).play(fog_sound)
+                fog2.startfog()
+                blurs2.remove(blur)
+            if blur.rect.x < -blur.rect.width:
+                blurs2.remove(blur)
         fog2.update()       
         if fog2.isfog():
             fog2.draw(window)
