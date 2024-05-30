@@ -389,7 +389,7 @@ class flyobs(Obstacle):
     def __init__(self, image_list : list):
         self.type = bg  
         super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
-        self.rect.y = 405 # Y座標位置
+        self.rect.y = 450 # Y座標位置
 class largeobs2(Obstacle):
     def __init__(self, image_list : list):
         self.type = bg  # 不同背景不同種類的障礙物
@@ -404,7 +404,7 @@ class flyobs2(Obstacle):
     def __init__(self, image_list : list):
         self.type = bg  # 三種小仙人掌型態隨機選取一種
         super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
-        self.rect.y = 100 # Y座標位置
+        self.rect.y = 170 # Y座標位置
 class blurobs(Obstacle):
     def __init__(self, image_list : list):
         self.type = 0
