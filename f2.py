@@ -153,6 +153,8 @@ class Charactor1:
         self.step_index += 1
 
     def duck(self):
+        duck_sound = pygame.mixer.Sound(os.path.join("music/sounds", "duck.wav"))
+        duck_sound.play()
         self.image = self.duck_img_list[0]  
         self.ch_rect = self.image.get_rect()
         self.ch_rect.x = self.x_ch_pos
@@ -160,6 +162,8 @@ class Charactor1:
         self.step_index += 1
 
     def jump(self):
+        jump_sound = pygame.mixer.Sound(os.path.join("music/sounds", "fly.wav"))
+        jump_sound.play()
         self.image = self.jump_img
         if self.ch_jump:
             self.ch_rect.y -= self.fall * 4  
@@ -267,6 +271,8 @@ class Charactor2:
         self.step_index += 1
 
     def duck(self):
+        duck_sound = pygame.mixer.Sound(os.path.join("music/sounds", "duck.wav"))
+        duck_sound.play()
         self.image = self.duck_img_list[0]  
         self.ch_rect = self.image.get_rect()
         self.ch_rect.x = self.x_ch_pos
@@ -274,6 +280,8 @@ class Charactor2:
         self.step_index += 1
 
     def jump(self):
+        jump_sound = pygame.mixer.Sound(os.path.join("music/sounds", "jump.wav"))
+        jump_sound.play()
         self.image = self.jump_img
         if self.ch_jump:
             self.ch_rect.y -= self.fall * 4  
