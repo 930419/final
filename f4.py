@@ -537,6 +537,7 @@ def startpage():
 
     text_position1 = (650, (window_height//2) - 50)  # Choose The
     text_position2 = (650, (window_height//2) + 50)  # Game Difficulty
+
     run = True
     while run :
         window.blit(BACKGROUND_LIST[0], (0, 0))
@@ -557,9 +558,13 @@ def menu():
     global game_difficulty
     global game_mode
     global TITLE, HEADING, BODY
-    
+
     text_position1 = (650, (window_height//2) - 50)  # Choose The
     text_position2 = (650, (window_height//2) + 50)  # Game Difficulty
+
+    load_bg_music(os.path.join("music", "bg_music_in_menu.ogg"))
+    pygame.mixer.music.play(-1)  # menu background music
+
     run = True
     while run :
         window.blit(BACKGROUND_LIST[0], (0, 0))
@@ -609,7 +614,13 @@ def introsingle():
     run = True
     n = 1
     while run:
-        if n < len(INTRODUCTION):
+        if n == 0:
+            n = 1
+        elif n == 1:
+            window.blit(INTRODUCTION[n - 1], (0, 0))  # 第一個畫面部顯示back button
+            next_button_rect = MENU_BUTTON[1].get_rect(topleft=(800, 575))
+            window.blit(MENU_BUTTON[1], next_button_rect.topleft)
+        elif n < len(INTRODUCTION):
             window.blit(INTRODUCTION[n - 1], (0, 0))  # 顯示當前介紹畫面
             next_button_rect = MENU_BUTTON[1].get_rect(topleft=(800, 575))
             back_button_rect = MENU_BUTTON[2].get_rect(topleft=(100, 575))
@@ -632,7 +643,7 @@ def introsingle():
                         n += 1
                     else:
                         mainsingle()
-                elif back_button_rect.collidepoint(mouse_pos) and n > 0:
+                elif n != 1 and back_button_rect.collidepoint(mouse_pos) and n > 0:
                     n -= 1
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:
@@ -652,7 +663,13 @@ def introduo():
     run = True
     n = 1
     while run:
-        if n < len(INTRODUCTION2):
+        if n == 0:
+            n = 1
+        elif n == 1:
+            window.blit(INTRODUCTION2[n - 1], (0, 0))  # 第一個畫面不顯示back button
+            next_button_rect = MENU_BUTTON[1].get_rect(topleft=(800, 575))
+            window.blit(MENU_BUTTON[1], next_button_rect.topleft)
+        elif n < len(INTRODUCTION2):
             window.blit(INTRODUCTION2[n - 1], (0, 0))  # 顯示當前介紹畫面
             next_button_rect = MENU_BUTTON[1].get_rect(topleft=(800, 575))
             back_button_rect = MENU_BUTTON[2].get_rect(topleft=(100, 575))
@@ -675,7 +692,7 @@ def introduo():
                         n += 1
                     else:
                         mainDuo()
-                elif back_button_rect.collidepoint(mouse_pos) and n > 0:
+                elif n != 1 and back_button_rect.collidepoint(mouse_pos) and n > 0:
                     n -= 1
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:
@@ -688,7 +705,7 @@ def introduo():
 
         pygame.display.update()
     
-            
+
     pygame.quit()
     sys.exit()
 def difficulty():
@@ -983,6 +1000,7 @@ def mainsingle():
     gameover()
 def mainDuo():
     global game_speed, points, bg, winner, TITLE, SUBHEADING
+    winner = 0
     
     clock = pygame.time.Clock()
     points = 0
@@ -1018,7 +1036,7 @@ def mainDuo():
         life_bar1 = LifeBar(5, 33, 375)
         life_bar2 = LifeBar(5, 33, 50)
 
-    countdown_timer(window, player1, player2, bg, x_bg_pos, y_bg_pos)
+    countdown_timer(window, player1, bg, x_bg_pos, y_bg_pos)
 
     load_bg_music(os.path.join("music", "bg_music_in_game.ogg"))
     pygame.mixer.music.play(-1)
@@ -1029,7 +1047,7 @@ def mainDuo():
                 run = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_k:
-                    paused, restart, exit = pause_game(window, player1, player2, bg, x_bg_pos, y_bg_pos)
+                    paused, restart, exit = pause_game(window, player1, bg, x_bg_pos, y_bg_pos)
                     if restart:
                         mainDuo()
                         return
@@ -1312,7 +1330,6 @@ def gameover():
         y_or_n_or_tab_text.draw(window)
         y_already = False
         pygame.display.update()
-        
         score_list = load_sorted_score_list(f"{game_difficulty}.csv")
         while True:
             for event in pygame.event.get():
