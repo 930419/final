@@ -1022,7 +1022,7 @@ def mainDuo():
     fly_obstacle_sound = pygame.mixer.Sound(os.path.join("music/sounds", "fly.wav"))
     star_sound = pygame.mixer.Sound(os.path.join("music/sounds", "star.wav"))
     heart_sound = pygame.mixer.Sound(os.path.join("music/sounds", "heart.wav"))
-    fog_sound_ = pygame.mixer.Sound(os.path.join("music/sounds", "blur.wav"))
+    fog_sound = pygame.mixer.Sound(os.path.join("music/sounds", "blur.wav"))
 
 
     while countdown > 0:
