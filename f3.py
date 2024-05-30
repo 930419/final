@@ -798,7 +798,7 @@ def mainsingle():
     bg = 0
     player = Charactor1()
     obstacles = []
-    blur = []
+    blurs = []
     run = True
     x_bg_pos, y_bg_pos = 0, 0
     x_heart, y_heart = 33, 50
@@ -851,6 +851,7 @@ def mainsingle():
                         while countdown > 0:
                             window.blit(BACKGROUND_LIST[bg], (x_bg_pos, y_bg_pos))
                             window.blit(BACKGROUND_LIST[bg], (x_bg_pos + window_width, y_bg_pos))
+                            pygame.mixer.Channel(2).play(count_down_sound)
                             player.draw(window)
                             count_text = Text(f"{countdown}", 300, BLACK, (485, 300))
                             count_text.draw(window)
@@ -1053,10 +1054,12 @@ def mainDuo():
     star_sound = pygame.mixer.Sound(os.path.join("music/sounds", "star.wav"))
     heart_sound = pygame.mixer.Sound(os.path.join("music/sounds", "heart.wav"))
     fog_sound = pygame.mixer.Sound(os.path.join("music/sounds", "blur.wav"))
-
+    pygame.mixer.set_num_channels(12)
 
     while countdown > 0:
         window.blit(BACKGROUND_LIST[bg], (x_bg_pos, y_bg_pos))
+        pygame.mixer.Channel(2).play(count_down_sound)
+        count_down_sound.play()
         player1.draw(window)
         player2.draw(window)
         count_text = Text(f"{countdown}", 300, BLACK, (485, 300))
@@ -1086,6 +1089,7 @@ def mainDuo():
                         while countdown > 0:
                             window.blit(BACKGROUND_LIST[bg], (x_bg_pos, y_bg_pos))
                             window.blit(BACKGROUND_LIST[bg], (x_bg_pos + window_width, y_bg_pos))
+                            pygame.mixer.Channel(2).play(count_down_sound)
                             player1.draw(window)
                             player2.draw(window)
                             count_text = Text(f"{countdown}", 300, BLACK, (485, 300))
@@ -1252,7 +1256,7 @@ def mainDuo():
                 if player2.is_takingdamage() or player1.is_invincible():
                     continue
                 else:
-                    pygame.mixer.Channel(4).play(large_obstacle_sound)
+                    pygame.mixer.Channel(8).play(large_obstacle_sound)
                     life2 -= 1
                     player2.take_damage()
 
@@ -1267,7 +1271,7 @@ def mainDuo():
             blur.update()
             blur.draw(window)
             if player2.ch_rect.colliderect(blur.rect): 
-                pygame.mixer.Channel(3).play(fog_sound)
+                pygame.mixer.Channel(7).play(fog_sound)
                 fog2.startfog()
                 blurs2.remove(blur)
             if blur.rect.x < -blur.rect.width:
@@ -1327,11 +1331,11 @@ def mainDuo():
     # 檢測角色和道具的碰撞
             if player2.ch_rect.colliderect(item.rect) and itemtype2 == 0:
                 if life2 < 5:
-                    pygame.mixer.Channel(5).play(heart_sound)
+                    pygame.mixer.Channel(9).play(heart_sound)
                     life2 += 1  # 增加生命值
                 items2.remove(item)  # 移除已經碰撞的道具
             elif player2.ch_rect.colliderect(item.rect) and itemtype2 == 1:
-                pygame.mixer.Channel(6).play(star_sound)
+                pygame.mixer.Channel(10).play(star_sound)
                 player2.muteki_time()
                 items2.remove(item) 
             if item.rect.x < -item.rect.width:
@@ -1437,15 +1441,15 @@ def show_rank(score_list, y_already):
                     if y_already:
                         score_recorded_text = Text("Score recorded!", 80, BLACK, (window_width // 2, window_height // 2 - 100))
                         score_text = Text(f"Your score: {points}", TITLE, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
-                        tab_or_n_text = Text_body("Press n to leave / Press Tab to check ranks", BODY, BLACK, (window_width // 2, window_height // 2 + 50))
+                        tab_or_n_text = Text_body("Press n to leave / Press Tab to check ranks / Press r to restart", BODY, BLACK, (window_width // 2, window_height // 2 + 50))
                         score_recorded_text.draw(window)
                         score_text.draw(window)
                         tab_or_n_text.draw(window)
                     else:
                         game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
                         score_text = Text(f"Your score: {points}", TITLE, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
-                        record_or_not_text = Text_body("Do you want to record your score?", TITLE, BLACK, (window_width // 2, window_height // 2 + 50))
-                        y_or_n_or_tab_text = Text_body("Press y to record / Press n to leave / Press Tab to check ranks", BODY, BLACK, (window_width // 2, window_height // 2 + 90))
+                        record_or_not_text = Text_body("Do you want to record your score?", TITLE, BLACK, (window_width // 2, window_height // 2 + 90))
+                        y_or_n_or_tab_text = Text_body("Press y to record / Press n to leave / Press Tab to check ranks / Press r to restart", BODY, BLACK, (window_width // 2, window_height // 2 + 150))
                         game_over_text.draw(window)
                         score_text.draw(window)
                         record_or_not_text.draw(window)
@@ -1460,7 +1464,7 @@ def gameover():
         game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
         score_text = Text(f"Your score: {points}", TITLE, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
         record_or_not_text = Text_body("Do you want to record your score?", TITLE, BLACK, (window_width // 2, window_height // 2 + 90))
-        y_or_n_or_tab_text = Text_body("Press y to record / Press n to leave / Press Tab to check ranks", BODY, BLACK, (window_width // 2, window_height // 2 + 150))
+        y_or_n_or_tab_text = Text_body("Press y to record / Press n to leave / Press Tab to check ranks / Press r to restart", BODY, BLACK, (window_width // 2, window_height // 2 + 150))
         game_over_text.draw(window)
         score_text.draw(window)
         record_or_not_text.draw(window)
@@ -1506,13 +1510,15 @@ def gameover():
                         window.fill(WHITE)
                         score_recorded_text = Text("Score recorded!", 80, BLACK, (window_width // 2, window_height // 2 - 100))
                         score_text = Text(f"Your score: {points}", TITLE, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
-                        tab_or_n_text = Text_body("Press n to leave / Press Tab to check ranks", BODY, BLACK, (window_width // 2, window_height // 2 + 50))
+                        tab_or_n_text = Text_body("Press n to leave / Press Tab to check ranks / Press r to restart", BODY, BLACK, (window_width // 2, window_height // 2 + 50))
                         score_recorded_text.draw(window)
                         score_text.draw(window)
                         tab_or_n_text.draw(window)
                         pygame.display.update()
                     elif event.key == pygame.K_TAB:
                         show_rank(score_list, y_already)
+                    elif event.key == pygame.K_r:
+                        mainsingle()
 
     elif game_mode == 2:
         game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
@@ -1523,7 +1529,7 @@ def gameover():
         elif winner == 0:  
             winner_text = Text("draw", TITLE, BLACK, (window_width // 2, window_height // 2))
     
-        continue_text = Text("Press Enter to Continue", 24, BLACK, (window_width // 2, window_height // 2 + 100))  # 提示玩家按 Enter 鍵繼續
+        continue_text = Text("Press Enter to Continue / Press r to restart", 24, BLACK, (window_width // 2, window_height // 2 + 100))  # 提示玩家按 Enter 鍵繼續
         game_over_text.draw(window)
         winner_text.draw(window)
         continue_text.draw(window)
@@ -1537,6 +1543,8 @@ def gameover():
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:  # 如果玩家按下 Enter 鍵
                         menu()
+                    elif event.key == pygame.K_r:
+                        mainDuo()
 
 # 執行程式碼
 if __name__ == "__main__":
