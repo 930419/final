@@ -58,7 +58,7 @@ FLYOBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "cityf.png"))
              pygame.image.load(os.path.join("image/flyobstacle", "winterf.png")),
              pygame.image.load(os.path.join("image/flyobstacle", "autumnf.png")),
              pygame.image.load(os.path.join("image/flyobstacle", "forestf-2.png"))]
-FOG = [pygame.image.load(os.path.join("image/background", "fog.png"))]
+FOG = [pygame.image.load(os.path.join("image/background", "fog1.png"))]
 FOG1 = [pygame.image.load(os.path.join("image/flyobstacle", "fog-P2P.png"))]
 FOG2 = [pygame.image.load(os.path.join("image/flyobstacle", "fog-P2P.png"))]
 BLUROBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "cloud.png"))]
@@ -435,8 +435,8 @@ class Fog:
         self.image_list = FOG  # 道具圖片列表
         self.type = 0  # 道具類型，這裡預設為 0
         self.rect = self.image_list[0].get_rect()  # 道具的矩形區域
-        self.rect.x = 500  # 道具出現的 x 座標
-        self.rect.y = 325 # 道具出現的 y 座標
+        self.rect.x = 0  # 道具出現的 x 座標
+        self.rect.y = 0 # 道具出現的 y 座標
         self.fog_timer = 0
     def startfog(self):
         if self.fog_timer != 300:
