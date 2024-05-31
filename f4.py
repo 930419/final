@@ -19,74 +19,96 @@ MENU_BUTTON = [pygame.image.load(os.path.join("image/menu", "button-2.png")),
                pygame.image.load(os.path.join("image/menu/intro", "button_next-2.png")),
                pygame.image.load(os.path.join("image/menu/intro", "button_back-2.png")),
                pygame.image.load(os.path.join("image/menu/intro", "button_start-2.png"))]
+
 INTRODUCTION = [pygame.image.load(os.path.join("image/menu/intro", "intro_single-2.png")),
                 pygame.image.load(os.path.join("image/menu/intro", "intro_obstacles-2.png")),
                 pygame.image.load(os.path.join("image/menu/intro", "intro_buff-2.png"))]
+
 INTRODUCTION2 = [pygame.image.load(os.path.join("image/menu/intro", "intro_single-2.png")),
                  pygame.image.load(os.path.join("image/menu/intro", "intro_obstacles-2.png")),
-                 pygame.image.load(os.path.join("image/menu/intro", "intro_buff-2.png"))]                
+                 pygame.image.load(os.path.join("image/menu/intro", "intro_buff-2.png"))]
+
 BACKGROUND_LIST = [pygame.image.load(os.path.join("image/background", "6city.jpg")),
                    pygame.image.load(os.path.join("image/background", "5winter.jpg")),
                    pygame.image.load(os.path.join("image/background", "4autumn.jpg")),
                    pygame.image.load(os.path.join("image/background", "3forest.jpg"))]
+
 BACKGROUND_LIST_DUO = [pygame.image.load(os.path.join("image/background", "3forestduo.jpg")),
                        pygame.image.load(os.path.join("image/background", "5winter.jpg")),
                        pygame.image.load(os.path.join("image/background", "4autumn.jpg")),
                        pygame.image.load(os.path.join("image/background", "3forest.jpg"))]
+
 CHARACTOR_LIST = [pygame.image.load(os.path.join("image/charactor", "snail-1-right.png")),
-                  pygame.image.load(os.path.join("image/charactor", "snail-2-right.png")),]
+                  pygame.image.load(os.path.join("image/charactor", "snail-2-right.png"))]
+
 DAMAGE_LIST = [pygame.image.load(os.path.join("image/charactor", "snail-debuff-1-right.png")),
                pygame.image.load(os.path.join("image/charactor", "snail-debuff-2-right.png"))]
+
 MUTEKI_LIST =  [pygame.image.load(os.path.join("image/charactor", "snail-invicible-1-right.png")),
                 pygame.image.load(os.path.join("image/charactor", "snail-invicible-2-right.png"))]  # 跑步圖片大小 87*94
+
 JUMPING_IMG = pygame.image.load(os.path.join("image/charactor", "snail-jump-right.png"))  # 跳躍圖片大小 87*94
+
 DUCKING_LIST = [pygame.image.load(os.path.join("image/charactor", "snail-hedge-right.png"))]  #  蹲下大小 118*60
+
 ITEM = [pygame.image.load(os.path.join("image/item", "1.png")),
         pygame.image.load(os.path.join("image/item", "2.png")),
         pygame.image.load(os.path.join("image/item", "3.png"))]
+
 LIFE_BAR = [pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-0.png")),
             pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-1.png")),
             pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-2.png")),
             pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-3.png")),
             pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-4.png")),
             pygame.image.load(os.path.join("image/item/life_bar", "Life bar-5-5.png"))]
+
 #  大障礙物
 LARGEOBSTACLE = [pygame.image.load(os.path.join("image/largeobstacle", "cityb.png")),
-             pygame.image.load(os.path.join("image/largeobstacle", "winterb.png")),
-             pygame.image.load(os.path.join("image/largeobstacle", "autumnb.png")),
-             pygame.image.load(os.path.join("image/largeobstacle", "forestb.png"))]
+                 pygame.image.load(os.path.join("image/largeobstacle", "winterb.png")),
+                 pygame.image.load(os.path.join("image/largeobstacle", "autumnb.png")),
+                 pygame.image.load(os.path.join("image/largeobstacle", "forestb.png"))]
 # 小障礙物
 SMALLOBSTACLE = [pygame.image.load(os.path.join("image/smallobstacle", "citys.png")),
-             pygame.image.load(os.path.join("image/smallobstacle", "winters.png")),
-             pygame.image.load(os.path.join("image/smallobstacle", "autumns.png")),
-             pygame.image.load(os.path.join("image/smallobstacle", "forests.png"))]
+                 pygame.image.load(os.path.join("image/smallobstacle", "winters.png")),
+                 pygame.image.load(os.path.join("image/smallobstacle", "autumns.png")),
+                 pygame.image.load(os.path.join("image/smallobstacle", "forests.png"))]
 
 FLYOBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "cityf.png")),
-             pygame.image.load(os.path.join("image/flyobstacle", "winterf.png")),
-             pygame.image.load(os.path.join("image/flyobstacle", "autumnf.png")),
-             pygame.image.load(os.path.join("image/flyobstacle", "forestf-2.png"))]
+               pygame.image.load(os.path.join("image/flyobstacle", "winterf.png")),
+               pygame.image.load(os.path.join("image/flyobstacle", "autumnf.png")),
+               pygame.image.load(os.path.join("image/flyobstacle", "forestf-2.png"))]
+
 FOG = [pygame.image.load(os.path.join("image/background", "fog1.png"))]
 FOG1 = [pygame.image.load(os.path.join("image/flyobstacle", "fog-P2P.png"))]
 FOG2 = [pygame.image.load(os.path.join("image/flyobstacle", "fog-P2P.png"))]
 BLUROBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "cloud.png"))]
+# =====
+
 #  是否播過介紹
 needintrosingle = True
 needintroduo = True
+# =====
+
 #  建立視窗(背景長/寬 ＝ 1000/660)
 window_height = 650
 window_width = 1000
 window = pygame.display.set_mode((window_width, window_height))
 screen = pygame.display.set_mode((window_width, window_height))
+# =====
+
 #  難度
 EASY = 1
 MEDIUM = 2
 HARD = 3
 game_difficulty = EASY
+# =====
+
 #  文字大小
 TITLE = 48
 HEADING = 32
 SUBHEADING = 28
 BODY = 24
+
 
 #  像素文字
 class Text:
@@ -97,6 +119,8 @@ class Text:
         self.rect.center = position  # 文字的中心位置(參數)
     def draw(self, screen):
         screen.blit(self.surface, self.rect)
+
+
 #  一般文字        
 class Text_body:
     def __init__(self, text, size, color, position=(0, 0)):
@@ -106,6 +130,8 @@ class Text_body:
         self.rect.center = position  # 文字的中心位置(參數)
     def draw(self, screen):
         screen.blit(self.surface, self.rect)
+# =====
+
 #  角色處理
 class Charactor1:
     x_ch_pos = 80
@@ -114,6 +140,7 @@ class Charactor1:
     jump_val = 7
     invincible_timer1 = 0
     take_damagetimer1 = 0
+    
     def __init__(self):
          # 定義變數
         self.ch_duck = False
@@ -161,21 +188,25 @@ class Charactor1:
         if self.fall <= - self.jump_val:
             self.ch_jump = False
             self.fall = self.jump_val
+            
     def damage(self):
         self.image = self.damage_img_list[(self.step_index // 5)-1]  # 依 step_index 跑步圖片，每五個step_index換一張圖
         self.ch_rect = self.image.get_rect()
         self.ch_rect.x = self.x_ch_pos
         self.ch_rect.y = self.y_ch_pos
         self.step_index += 1
+        
     def muteki(self):
         self.image = self.muteki_img_list[(self.step_index // 5)-1]  # 依 step_index 跑步圖片，每五個step_index換一張圖
         self.ch_rect = self.image.get_rect()
         self.ch_rect.x = self.x_ch_pos
         self.ch_rect.y = self.y_ch_pos
         self.step_index += 1
+        
     def take_damage(self):  # 不會連續扣血
         if self.take_damagetimer1 <= 0:  # 如果不在無敵時間內
             self.take_damagetimer1 = 30
+            
     def muteki_time(self): # 無敵星星
         if self.invincible_timer1 <= 0:  # 如果不在無敵時間內
             self.invincible_timer1 = 300
@@ -211,12 +242,17 @@ class Charactor1:
             self.invincible_timer1 -= 1
         if self.take_damagetimer1 > 0:
             self.take_damagetimer1 -= 1
+            
     def is_invincible(self):
         return self.invincible_timer1 > 0
+        
     def is_takingdamage(self):
         return self.take_damagetimer1 > 0
+        
     def draw(self, screen):
         screen.blit(self.image, (self.ch_rect.x, self.ch_rect.y))
+
+
 class Charactor2:
     invincible_timer2 = 0
     take_damagetimer2 = 0
@@ -224,6 +260,7 @@ class Charactor2:
     y_ch_pos = 200
     y_ch_posduck = 230
     jump_val = 7
+    
     def __init__(self):
          # 定義變數
         self.ch_duck = False
@@ -273,21 +310,25 @@ class Charactor2:
         if self.fall <= - self.jump_val:
             self.ch_jump = False
             self.fall = self.jump_val
+            
     def damage(self):
         self.image = self.damage_img_list[(self.step_index // 5)-1]  # 依 step_index 跑步圖片，每五個step_index換一張圖
         self.ch_rect = self.image.get_rect()
         self.ch_rect.x = self.x_ch_pos
         self.ch_rect.y = self.y_ch_pos
         self.step_index += 1
+        
     def muteki(self):
         self.image = self.muteki_img_list[(self.step_index // 5)-1]  # 依 step_index 跑步圖片，每五個step_index換一張圖
         self.ch_rect = self.image.get_rect()
         self.ch_rect.x = self.x_ch_pos
         self.ch_rect.y = self.y_ch_pos
         self.step_index += 1
+        
     def take_damage(self):  # 不會連續扣血
         if self.take_damagetimer2 <= 0:  # 如果不在無敵時間內
             self.take_damagetimer2 = 30
+            
     def muteki_time(self): # 無敵星星
         if self.invincible_timer2 <= 0:  # 如果不在無敵時間內
             self.invincible_timer2 = 300
@@ -322,12 +363,17 @@ class Charactor2:
             self.invincible_timer2 -= 1
         if self.take_damagetimer2 > 0:
             self.take_damagetimer2 -= 1
+            
     def is_invincible(self):
         return self.invincible_timer2 > 0
+        
     def is_takingdamage(self):
         return self.take_damagetimer2 > 0
+        
     def draw(self, screen):
         screen.blit(self.image, (self.ch_rect.x, self.ch_rect.y))
+# =====
+
 #  障礙物處理
 class Obstacle:
     def __init__(self, imageList : list, typeObject : int):
@@ -339,36 +385,50 @@ class Obstacle:
         self.rect.x -= game_speed
     def draw(self, screen : pygame.surface):
         screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y))
+
+
 class largeobs(Obstacle):
     def __init__(self, image_list : list):
         self.type = bg  # 不同背景不同種類的障礙物
         super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
         self.rect.y = 500  # Y座標位置
+
+
 class smallobs(Obstacle):
     def __init__(self, image_list : list):
         self.type = bg  # 不同背景不同種類的障礙物
         super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
         self.rect.y = 510 # Y座標位置
+
+
 class flyobs(Obstacle):
     def __init__(self, image_list : list):
         self.type = bg  
         super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
         self.rect.y = 415 # Y座標位置
+
+
 class largeobs2(Obstacle):
     def __init__(self, image_list : list):
         self.type = bg  # 不同背景不同種類的障礙物
         super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
         self.rect.y = 200  # Y座標位置
+
+
 class smallobs2(Obstacle):
     def __init__(self, image_list : list):
         self.type = bg  # 
         super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
         self.rect.y = 210 # Y座標位置
+
+
 class flyobs2(Obstacle):
     def __init__(self, image_list : list):
         self.type = bg  # 三種小仙人掌型態隨機選取一種
         super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
         self.rect.y = 170 # Y座標位置
+
+
 class blurobs:
     def __init__(self, imageList : list):
         self.image_list = imageList  # 以變數儲存障礙物類型
@@ -376,10 +436,14 @@ class blurobs:
         self.rect = self.image_list[self.type].get_rect()  # 將障礙物框起
         self.rect.x = window_width  # 障礙物X座標位置
         self.rect.y = 400 
+        
     def update(self):
         self.rect.x -= game_speed
+        
     def draw(self, screen : pygame.surface):
         screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y))
+
+
 class blurobs2(Obstacle):
     def __init__(self, imageList : list):
         self.image_list = imageList  # 以變數儲存障礙物類型
@@ -387,10 +451,15 @@ class blurobs2(Obstacle):
         self.rect = self.image_list[self.type].get_rect()  # 將障礙物框起
         self.rect.x = window_width  # 障礙物X座標位置
         self.rect.y = 200 
+        
     def update(self):
         self.rect.x -= game_speed
+        
     def draw(self, screen : pygame.surface):
         screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y))
+
+# =====
+
 #  道具處理
 class Heart:
     def __init__(self, image_list: list):
@@ -399,10 +468,14 @@ class Heart:
         self.rect = self.image_list[self.type].get_rect()  # 道具的矩形區域
         self.rect.x = window_width  # 道具出現的 x 座標
         self.rect.y = random.randint(330, 500)  # 道具出現的 y 座標
+        
     def update(self):
         self.rect.x -= game_speed  # 道具向左移動的速度
+        
     def draw(self, screen: pygame.Surface):
         screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y))  # 繪製道具
+
+
 class star:
     def __init__(self, image_list: list):
         self.image_list = image_list  # 道具圖片列表
@@ -410,10 +483,14 @@ class star:
         self.rect = self.image_list[self.type].get_rect()  # 道具的矩形區域
         self.rect.x = window_width  # 道具出現的 x 座標
         self.rect.y = random.randint(330, 500)  # 道具出現的 y 座標
+        
     def update(self):
         self.rect.x -= game_speed  # 道具向左移動的速度
+        
     def draw(self, screen: pygame.Surface):
         screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y))  # 繪製道具
+
+
 class Heart2:
     def __init__(self, image_list: list):
         self.image_list = image_list  # 道具圖片列表
@@ -421,10 +498,14 @@ class Heart2:
         self.rect = self.image_list[self.type].get_rect()  # 道具的矩形區域
         self.rect.x = window_width  # 道具出現的 x 座標
         self.rect.y = random.randint(150, 320)  # 道具出現的 y 座標
+        
     def update(self):
         self.rect.x -= game_speed  # 道具向左移動的速度
+        
     def draw(self, screen: pygame.Surface):
         screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y))  # 繪製道具
+
+
 class star2:
     def __init__(self, image_list: list):
         self.image_list = image_list  # 道具圖片列表
@@ -432,10 +513,16 @@ class star2:
         self.rect = self.image_list[self.type].get_rect()  # 道具的矩形區域
         self.rect.x = window_width  # 道具出現的 x 座標
         self.rect.y = random.randint(150, 280)  # 道具出現的 y 座標
+        
     def update(self):
         self.rect.x -= game_speed  # 道具向左移動的速度
+        
     def draw(self, screen: pygame.Surface):
         screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y)) 
+
+
+# =====
+
 # 特殊情況
 class Fog:
     def __init__(self):
@@ -445,16 +532,22 @@ class Fog:
         self.rect.x = 0  # 道具出現的 x 座標
         self.rect.y = 0 # 道具出現的 y 座標
         self.fog_timer = 0
+        
     def startfog(self):
         if self.fog_timer != 300:
             self.fog_timer = 300
+            
     def isfog(self):
         return self.fog_timer > 0
+        
     def update(self):
 
         self.fog_timer -= 1
+        
     def draw(self, screen: pygame.Surface):
         screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y))  # 繪製道具
+
+
 class Fog1:
     def __init__(self):
         self.image_list = FOG1 # 道具圖片列表
@@ -463,16 +556,22 @@ class Fog1:
         self.rect.x = 500  # 道具出現的 x 座標
         self.rect.y = 490 # 道具出現的 y 座標
         self.fog_timer = 0
+        
     def startfog(self):
         if self.fog_timer != 300:
             self.fog_timer = 300
+            
     def isfog(self):
         return self.fog_timer > 0
+        
     def update(self):
 
         self.fog_timer -= 1
+        
     def draw(self, screen: pygame.Surface):
         screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y))  # 繪製道具
+
+
 class Fog2:
     def __init__(self):
         self.image_list = FOG2  # 道具圖片列表
@@ -481,16 +580,21 @@ class Fog2:
         self.rect.x = 500  # 道具出現的 x 座標
         self.rect.y = 163 # 道具出現的 y 座標
         self.fog_timer = 0
+        
     def startfog(self):
         if self.fog_timer != 300:
             self.fog_timer = 300
+            
     def isfog(self):
         return self.fog_timer > 0
+        
     def update(self):
 
         self.fog_timer -= 1
+        
     def draw(self, screen: pygame.Surface):
         screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y))  # 繪製道具
+
 
 class LifeBar:
     def __init__(self, max_life, x, y):
@@ -513,13 +617,21 @@ class LifeBar:
 
     def reset(self):
         self.current_life = self.max_life
+
+
+# =====
+
 #  初始化pygame
 def initialize_game(): 
     pygame.init()
+
+
 #  讀取背景音樂
 def load_bg_music(path):
     pygame.mixer.init()
     pygame.mixer.music.load(path)
+
+
 #  讀取分數
 def load_sorted_score_list(which_score):
     score_list = list()
@@ -535,6 +647,8 @@ def load_sorted_score_list(which_score):
                 pass
         score_file.close()
     return score_list
+
+
 #  起始頁面
 def startpage():
 
@@ -558,6 +672,8 @@ def startpage():
                 if event.key == pygame.K_RETURN:
                     menu()
         pygame.display.update()
+
+
 # 單雙人選擇目錄
 def menu():
     global needintrosingle
@@ -573,6 +689,7 @@ def menu():
     pygame.mixer.music.play(-1)  # menu background music
 
     run = True
+    
     while run :
         window.blit(BACKGROUND_LIST[0], (0, 0))
         start_text_L1 = Text("Choose The", TITLE, BLACK, text_position1)
@@ -616,6 +733,10 @@ def menu():
                             mainDuo()
     pygame.quit()
     sys.exit()  
+
+
+# =====
+
 # 遊戲介紹 
 def introsingle():
     run = True
@@ -666,6 +787,8 @@ def introsingle():
             
     pygame.quit()
     sys.exit()
+
+
 def introduo():
     run = True
     n = 1
@@ -715,13 +838,18 @@ def introduo():
 
     pygame.quit()
     sys.exit()
+
+
 def difficulty():
     global game_difficulty
     global TITLE, HEADING, BODY
     global needintrosingle
+    
     text_position1 = (650, (window_height//2) - 50)  # For "Choose The"
     text_position2 = (650, (window_height//2) + 50)  # For "Game Difficulty"
+    
     run = True
+    
     while run :
         window.fill(WHITE)
         window.blit(BACKGROUND_LIST[0], (0, 0))
@@ -793,7 +921,6 @@ def difficulty():
                         if needintrosingle == True:
                             needintrosingle = False
                             introsingle()
-                            
                         else:
                             mainsingle()
                     elif hard_button_rect.collidepoint(mouse_pos):
@@ -805,9 +932,12 @@ def difficulty():
                             mainsingle()
     pygame.quit()
     sys.exit()
+
+
 def countdown_timer(window, player, bg, x_bg_pos, y_bg_pos, countdown_time=3):
     countdown = countdown_time
     count_down_sound = pygame.mixer.Sound(os.path.join("music/sounds", "count_down.wav"))
+    
     while countdown > 0:
         window.blit(BACKGROUND_LIST[bg], (x_bg_pos, y_bg_pos))
         player.draw(window)
@@ -817,6 +947,8 @@ def countdown_timer(window, player, bg, x_bg_pos, y_bg_pos, countdown_time=3):
         pygame.display.update()
         time.sleep(1)
         countdown -= 1
+
+
 def pause_game(window, player, bg, x_bg_pos, y_bg_pos):
     image = [pygame.image.load(os.path.join("image/window", "paused_window-2.png")),
              pygame.image.load(os.path.join("image/window", "paused_button-2.png"))]
@@ -848,8 +980,11 @@ def pause_game(window, player, bg, x_bg_pos, y_bg_pos):
         restart_text.draw(window)
         exit_text.draw(window)
         pygame.display.update()
+
+
 def mainsingle():
     global game_speed, jump_val, points, bg
+    
     clock = pygame.time.Clock()
     points = 0
     oripoint = 0
@@ -1012,6 +1147,8 @@ def mainsingle():
         clock.tick(60)
 
     gameover()
+
+
 def mainDuo():
     global game_speed, points, bg, winner, TITLE, SUBHEADING
     winner = 0
@@ -1226,6 +1363,10 @@ def mainDuo():
         clock.tick(60)
 
     gameover()
+
+
+# =====
+
 def enter_your_name(enter_name_text, enter_rect):
     global TITLE, HEADING
     
@@ -1241,6 +1382,7 @@ def enter_your_name(enter_name_text, enter_rect):
     name_rect = name_surface.get_rect()
     name_rect.bottomleft = (x_pos, y_pos - 10)
     cursor_x, cursor_y = name_rect.topright
+    
     while not finish_enter:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -1263,6 +1405,7 @@ def enter_your_name(enter_name_text, enter_rect):
                     else:
                         name += event.unicode
         window.fill(WHITE)
+        
         finish_text = Text_body("Press Enter when finish entering", HEADING, BLACK, (window_width // 2, window_height // 2 + 50))
         finish_text.draw(window)
         enter_name_text.draw(window)
@@ -1280,6 +1423,9 @@ def enter_your_name(enter_name_text, enter_rect):
             pygame.draw.line(window, SKYBLUE, (cursor_x, cursor_y + 7), ( cursor_x, cursor_y + 47), 2)
         pygame.display.update()
     return name
+
+
+# =====
 
 def show_rank(score_list, y_already):
     global TITLE, HEADING, BODY
@@ -1335,6 +1481,10 @@ def show_rank(score_list, y_already):
                     pygame.display.update()
                     leave_rank = True
                     break
+
+
+# =====
+
 def gameover():
     window.fill(WHITE)  # 用白色填充整個視窗
     pygame.mixer.music.stop()
@@ -1423,6 +1573,8 @@ def gameover():
                     elif event.key == pygame.K_r:
                         mainDuo()
 
+
+# =====
 
 # 執行程式碼
 if __name__ == "__main__":
