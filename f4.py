@@ -346,7 +346,7 @@ class flyobs(Obstacle):
     def __init__(self, image_list : list):
         self.type = bg  
         super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
-        self.rect.y = 450 # Y座標位置
+        self.rect.y = 410 # Y座標位置
 class largeobs2(Obstacle):
     def __init__(self, image_list : list):
         self.type = bg  # 不同背景不同種類的障礙物
@@ -954,7 +954,7 @@ def mainsingle():
                 items.remove(item)
             if item.rect.x < -item.rect.width:
                 items.remove(item)
-
+                         
         if len(obstacles) == 0:
             rand = random.randint(0, 5)
             if rand == 0 or rand == 1:
@@ -978,11 +978,13 @@ def mainsingle():
 
         if len(blurs) == 0:
             randfog = random.randint(0, 100)
-            if randfog < 2:
+            if randfog < 1:
                 blurs.append(blurobs(BLUROBSTACLE))
         for blur in blurs:
             blur.update()
             blur.draw(window)
+            if blur.rect.colliderect(obstacle.rect):
+                blurs.remove(blur)
             if player.ch_rect.colliderect(blur.rect):
                 if player.is_takingdamage() or player.is_invincible():
                     continue
@@ -992,7 +994,8 @@ def mainsingle():
                     blurs.remove(blur)
             if blur.rect.x < -blur.rect.width:
                 blurs.remove(blur)
-
+        
+        
         fog.update()
         if fog.isfog():
             fog.draw(window)
