@@ -108,11 +108,15 @@ FOG = [pygame.image.load(os.path.join("image/background", "fog1.png"))]
 FOG1 = [pygame.image.load(os.path.join("image/flyobstacle", "fog-P2P.png"))]
 FOG2 = [pygame.image.load(os.path.join("image/flyobstacle", "fog-P2P.png"))]
 BLUROBSTACLE = [pygame.image.load(os.path.join("image/flyobstacle", "cloud.png"))]
+
+
 # =====
 
 #  是否播過介紹
 needintrosingle = True
 needintroduo = True
+
+
 # =====
 
 #  建立視窗(背景長/寬 ＝ 1000/660)
@@ -120,6 +124,8 @@ window_height = 650
 window_width = 1000
 window = pygame.display.set_mode((window_width, window_height))
 screen = pygame.display.set_mode((window_width, window_height))
+
+
 # =====
 
 #  難度
@@ -127,6 +133,8 @@ EASY = 1
 MEDIUM = 2
 HARD = 3
 game_difficulty = EASY
+
+
 # =====
 
 #  文字大小
@@ -156,6 +164,8 @@ class Text_body:
         self.rect.center = position  # 文字的中心位置(參數)
     def draw(self, screen):
         screen.blit(self.surface, self.rect)
+
+
 # =====
 
 #  角色處理
@@ -418,6 +428,8 @@ class Charactor2:
         
     def draw(self, screen):
         screen.blit(self.image, (self.ch_rect.x, self.ch_rect.y))
+
+
 # =====
 
 #  障礙物處理
@@ -503,6 +515,7 @@ class blurobs2(Obstacle):
         
     def draw(self, screen : pygame.surface):
         screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y))
+
 
 # =====
 
@@ -613,9 +626,10 @@ class Fog1:
     def update(self):
 
         self.fog_timer -= 1
-        
+    
+    # 繪製道具    
     def draw(self, screen: pygame.Surface):
-        screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y))  # 繪製道具
+        screen.blit(self.image_list[self.type], (0, 0)) # 霧的大小已經調成符合單人視窗了 
 
 
 class Fog2:
@@ -637,9 +651,10 @@ class Fog2:
     def update(self):
 
         self.fog_timer -= 1
-        
+
+    # 繪製道具
     def draw(self, screen: pygame.Surface):
-        screen.blit(self.image_list[self.type], (self.rect.x, self.rect.y))  # 繪製道具
+        screen.blit(self.image_list[self.type], (0, window_height // 2))
 
 
 class LifeBar:
