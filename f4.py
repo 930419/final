@@ -928,6 +928,32 @@ def mainsingle():
         user_input = pygame.key.get_pressed()
         player.update(user_input)
         player.draw(window)
+        
+        random_item = random.randint(0, 1)
+        if len(items) == 0 and random.randint(0, 1000) < 2 and random_item == 0:
+            items.append(Heart(ITEM))
+            itemtype = 0
+        elif len(items) == 0 and random.randint(0, 1000) < 10 and random_item == 1:
+            items.append(star(ITEM))
+            itemtype = 1
+
+        for item in items:
+            item.update()
+            if not item.rect.colliderect(obstacle.rect):
+                item.draw(window)
+            else:
+                items.remove(item)
+
+            if player.ch_rect.colliderect(item.rect):
+                if itemtype == 0:
+                    life_bar.heal()
+                    pygame.mixer.Channel(5).play(heart_sound)
+                elif itemtype == 1:
+                    pygame.mixer.Channel(6).play(star_sound)
+                    player.muteki_time()
+                items.remove(item)
+            if item.rect.x < -item.rect.width:
+                items.remove(item)
 
         if len(obstacles) == 0:
             rand = random.randint(0, 5)
@@ -968,31 +994,6 @@ def mainsingle():
         if fog.isfog():
             fog.draw(window)
 
-        random_item = random.randint(0, 1)
-        if len(items) == 0 and random.randint(0, 1000) < 2 and random_item == 0:
-            items.append(Heart(ITEM))
-            itemtype = 0
-        elif len(items) == 0 and random.randint(0, 1000) < 10 and random_item == 1:
-            items.append(star(ITEM))
-            itemtype = 1
-
-        for item in items:
-            item.update()
-            if not item.rect.colliderect(obstacle.rect):
-                item.draw(window)
-            else:
-                items.remove(item)
-
-            if player.ch_rect.colliderect(item.rect):
-                if itemtype == 0:
-                    life_bar.heal()
-                    pygame.mixer.Channel(5).play(heart_sound)
-                elif itemtype == 1:
-                    pygame.mixer.Channel(6).play(star_sound)
-                    player.muteki_time()
-                items.remove(item)
-            if item.rect.x < -item.rect.width:
-                items.remove(item)
 
         pygame.display.update()
         clock.tick(60)
