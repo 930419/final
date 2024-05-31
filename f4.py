@@ -984,9 +984,12 @@ def mainsingle():
             blur.update()
             blur.draw(window)
             if player.ch_rect.colliderect(blur.rect):
-                pygame.mixer.Channel(3).play(fog_sound)
-                fog.startfog()
-                blurs.remove(blur)
+                if player.is_takingdamage() or player.is_invincible():
+                    continue
+                else:
+                    pygame.mixer.Channel(3).play(fog_sound)
+                    fog.startfog()
+                    blurs.remove(blur)
             if blur.rect.x < -blur.rect.width:
                 blurs.remove(blur)
 
