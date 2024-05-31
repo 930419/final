@@ -1436,7 +1436,7 @@ def show_rank(score_list, y_already):
     image = pygame.image.load(os.path.join("image/window", "rank_board-2.png"))
 
     x_pos = window_width // 2 - 50
-    y_pos = 70
+    y_pos = 109
     name_font = pygame.font.Font('Fonts/AgencyFB-Bold.ttf', SUBHEADING)
     window.blit(image, (0, 0))
     score_range = int()
@@ -1448,9 +1448,9 @@ def show_rank(score_list, y_already):
         record = f"{score_list[i][0]} {score_list[i][1]}"
         record_surface = name_font.render(record, True, BROWN)
         record_rect = record_surface.get_rect()
-        record_rect.topleft = (x_pos, y_pos)
+        record_rect.bottomleft = (x_pos, y_pos)
         window.blit(record_surface, record_rect)
-        y_pos += 55
+        y_pos += 54
     n_text_row1 = Text_body("Press Tab again", SUBHEADING, BROWN, (910, 30))
     n_text_row2 = Text_body("to go back", SUBHEADING, BROWN, (935, 70))
     n_text_row1.draw(window), n_text_row2.draw(window)
