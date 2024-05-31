@@ -14,16 +14,16 @@ BLACK = pygame.Color(0, 0, 0)
 SKYBLUE = pygame.Color(0, 127, 255)
 
 #  import 圖片檔案
-MENU_BUTTON = [pygame.image.load(os.path.join("image/menu", "button.png")),
-                pygame.image.load(os.path.join("image/menu/intro", "button_next.png")),
-                pygame.image.load(os.path.join("image/menu/intro", "button_back.png")),
-                pygame.image.load(os.path.join("image/menu/intro", "button_start.png"))]
-INTRODUCTION = [pygame.image.load(os.path.join("image/menu/intro", "intro_single.png")),
-                pygame.image.load(os.path.join("image/menu/intro", "intro_obstacles.png")),
-                pygame.image.load(os.path.join("image/menu/intro", "intro_buff.png"))]
-INTRODUCTION2 = [pygame.image.load(os.path.join("image/menu/intro", "intro_single.png")),
-                pygame.image.load(os.path.join("image/menu/intro", "intro_obstacles.png")),
-                pygame.image.load(os.path.join("image/menu/intro", "intro_buff.png"))]                
+MENU_BUTTON = [pygame.image.load(os.path.join("image/menu", "button-2.png")),
+                pygame.image.load(os.path.join("image/menu/intro", "button_next-2.png")),
+                pygame.image.load(os.path.join("image/menu/intro", "button_back-2.png")),
+                pygame.image.load(os.path.join("image/menu/intro", "button_start-2.png"))]
+INTRODUCTION = [pygame.image.load(os.path.join("image/menu/intro", "intro_single-2.png")),
+                pygame.image.load(os.path.join("image/menu/intro", "intro_obstacles-2.png")),
+                pygame.image.load(os.path.join("image/menu/intro", "intro_buff-2.png"))]
+INTRODUCTION2 = [pygame.image.load(os.path.join("image/menu/intro", "intro_single-2.png")),
+                pygame.image.load(os.path.join("image/menu/intro", "intro_obstacles-2.png")),
+                pygame.image.load(os.path.join("image/menu/intro", "intro_buff-2.png"))]                
 BACKGROUND_LIST = [pygame.image.load(os.path.join("image/background", "6city.jpg")), pygame.image.load(os.path.join("image/background", "5winter.jpg"))
                    , pygame.image.load(os.path.join("image/background", "4autumn.jpg")), pygame.image.load(os.path.join("image/background", "3forest.jpg"))]
 CHARACTOR_LIST = [pygame.image.load(os.path.join("image/charactor", "snail-1-right.png")),
