@@ -534,8 +534,8 @@ class Fog:
         self.fog_timer = 0
         
     def startfog(self):
-        if self.fog_timer != 300:
-            self.fog_timer = 300
+        if self.fog_timer != 180:
+            self.fog_timer = 180
             
     def isfog(self):
         return self.fog_timer > 0
@@ -558,8 +558,8 @@ class Fog1:
         self.fog_timer = 0
         
     def startfog(self):
-        if self.fog_timer != 300:
-            self.fog_timer = 300
+        if self.fog_timer != 180:
+            self.fog_timer = 180
             
     def isfog(self):
         return self.fog_timer > 0
@@ -582,8 +582,8 @@ class Fog2:
         self.fog_timer = 0
         
     def startfog(self):
-        if self.fog_timer != 300:
-            self.fog_timer = 300
+        if self.fog_timer != 180:
+            self.fog_timer = 180
             
     def isfog(self):
         return self.fog_timer > 0
@@ -1119,7 +1119,7 @@ def mainsingle():
                 obstacles.remove(obstacle)
 
         if len(blurs) == 0:
-            randfog = random.randint(0, 100)
+            randfog = random.randint(0, 1000)
             if randfog < 1:
                 blurs.append(blurobs(BLUROBSTACLE))
         for blur in blurs:
@@ -1184,7 +1184,7 @@ def mainDuo():
     pygame.mixer.set_num_channels(12)
     if game_difficulty == EASY:
         game_speed = 7
-        life_bar1 = LifeBar(5, 33, 375)
+        life_bar1 = LifeBar(5, 33, 340)
         life_bar2 = LifeBar(5, 33, 50)
 
     countdown_timer(window, player1, bg, x_bg_pos, y_bg_pos)
@@ -1215,7 +1215,10 @@ def mainDuo():
         window.blit(BACKGROUND_LIST_DUO[bg], (x_bg_pos, y_bg_pos))
         window.blit(BACKGROUND_LIST_DUO[bg], (x_bg_pos + window_width, y_bg_pos))
         pygame.draw.line(window, BLACK, (0, 325), (1000, 325), 4)
-
+        p1 = Text_body("1P", TITLE, BLACK, (50, 110))
+        p2 = Text_body("2P", TITLE, BLACK, (50, 400))
+        p1.draw(window)
+        p2.draw(window)
         if x_bg_pos <= -window_width:
             window.blit(BACKGROUND_LIST_DUO[bg], (x_bg_pos + window_width, y_bg_pos))
             x_bg_pos = 0
@@ -1270,7 +1273,7 @@ def mainDuo():
                 obstacles1.remove(obstacle)
 
         if len(blurs1) == 0:
-            if random.randint(0, 100) < 2:
+            if random.randint(0, 1000) < 2:
                 blurs1.append(blurobs(BLUROBSTACLE))
         for blur in blurs1:
             blur.update()
@@ -1306,7 +1309,7 @@ def mainDuo():
                 obstacles2.remove(obstacle)
 
         if len(blurs2) == 0:
-            if random.randint(0, 100) < 2:
+            if random.randint(0, 1000) < 2:
                 blurs2.append(blurobs2(BLUROBSTACLE))
         for blur in blurs2:
             blur.update()
