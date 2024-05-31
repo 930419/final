@@ -346,7 +346,7 @@ class flyobs(Obstacle):
     def __init__(self, image_list : list):
         self.type = bg  
         super().__init__(image_list, self.type)  # 繼承障礙物屬性與動作
-        self.rect.y = 410 # Y座標位置
+        self.rect.y = 415 # Y座標位置
 class largeobs2(Obstacle):
     def __init__(self, image_list : list):
         self.type = bg  # 不同背景不同種類的障礙物
