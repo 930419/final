@@ -813,8 +813,8 @@ def countdown_timer(window, player, bg, x_bg_pos, y_bg_pos, countdown_time=3):
         time.sleep(1)
         countdown -= 1
 def pause_game(window, player, bg, x_bg_pos, y_bg_pos):
-    image = [pygame.image.load(os.path.join("image/window", "paused_window.png")),
-             pygame.image.load(os.path.join("image/window", "paused_button.png"))]
+    image = [pygame.image.load(os.path.join("image/window", "paused_window-2.png")),
+             pygame.image.load(os.path.join("image/window", "paused_button-2.png"))]
 
     while True:
         for event in pygame.event.get():
