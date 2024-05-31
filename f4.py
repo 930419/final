@@ -1213,19 +1213,19 @@ def mainDuo():
 
     gameover()
 def enter_your_name(enter_name_text, enter_rect):
-    global HEADING
+    global TITLE, HEADING
     
     name = str()
     entering = False
     finish_enter = False
-    x_pos = window_width // 2 + 70
-    y_pos = window_height // 2 + 18
+    x_pos = window_width // 2 - 70
+    y_pos = window_height // 2 + 10
     active = True
     cursor_timer = pygame.time.get_ticks()
-    name_font = pygame.font.Font('Fonts/AgencyFB-Bold.ttf', HEADING)
+    name_font = pygame.font.Font('Fonts/AgencyFB-Bold.ttf', TITLE)
     name_surface = name_font.render(name, True, BLACK)
     name_rect = name_surface.get_rect()
-    name_rect.bottomleft = (x_pos, y_pos + 10)
+    name_rect.bottomleft = (x_pos, y_pos - 10)
     cursor_x, cursor_y = name_rect.topright
     while not finish_enter:
         for event in pygame.event.get():
@@ -1249,13 +1249,13 @@ def enter_your_name(enter_name_text, enter_rect):
                     else:
                         name += event.unicode
         window.fill(WHITE)
-        finish_text = Text("Press Enter when finish entering", HEADING, BLACK, (window_width // 2, window_height // 2 + 50))
+        finish_text = Text_body("Press Enter when finish entering", HEADING, BLACK, (window_width // 2, window_height // 2 + 50))
         finish_text.draw(window)
         enter_name_text.draw(window)
         pygame.draw.rect(window, WHITE, enter_rect, 2)
         name_surface = name_font.render(name, True, BLACK)
         name_rect = name_surface.get_rect()
-        name_rect.bottomleft = (x_pos, y_pos + 10)
+        name_rect.bottomleft = (x_pos, y_pos - 10)
         window.blit(name_surface, name_rect)
         cursor_x, cursor_y = name_rect.topright
         current_time = pygame.time.get_ticks()
@@ -1263,28 +1263,30 @@ def enter_your_name(enter_name_text, enter_rect):
             active = not active
             cursor_timer = current_time
         if active and entering:
-            pygame.draw.line(window, SKYBLUE, (cursor_x + 2, cursor_y), ( cursor_x + 2, cursor_y + 20), 2)
+            pygame.draw.line(window, SKYBLUE, (cursor_x, cursor_y + 7), ( cursor_x, cursor_y + 47), 2)
         pygame.display.update()
     return name
+
 def show_rank(score_list, y_already):
     global TITLE, HEADING, BODY
     
-    x_pos = 50
+    x_pos = window_width // 2 - 50
     y_pos = 70
-    name_font = pygame.font.Font('Fonts/AgencyFB-Bold.ttf', HEADING)
+    name_font = pygame.font.Font('Fonts/AgencyFB-Bold.ttf', SUBHEADING)
     window.fill(WHITE)
-    
-    for i in range(len(score_list)):
+    score_range = int()
+    if len(score_list) > 10:
+        score_range = 10
+    else:
+        score_range = len(score_list)
+    for i in range(score_range):
         record = f"{i + 1}: {score_list[i][0]} {score_list[i][1]}"
         record_surface = name_font.render(record, True, BLACK)
         record_rect = record_surface.get_rect()
         record_rect.topleft = (x_pos, y_pos)
         window.blit(record_surface, record_rect)
-        y_pos += 40
-        if (i + 1) % 14 == 0:
-            x_pos += 250
-            y_pos = 70
-    n_text = Text("Press Tab again to go back", HEADING, BLACK, (620, 20))
+        y_pos += 55
+    n_text = Text_body("Press Tab again to go back", SUBHEADING, BLACK, (850, 20))
     n_text.draw(window)
     pygame.display.update()  
     leave_rank = False
@@ -1309,14 +1311,13 @@ def show_rank(score_list, y_already):
                         score_text = Text(f"Your score: {points}", TITLE, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
                         record_or_not_text = Text_body("Do you want to record your score?", TITLE, BLACK, (window_width // 2, window_height // 2 + 90))
                         y_or_n_or_tab_text = Text_body("Press y to record / Press n to leave / Press Tab to check ranks / Press r to restart", BODY, BLACK, (window_width // 2, window_height // 2 + 150))
-                        y_or_n_or_tab_text = Text_body("Press y to record / Press n to leave / Press Tab to check ranks", BODY, BLACK, (window_width // 2, window_height // 2 + 90))
                         game_over_text.draw(window)
                         score_text.draw(window)
                         record_or_not_text.draw(window)
                         y_or_n_or_tab_text.draw(window)
                     pygame.display.update()
                     leave_rank = True
-                    break   
+                    break
 def gameover():
     window.fill(WHITE)  # 用白色填充整個視窗
     if game_mode == 1:
@@ -1342,11 +1343,10 @@ def gameover():
                     elif event.key == pygame.K_y:  # 如果玩家按下 y 鍵
                         y_already = True
                         window.fill(WHITE)
-                        enter_name_text = Text("Enter your name: ___________", HEADING, BLACK, (window_width // 2, window_height // 2))
+                        enter_name_text = Text_body("Enter your name: _______________________", TITLE, BLACK, (window_width // 2, window_height // 2 - 30))
                         enter_name_text.draw(window)
-                        enter_rect = pygame.Rect(window_width // 2 - 80, window_height // 2 - 20, 335, 40)
+                        enter_rect = pygame.Rect(window_width // 2 - 80, window_height // 2 - 50, 450, 47)
                         pygame.draw.rect(window, WHITE, enter_rect, 2)
-                        pygame.draw.line(window, SKYBLUE, ((window_width // 2 + 150), window_height // 2 + 10), (window_width // 2 - 70, window_height // 2 - 10), 2)
                         pygame.display.update()
                         name = enter_your_name(enter_name_text, enter_rect)
                         already_record = False
