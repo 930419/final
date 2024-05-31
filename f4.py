@@ -39,7 +39,6 @@ BACKGROUND_LIST_DUO = [pygame.image.load(os.path.join("image/background", "6city
                        pygame.image.load(os.path.join("image/background", "5winterduo.jpg")),
                        pygame.image.load(os.path.join("image/background", "4autumnduo.jpg")),
                        pygame.image.load(os.path.join("image/background", "3forestduo.jpg"))]
-
 CHARACTOR_LIST = [pygame.image.load(os.path.join("image/charactor", "snail-1-right.png")),
                   pygame.image.load(os.path.join("image/charactor", "snail-2-right.png"))]
 
@@ -49,9 +48,34 @@ DAMAGE_LIST = [pygame.image.load(os.path.join("image/charactor", "snail-debuff-1
 MUTEKI_LIST =  [pygame.image.load(os.path.join("image/charactor", "snail-invicible-1-right.png")),
                 pygame.image.load(os.path.join("image/charactor", "snail-invicible-2-right.png"))]  # 跑步圖片大小 87*94
 
-JUMPING_IMG = pygame.image.load(os.path.join("image/charactor", "snail-jump-right.png"))  # 跳躍圖片大小 87*94
+JUMPING_IMG = [pygame.image.load(os.path.join("image/charactor", "snail-jump-right.png")),
+                pygame.image.load(os.path.join("image/charactor", "snail-invicible-jump-right.png")),
+                pygame.image.load(os.path.join("image/charactor", "snail-debuff-jump-right.png"))]  # 跳躍圖片大小 87*94
 
-DUCKING_LIST = [pygame.image.load(os.path.join("image/charactor", "snail-hedge-right.png"))]  #  蹲下大小 118*60
+
+DUCKING_LIST = [pygame.image.load(os.path.join("image/charactor", "snail-hedge-right.png")),
+                pygame.image.load(os.path.join("image/charactor", "snail-invicible-hedge-right.png")),
+                pygame.image.load(os.path.join("image/charactor", "snail-debuff-hedge-right.png"))] 
+
+
+ # 第二隻蝸牛
+CHARACTOR_LIST2 = [pygame.image.load(os.path.join("image/charactor/snail2", "snail2-1-right.png")),
+                  pygame.image.load(os.path.join("image/charactor/snail2", "snail2-2-right.png"))]
+
+DAMAGE_LIST2 = [pygame.image.load(os.path.join("image/charactor/snail2", "snail2-debuff-1-right.png")),
+               pygame.image.load(os.path.join("image/charactor/snail2", "snail2-debuff-2-right.png"))]
+
+MUTEKI_LIST2 =  [pygame.image.load(os.path.join("image/charactor/snail2", "snail2-invicible-1-right.png")),
+                pygame.image.load(os.path.join("image/charactor/snail2", "snail2-invicible-2-right.png"))]  # 跑步圖片大小 87*94
+
+JUMPING_IMG2 = [pygame.image.load(os.path.join("image/charactor/snail2", "snail2-jump-right.png")),
+                pygame.image.load(os.path.join("image/charactor/snail2", "snail2-invicible-jump-right.png")),
+                pygame.image.load(os.path.join("image/charactor/snail2", "snail2-debuff-jump-right.png"))]  # 跳躍圖片大小 87*94
+
+DUCKING_LIST2 = [pygame.image.load(os.path.join("image/charactor/snail2", "snail2-hedge-right.png")),
+                pygame.image.load(os.path.join("image/charactor/snail2", "snail2-invicible-hedge-right.png")),
+                pygame.image.load(os.path.join("image/charactor/snail2", "snail2-debuff-hedge-right.png"))]  #  蹲下大小 118*60
+
 
 ITEM = [pygame.image.load(os.path.join("image/item", "1.png")),
         pygame.image.load(os.path.join("image/item", "2.png")),
@@ -174,7 +198,12 @@ class Charactor1:
     def duck(self):
         duck_sound = pygame.mixer.Sound(os.path.join("music/sounds", "duck.wav"))
         pygame.mixer.Channel(0).play(duck_sound)
-        self.image = self.duck_img_list[0]  
+        if self.invincible_timer1 > 0:
+            self.image = self.duck_img_list[1]
+        elif self.invincible_timer1 <= 0 and self.take_damagetimer1 > 0:
+            self.image. = self.duck_img_list[2]
+        else:
+            self.image = self.duck_img_list[0]  
         self.ch_rect = self.image.get_rect()
         self.ch_rect.x = self.x_ch_pos
         self.ch_rect.y = self.y_ch_posduck
@@ -183,7 +212,12 @@ class Charactor1:
     def jump(self):
         jump_sound = pygame.mixer.Sound(os.path.join("music/sounds", "jump.wav"))
         pygame.mixer.Channel(1).play(jump_sound)
-        self.image = self.jump_img
+        if self.invincible_timer1 > 0:
+            self.image = self.jump_img[1]
+        elif self.invincible_timer1 <= 0 and self.take_damagetimer1 > 0:
+            self.image. = self.jump_img[2]
+        else:
+            self.image = self.jump_img[0]
         if self.ch_jump:
             self.ch_rect.y -= self.fall * 4  
             self.fall -= 0.5  
@@ -214,7 +248,7 @@ class Charactor1:
             self.invincible_timer1 = 300
 
     def update(self, user_input):
-        if user_input[pygame.K_UP] or user_input[pygame.K_SPACE] and not self.ch_jump:
+        if user_input[pygame.K_UP] or user_input[pygame.K_SPACE] and self.ch_jump == False:
             self.ch_duck = False
             self.ch_run = False
             self.ch_jump = True
@@ -272,11 +306,11 @@ class Charactor2:
         self.fall = self.jump_val  # fall:高度變化幅度
 
         # 圖片
-        self.duck_img_list = DUCKING_LIST
-        self.run_img_list = CHARACTOR_LIST
-        self.jump_img = JUMPING_IMG
-        self.damage_img_list = DAMAGE_LIST
-        self.muteki_img_list = MUTEKI_LIST
+        self.duck_img_list = DUCKING_LIST2
+        self.run_img_list = CHARACTOR_LIST2
+        self.jump_img = JUMPING_IMG2
+        self.damage_img_list = DAMAGE_LIST2
+        self.muteki_img_list = MUTEKI_LIST2
         self.image = self.run_img_list[0]  
 
         # 把角色框列
@@ -296,7 +330,12 @@ class Charactor2:
     def duck(self):
         duck_sound = pygame.mixer.Sound(os.path.join("music/sounds", "duck.wav"))
         pygame.mixer.Channel(0).play(duck_sound)
-        self.image = self.duck_img_list[0]  
+        if self.invincible_timer2 > 0:
+            self.image = self.duck_img_list[1]
+        elif self.invincible_timer2 <= 0 and self.take_damagetimer2 > 0:
+            self.image. = self.duck_img_list[2]
+        else:
+            self.image = self.duck_img_list[0] 
         self.ch_rect = self.image.get_rect()
         self.ch_rect.x = self.x_ch_pos
         self.ch_rect.y = self.y_ch_posduck
@@ -305,7 +344,12 @@ class Charactor2:
     def jump(self):
         jump_sound = pygame.mixer.Sound(os.path.join("music/sounds", "jump.wav"))
         pygame.mixer.Channel(1).play(jump_sound)
-        self.image = self.jump_img
+        if self.invincible_timer2 > 0:
+            self.image = self.jump_img[1]
+        elif self.invincible_timer2 <= 0 and self.take_damagetimer2 > 0:
+            self.image. = self.jump_img[2]
+        else:
+            self.image = self.jump_img[0]
         if self.ch_jump:
             self.ch_rect.y -= self.fall * 4  
             self.fall -= 0.5  
