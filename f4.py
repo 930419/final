@@ -26,6 +26,8 @@ INTRODUCTION2 = [pygame.image.load(os.path.join("image/menu/intro", "intro_singl
                 pygame.image.load(os.path.join("image/menu/intro", "intro_buff-2.png"))]                
 BACKGROUND_LIST = [pygame.image.load(os.path.join("image/background", "6city.jpg")), pygame.image.load(os.path.join("image/background", "5winter.jpg"))
                    , pygame.image.load(os.path.join("image/background", "4autumn.jpg")), pygame.image.load(os.path.join("image/background", "3forest.jpg"))]
+BACKGROUND_LIST_DUO = [pygame.image.load(os.path.join("image/background", "3forestduo.jpg")), pygame.image.load(os.path.join("image/background", "5winter.jpg"))
+                   , pygame.image.load(os.path.join("image/background", "4autumn.jpg")), pygame.image.load(os.path.join("image/background", "3forest.jpg"))]
 CHARACTOR_LIST = [pygame.image.load(os.path.join("image/charactor", "snail-1-right.png")),
                 pygame.image.load(os.path.join("image/charactor", "snail-2-right.png")),]
 DAMAGE_LIST = [pygame.image.load(os.path.join("image/charactor", "snail-debuff-1-right.png")),
@@ -1067,13 +1069,13 @@ def mainDuo():
 
         x_bg_pos -= game_speed
         if oripoint % 3200 == 0 and points != 0:
-            bg = (bg + 1) % len(BACKGROUND_LIST)
-        window.blit(BACKGROUND_LIST[bg], (x_bg_pos, y_bg_pos))
-        window.blit(BACKGROUND_LIST[bg], (x_bg_pos + window_width, y_bg_pos))
+            bg = (bg + 1) % len(BACKGROUND_LIST_DUO)
+        window.blit(BACKGROUND_LIST_DUO[bg], (x_bg_pos, y_bg_pos))
+        window.blit(BACKGROUND_LIST_DUO[bg], (x_bg_pos + window_width, y_bg_pos))
         pygame.draw.line(window, BLACK, (0, 325), (1000, 325), 4)
 
         if x_bg_pos <= -window_width:
-            window.blit(BACKGROUND_LIST[bg], (x_bg_pos + window_width, y_bg_pos))
+            window.blit(BACKGROUND_LIST_DUO[bg], (x_bg_pos + window_width, y_bg_pos))
             x_bg_pos = 0
 
         pause_text = Text_body("press k to pause", SUBHEADING, BLACK, (900, 25))
