@@ -1438,7 +1438,7 @@ def show_rank(score_list, y_already):
     x_pos = window_width // 2 - 50
     y_pos = 70
     name_font = pygame.font.Font('Fonts/AgencyFB-Bold.ttf', SUBHEADING)
-    window.fill(WHITE)
+    window.blit(image, (0, 0))
     score_range = int()
     if len(score_list) > 10:
         score_range = 10
