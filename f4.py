@@ -7,6 +7,8 @@ import random
 import time
 import sys
 import csv
+# 要先 pip install moviepy
+from moviepy.editor import VideoFileClip
     
 #  顏色
 WHITE = pygame.Color(255, 255, 255)
@@ -656,9 +658,12 @@ def startpage():
     global game_mode
     global TITLE, HEADING, BODY
 
+    intro_anime = VideoFileClip(os.path.join("anime", "intro_anime.mp4"))
+    intro_anime.preview()
+
     text_position1 = (650, (window_height//2) - 50)  # Choose The
     text_position2 = (650, (window_height//2) + 50)  # Game Difficulty
-
+    """
     run = True
     while run :
         window.blit(BACKGROUND_LIST[0], (0, 0))
@@ -671,7 +676,9 @@ def startpage():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     menu()
-        pygame.display.update()
+    """
+    menu()
+    pygame.display.update()
 
 
 # 單雙人選擇目錄
