@@ -11,27 +11,32 @@ import csv
 #  顏色
 WHITE = pygame.Color(255, 255, 255)
 BLACK = pygame.Color(0, 0, 0)
+BROWN = pygame.Color(40, 33, 22)
 SKYBLUE = pygame.Color(0, 127, 255)
 
 #  import 圖片檔案
 MENU_BUTTON = [pygame.image.load(os.path.join("image/menu", "button-2.png")),
-                pygame.image.load(os.path.join("image/menu/intro", "button_next-2.png")),
-                pygame.image.load(os.path.join("image/menu/intro", "button_back-2.png")),
-                pygame.image.load(os.path.join("image/menu/intro", "button_start-2.png"))]
+               pygame.image.load(os.path.join("image/menu/intro", "button_next-2.png")),
+               pygame.image.load(os.path.join("image/menu/intro", "button_back-2.png")),
+               pygame.image.load(os.path.join("image/menu/intro", "button_start-2.png"))]
 INTRODUCTION = [pygame.image.load(os.path.join("image/menu/intro", "intro_single-2.png")),
                 pygame.image.load(os.path.join("image/menu/intro", "intro_obstacles-2.png")),
                 pygame.image.load(os.path.join("image/menu/intro", "intro_buff-2.png"))]
 INTRODUCTION2 = [pygame.image.load(os.path.join("image/menu/intro", "intro_single-2.png")),
-                pygame.image.load(os.path.join("image/menu/intro", "intro_obstacles-2.png")),
-                pygame.image.load(os.path.join("image/menu/intro", "intro_buff-2.png"))]                
-BACKGROUND_LIST = [pygame.image.load(os.path.join("image/background", "6city.jpg")), pygame.image.load(os.path.join("image/background", "5winter.jpg"))
-                   , pygame.image.load(os.path.join("image/background", "4autumn.jpg")), pygame.image.load(os.path.join("image/background", "3forest.jpg"))]
-BACKGROUND_LIST_DUO = [pygame.image.load(os.path.join("image/background", "3forestduo.jpg")), pygame.image.load(os.path.join("image/background", "5winter.jpg"))
-                   , pygame.image.load(os.path.join("image/background", "4autumn.jpg")), pygame.image.load(os.path.join("image/background", "3forest.jpg"))]
+                 pygame.image.load(os.path.join("image/menu/intro", "intro_obstacles-2.png")),
+                 pygame.image.load(os.path.join("image/menu/intro", "intro_buff-2.png"))]                
+BACKGROUND_LIST = [pygame.image.load(os.path.join("image/background", "6city.jpg")),
+                   pygame.image.load(os.path.join("image/background", "5winter.jpg")),
+                   pygame.image.load(os.path.join("image/background", "4autumn.jpg")),
+                   pygame.image.load(os.path.join("image/background", "3forest.jpg"))]
+BACKGROUND_LIST_DUO = [pygame.image.load(os.path.join("image/background", "3forestduo.jpg")),
+                       pygame.image.load(os.path.join("image/background", "5winter.jpg")),
+                       pygame.image.load(os.path.join("image/background", "4autumn.jpg")),
+                       pygame.image.load(os.path.join("image/background", "3forest.jpg"))]
 CHARACTOR_LIST = [pygame.image.load(os.path.join("image/charactor", "snail-1-right.png")),
-                pygame.image.load(os.path.join("image/charactor", "snail-2-right.png")),]
+                  pygame.image.load(os.path.join("image/charactor", "snail-2-right.png")),]
 DAMAGE_LIST = [pygame.image.load(os.path.join("image/charactor", "snail-debuff-1-right.png")),
-                pygame.image.load(os.path.join("image/charactor", "snail-debuff-2-right.png"))]
+               pygame.image.load(os.path.join("image/charactor", "snail-debuff-2-right.png"))]
 MUTEKI_LIST =  [pygame.image.load(os.path.join("image/charactor", "snail-invicible-1-right.png")),
                 pygame.image.load(os.path.join("image/charactor", "snail-invicible-2-right.png"))]  # 跑步圖片大小 87*94
 JUMPING_IMG = pygame.image.load(os.path.join("image/charactor", "snail-jump-right.png"))  # 跳躍圖片大小 87*94
@@ -572,7 +577,7 @@ def menu():
         window.blit(BACKGROUND_LIST[0], (0, 0))
         start_text_L1 = Text("Choose The", TITLE, BLACK, text_position1)
         start_text_L2 = Text("Game Mode", TITLE, BLACK, text_position2)
-        resource_text = Text_body("background music: Music Atelier Amacha", BODY, BLACK, (200, 25))
+        resource_text = Text_body("Background music: Music Atelier Amacha", BODY, BROWN, (180, 25))
         start_text_L1.draw(window), start_text_L2.draw(window)
         # 設置人數選擇按鈕的背景
         single_button_rect = MENU_BUTTON[0].get_rect(topleft=(100, 200))
@@ -582,9 +587,9 @@ def menu():
         window.blit(MENU_BUTTON[0], Duo_button_rect.topleft)
         
         # 繪製難度選擇按鈕及最高分的文本
-        Single_text = Text("Single", HEADING, BLACK, (200, 225))
+        Single_text = Text("Single", HEADING, BROWN, (200, 225))
         resource_text.draw(window)
-        Duo_text = Text("Duo", HEADING, BLACK, (200, 425))
+        Duo_text = Text("Duo", HEADING, BROWN, (200, 425))
         Single_text.draw(window)
         Duo_text.draw(window)
 
@@ -734,9 +739,9 @@ def difficulty():
         window.blit(MENU_BUTTON[0], hard_button_rect.topleft)
 
         # 繪製難度選擇按鈕及最高分的文本
-        easy_text = Text("EASY", HEADING, BLACK, (200, 225))
-        medium_text = Text("MEDIUM", HEADING, BLACK, (200, 325))
-        hard_text = Text("HARD", HEADING, BLACK, (200, 425))
+        easy_text = Text("EASY", HEADING, BROWN, (200, 225))
+        medium_text = Text("MEDIUM", HEADING, BROWN, (200, 325))
+        hard_text = Text("HARD", HEADING, BROWN, (200, 425))
         
         # 顯示各關目前最高分
         easy_score_list = load_sorted_score_list("1.csv")
@@ -1279,6 +1284,8 @@ def enter_your_name(enter_name_text, enter_rect):
 def show_rank(score_list, y_already):
     global TITLE, HEADING, BODY
     
+    image = pygame.image.load(os.path.join("image/window", "rank_board-2.png"))
+
     x_pos = window_width // 2 - 50
     y_pos = 70
     name_font = pygame.font.Font('Fonts/AgencyFB-Bold.ttf', SUBHEADING)
@@ -1289,14 +1296,15 @@ def show_rank(score_list, y_already):
     else:
         score_range = len(score_list)
     for i in range(score_range):
-        record = f"{i + 1}: {score_list[i][0]} {score_list[i][1]}"
-        record_surface = name_font.render(record, True, BLACK)
+        record = f"{score_list[i][0]} {score_list[i][1]}"
+        record_surface = name_font.render(record, True, BROWN)
         record_rect = record_surface.get_rect()
         record_rect.topleft = (x_pos, y_pos)
         window.blit(record_surface, record_rect)
         y_pos += 55
-    n_text = Text_body("Press Tab again to go back", SUBHEADING, BLACK, (850, 20))
-    n_text.draw(window)
+    n_text_row1 = Text_body("Press Tab again", SUBHEADING, BROWN, (910, 30))
+    n_text_row2 = Text_body("to go back", SUBHEADING, BROWN, (935, 70))
+    n_text_row1.draw(window), n_text_row2.draw(window)
     pygame.display.update()  
     leave_rank = False
     
