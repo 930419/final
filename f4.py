@@ -1320,6 +1320,7 @@ def show_rank(score_list, y_already):
                     break
 def gameover():
     window.fill(WHITE)  # 用白色填充整個視窗
+    pygame.mixer.music.stop()
     if game_mode == 1:
         game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
         score_text = Text(f"Your score: {points}", TITLE, BLACK, (window_width // 2, window_height // 2))  # 顯示分數
