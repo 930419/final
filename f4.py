@@ -33,10 +33,10 @@ BACKGROUND_LIST = [pygame.image.load(os.path.join("image/background", "6city.jpg
                    pygame.image.load(os.path.join("image/background", "4autumn.jpg")),
                    pygame.image.load(os.path.join("image/background", "3forest.jpg"))]
 
-BACKGROUND_LIST_DUO = [pygame.image.load(os.path.join("image/background", "3forestduo.jpg")),
-                       pygame.image.load(os.path.join("image/background", "5winter.jpg")),
-                       pygame.image.load(os.path.join("image/background", "4autumn.jpg")),
-                       pygame.image.load(os.path.join("image/background", "3forest.jpg"))]
+BACKGROUND_LIST_DUO = [pygame.image.load(os.path.join("image/background", "6cityduo.jpg")),
+                       pygame.image.load(os.path.join("image/background", "5winterduo.jpg")),
+                       pygame.image.load(os.path.join("image/background", "4autumnduo.jpg")),
+                       pygame.image.load(os.path.join("image/background", "3forestduo.jpg"))]
 
 CHARACTOR_LIST = [pygame.image.load(os.path.join("image/charactor", "snail-1-right.png")),
                   pygame.image.load(os.path.join("image/charactor", "snail-2-right.png"))]
