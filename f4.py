@@ -1392,9 +1392,9 @@ def gameover():
     elif game_mode == 2:
         game_over_text = Text("Game Over", 80, BLACK, (window_width // 2, window_height // 2 - 100))  # 顯示 "Game Over" 文字
         if winner == 1:
-            winner_text = Text("winner is 1P", TITLE, BLACK, (window_width // 2, window_height // 2))
-        elif winner == 2:  
             winner_text = Text("winner is 2P", TITLE, BLACK, (window_width // 2, window_height // 2))
+        elif winner == 2:  
+            winner_text = Text("winner is 1P", TITLE, BLACK, (window_width // 2, window_height // 2))
         elif winner == 0:  
             winner_text = Text("draw", TITLE, BLACK, (window_width // 2, window_height // 2))
     
