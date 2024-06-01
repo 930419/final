@@ -718,10 +718,24 @@ def startpage():
     global game_mode
     global TITLE, HEADING, BODY
 
-    intro_anime = VideoFileClip(os.path.join("anime", "intro_anime.mp4"))
-    intro_anime.preview()
+    global game_difficulty
+    global game_mode
+    global TITLE, HEADING, BODY
+    story = pygame.image.load(os.path.join("image/window", "story.jpg"))
+    window.blit(story, (0, 0))
+    pygame.display.update()
+    run = True
 
-    menu()
+    while run:
+        for event in pygame.event.get():
+            if event.type == (pygame.QUIT or pygame.K_ESCAPE):
+                run = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    intro_anime = VideoFileClip(os.path.join("anime", "intro_anime.mp4"))
+                    intro_anime.preview()
+                    menu()
+
     pygame.display.update()
 
 
