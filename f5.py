@@ -655,7 +655,7 @@ class Fog2:
 
     # 繪製道具
     def draw(self, screen: pygame.Surface):
-        screen.blit(self.image_list[self.type], (-30, window_height // 2))
+        screen.blit(self.image_list[self.type], (0, window_height // 2))
 
 
 class LifeBar:
@@ -1237,8 +1237,8 @@ def mainDuo():
     paused = False
     exit = False
     pygame.draw.line(window, BLACK, (0, 325), (1000, 325), 3)
-    fog1 = Fog2()
-    fog2 = Fog1()
+    fog1 = Fog1()
+    fog2 = Fog2()
 
     count_down_sound = pygame.mixer.Sound(os.path.join("music/sounds", "count_down.wav"))
     small_obstacle_sound = pygame.mixer.Sound(os.path.join("music/sounds", "small.wav"))
@@ -1318,6 +1318,46 @@ def mainDuo():
         player2.update(user_input)
         player2.draw(window)
 
+        if len(obstacles1) == 0:
+            rand1 = random.randint(0, 5)
+            if rand1 in [0, 1]:
+                obstacles1.append(smallobs(SMALLOBSTACLE))
+            elif rand1 in [2, 3]:
+                obstacles1.append(largeobs(LARGEOBSTACLE))
+            else:
+                obstacles1.append(flyobs(FLYOBSTACLE))
+
+        for obstacle in obstacles1:
+            obstacle.update()
+            obstacle.draw(window)
+            if player1.ch_rect.colliderect(obstacle.rect):
+                if not (player1.is_takingdamage() or player1.is_invincible()):
+                    pygame.mixer.Channel(4).play(large_obstacle_sound)
+                    life_bar1.take_damage()
+                    player1.take_damage()
+            if obstacle.rect.x < -obstacle.rect.width:
+                obstacles1.remove(obstacle)
+
+        if len(obstacles2) == 0:
+            rand2 = random.randint(0, 5)
+            if rand2 in [0, 1]:
+                obstacles2.append(smallobs2(SMALLOBSTACLE))
+            elif rand2 in [2, 3]:
+                obstacles2.append(largeobs2(LARGEOBSTACLE))
+            else:
+                obstacles2.append(flyobs2(FLYOBSTACLE))
+
+        for obstacle in obstacles2:
+            obstacle.update()
+            obstacle.draw(window)
+            if player2.ch_rect.colliderect(obstacle.rect):
+                if not (player2.is_takingdamage() or player2.is_invincible()):
+                    pygame.mixer.Channel(8).play(large_obstacle_sound)
+                    life_bar2.take_damage()
+                    player2.take_damage()
+            if obstacle.rect.x < -obstacle.rect.width:
+                obstacles2.remove(obstacle)
+
         if len(items1) == 0:
             if random.randint(0, 1000) < 2:
                 items1.append(Heart(ITEM))
@@ -1356,26 +1396,6 @@ def mainDuo():
             if item.rect.x < -item.rect.width:
                 items2.remove(item)
 
-        if len(obstacles1) == 0:
-            rand1 = random.randint(0, 5)
-            if rand1 in [0, 1]:
-                obstacles1.append(smallobs(SMALLOBSTACLE))
-            elif rand1 in [2, 3]:
-                obstacles1.append(largeobs(LARGEOBSTACLE))
-            else:
-                obstacles1.append(flyobs(FLYOBSTACLE))
-
-        for obstacle in obstacles1:
-            obstacle.update()
-            obstacle.draw(window)
-            if player1.ch_rect.colliderect(obstacle.rect):
-                if not (player1.is_takingdamage() or player1.is_invincible()):
-                    pygame.mixer.Channel(4).play(large_obstacle_sound)
-                    life_bar1.take_damage()
-                    player1.take_damage()
-            if obstacle.rect.x < -obstacle.rect.width:
-                obstacles1.remove(obstacle)
-
         if len(blurs1) == 0:
             if random.randint(0, 1000) < 2:
                 blurs1.append(blurobs(BLUROBSTACLE))
@@ -1388,29 +1408,6 @@ def mainDuo():
                 blurs1.remove(blur)
             if blur.rect.x < -blur.rect.width:
                 blurs1.remove(blur)
-        fog1.update()
-        if fog1.isfog():
-            fog1.draw(window)
-
-        if len(obstacles2) == 0:
-            rand2 = random.randint(0, 5)
-            if rand2 in [0, 1]:
-                obstacles2.append(smallobs2(SMALLOBSTACLE))
-            elif rand2 in [2, 3]:
-                obstacles2.append(largeobs2(LARGEOBSTACLE))
-            else:
-                obstacles2.append(flyobs2(FLYOBSTACLE))
-
-        for obstacle in obstacles2:
-            obstacle.update()
-            obstacle.draw(window)
-            if player2.ch_rect.colliderect(obstacle.rect):
-                if not (player2.is_takingdamage() or player2.is_invincible()):
-                    pygame.mixer.Channel(8).play(large_obstacle_sound)
-                    life_bar2.take_damage()
-                    player2.take_damage()
-            if obstacle.rect.x < -obstacle.rect.width:
-                obstacles2.remove(obstacle)
 
         if len(blurs2) == 0:
             if random.randint(0, 1000) < 2:
@@ -1424,6 +1421,11 @@ def mainDuo():
                 blurs2.remove(blur)
             if blur.rect.x < -blur.rect.width:
                 blurs2.remove(blur)
+
+        fog1.update()
+        if fog1.isfog():
+            fog1.draw(window)
+
         fog2.update()
         if fog2.isfog():
             fog2.draw(window)
