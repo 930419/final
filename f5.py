@@ -655,7 +655,7 @@ class Fog2:
 
     # 繪製道具
     def draw(self, screen: pygame.Surface):
-        screen.blit(self.image_list[self.type], (0, window_height // 2))
+        screen.blit(self.image_list[self.type], (-30, window_height // 2))
 
 
 class LifeBar:
@@ -1304,6 +1304,44 @@ def mainDuo():
         player2.update(user_input)
         player2.draw(window)
 
+        if len(items1) == 0:
+            if random.randint(0, 1000) < 2:
+                items1.append(Heart(ITEM))
+            elif random.randint(0, 1000) < 10:
+                items1.append(star(ITEM))
+        for item in items1:
+            item.update()
+            item.draw(window)
+            if player1.ch_rect.colliderect(item.rect):
+                if isinstance(item, Heart):
+                    pygame.mixer.Channel(9).play(heart_sound)
+                    life_bar1.heal()
+                else:
+                    pygame.mixer.Channel(10).play(star_sound)
+                    player1.muteki_time()
+                items1.remove(item)
+            if item.rect.x < -item.rect.width:
+                items1.remove(item)
+
+        if len(items2) == 0:
+            if random.randint(0, 1000) < 2:
+                items2.append(Heart2(ITEM))
+            elif random.randint(0, 1000) < 10:
+                items2.append(star2(ITEM))
+        for item in items2:
+            item.update()
+            item.draw(window)
+            if player2.ch_rect.colliderect(item.rect):
+                if isinstance(item, Heart2):
+                    pygame.mixer.Channel(5).play(heart_sound)
+                    life_bar2.heal()
+                else:
+                    pygame.mixer.Channel(6).play(star_sound)
+                    player2.muteki_time()
+                items2.remove(item)
+            if item.rect.x < -item.rect.width:
+                items2.remove(item)
+
         if len(obstacles1) == 0:
             rand1 = random.randint(0, 5)
             if rand1 in [0, 1]:
@@ -1375,44 +1413,6 @@ def mainDuo():
         fog2.update()
         if fog2.isfog():
             fog2.draw(window)
-
-        if len(items1) == 0:
-            if random.randint(0, 1000) < 2:
-                items1.append(Heart(ITEM))
-            elif random.randint(0, 1000) < 10:
-                items1.append(star(ITEM))
-        for item in items1:
-            item.update()
-            item.draw(window)
-            if player1.ch_rect.colliderect(item.rect):
-                if isinstance(item, Heart):
-                    pygame.mixer.Channel(9).play(heart_sound)
-                    life_bar1.heal()
-                else:
-                    pygame.mixer.Channel(10).play(star_sound)
-                    player1.muteki_time()
-                items1.remove(item)
-            if item.rect.x < -item.rect.width:
-                items1.remove(item)
-
-        if len(items2) == 0:
-            if random.randint(0, 1000) < 2:
-                items2.append(Heart2(ITEM))
-            elif random.randint(0, 1000) < 10:
-                items2.append(star2(ITEM))
-        for item in items2:
-            item.update()
-            item.draw(window)
-            if player2.ch_rect.colliderect(item.rect):
-                if isinstance(item, Heart2):
-                    pygame.mixer.Channel(5).play(heart_sound)
-                    life_bar2.heal()
-                else:
-                    pygame.mixer.Channel(6).play(star_sound)
-                    player2.muteki_time()
-                items2.remove(item)
-            if item.rect.x < -item.rect.width:
-                items2.remove(item)
 
         pygame.display.update()
         clock.tick(60)
