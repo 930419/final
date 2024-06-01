@@ -25,7 +25,7 @@ MENU_BUTTON = [pygame.image.load(os.path.join("image/menu", "button-2.png")),
 INTRODUCTION = [pygame.image.load(os.path.join("image/menu/intro", "intro_single-2.png")),
                 pygame.image.load(os.path.join("image/menu/intro", "intro_obstacles-2.png")),
                 pygame.image.load(os.path.join("image/menu/intro", "intro_buff-2.png"))]
-MENUBG  = pygame.image.load(os.path.join("image/menu/window", "main.png"))
+MENUBG  = pygame.image.load(os.path.join("image/window", "main.png"))
 
 INTRODUCTION2 = [pygame.image.load(os.path.join("image/menu/intro", "intro_Duo-2.png")),
                  pygame.image.load(os.path.join("image/menu/intro", "intro_obstacles-2.png")),
