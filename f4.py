@@ -343,7 +343,7 @@ class Charactor2:
         if self.invincible_timer2 > 0:
             self.image = self.duck_img_list[1]
         elif self.invincible_timer2 <= 0 and self.take_damagetimer2 > 0:
-            self.image. = self.duck_img_list[2]
+            self.image = self.duck_img_list[2]
         else:
             self.image = self.duck_img_list[0] 
         self.ch_rect = self.image.get_rect()
@@ -357,7 +357,7 @@ class Charactor2:
         if self.invincible_timer2 > 0:
             self.image = self.jump_img[1]
         elif self.invincible_timer2 <= 0 and self.take_damagetimer2 > 0:
-            self.image. = self.jump_img[2]
+            self.image = self.jump_img[2]
         else:
             self.image = self.jump_img[0]
         if self.ch_jump:
