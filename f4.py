@@ -26,7 +26,7 @@ INTRODUCTION = [pygame.image.load(os.path.join("image/menu/intro", "intro_single
                 pygame.image.load(os.path.join("image/menu/intro", "intro_obstacles-2.png")),
                 pygame.image.load(os.path.join("image/menu/intro", "intro_buff-2.png"))]
 
-INTRODUCTION2 = [pygame.image.load(os.path.join("image/menu/intro", "intro_single-2.png")),
+INTRODUCTION2 = [pygame.image.load(os.path.join("image/menu/intro", "intro_Duo-2.png")),
                  pygame.image.load(os.path.join("image/menu/intro", "intro_obstacles-2.png")),
                  pygame.image.load(os.path.join("image/menu/intro", "intro_buff-2.png"))]
 
@@ -211,7 +211,7 @@ class Charactor1:
         if self.invincible_timer1 > 0:
             self.image = self.duck_img_list[1]
         elif self.invincible_timer1 <= 0 and self.take_damagetimer1 > 0:
-            self.image. = self.duck_img_list[2]
+            self.image = self.duck_img_list[2]
         else:
             self.image = self.duck_img_list[0]  
         self.ch_rect = self.image.get_rect()
