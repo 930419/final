@@ -25,6 +25,7 @@ MENU_BUTTON = [pygame.image.load(os.path.join("image/menu", "button-2.png")),
 INTRODUCTION = [pygame.image.load(os.path.join("image/menu/intro", "intro_single-2.png")),
                 pygame.image.load(os.path.join("image/menu/intro", "intro_obstacles-2.png")),
                 pygame.image.load(os.path.join("image/menu/intro", "intro_buff-2.png"))]
+MENUBG  = pygame.image.load(os.path.join("image/menu/window", "main.png"))
 
 INTRODUCTION2 = [pygame.image.load(os.path.join("image/menu/intro", "intro_Duo-2.png")),
                  pygame.image.load(os.path.join("image/menu/intro", "intro_obstacles-2.png")),
@@ -757,7 +758,7 @@ def menu():
     run = True
     
     while run :
-        window.blit(BACKGROUND_LIST[0], (0, 0))
+        window.blit(MENUBG, (0, 0))
         start_text_L1 = Text("Choose The", TITLE, BLACK, text_position1)
         start_text_L2 = Text("Game Mode", TITLE, BLACK, text_position2)
         resource_text = Text_body("Background music: Music Atelier Amacha", BODY, BROWN, (180, 25))
@@ -918,7 +919,7 @@ def difficulty():
     
     while run :
         window.fill(WHITE)
-        window.blit(BACKGROUND_LIST[0], (0, 0))
+        window.blit(MENUBG, (0, 0))
         start_text_L1 = Text("Choose The", TITLE, BLACK, text_position1)
         start_text_L2 = Text("Game Difficulty", TITLE, BLACK, text_position2)
         start_text_L1.draw(window), start_text_L2.draw(window)
