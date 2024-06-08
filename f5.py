@@ -718,26 +718,24 @@ def startpage():
     global game_mode
     global TITLE, HEADING, BODY
 
-    intro_anime = VideoFileClip(os.path.join("anime", "intro_anime.mp4"))
-    intro_anime.preview()
-
-    text_position1 = (650, (window_height//2) - 50)  # Choose The
-    text_position2 = (650, (window_height//2) + 50)  # Game Difficulty
-    """
+    global game_difficulty
+    global game_mode
+    global TITLE, HEADING, BODY
+    story = pygame.image.load(os.path.join("image/window", "story.jpg"))
+    window.blit(story, (0, 0))
+    pygame.display.update()
     run = True
-    while run :
-        window.blit(BACKGROUND_LIST[0], (0, 0))
 
-        start_text_0 = Text("Press Enter To Start", TITLE, BLACK, (500, 450))
-        start_text_0.draw(window)
+    while run:
         for event in pygame.event.get():
             if event.type == (pygame.QUIT or pygame.K_ESCAPE):
                 run = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
+                    intro_anime = VideoFileClip(os.path.join("anime", "intro_anime.mp4"))
+                    intro_anime.preview()
                     menu()
-    """
-    menu()
+
     pygame.display.update()
 
 
@@ -750,7 +748,7 @@ def menu():
     global TITLE, HEADING, BODY
 
     text_position1 = (650, (window_height//2) - 50)  # Choose The
-    text_position2 = (650, (window_height//2) + 50)  # Game Difficulty
+    text_position2 = (650, (window_height//2) + 35)  # Game Mode
 
     load_bg_music(os.path.join("music", "bg_music_in_menu.ogg"))
     pygame.mixer.music.play(-1)  # menu background music
@@ -759,21 +757,21 @@ def menu():
     
     while run :
         window.blit(MENUBG, (0, 0))
-        start_text_L1 = Text("Choose The", TITLE, BLACK, text_position1)
-        start_text_L2 = Text("Game Mode", TITLE, BLACK, text_position2)
+        start_text_L1 = Text("Choose The", TITLE, BROWN, text_position1)
+        start_text_L2 = Text("Game Mode", TITLE, BROWN, text_position2)
         resource_text = Text_body("Background music: Music Atelier Amacha", BODY, BROWN, (180, 25))
         start_text_L1.draw(window), start_text_L2.draw(window)
         # 設置人數選擇按鈕的背景
-        single_button_rect = MENU_BUTTON[0].get_rect(topleft=(100, 200))
-        Duo_button_rect = MENU_BUTTON[0].get_rect(topleft=(100, 400))
+        single_button_rect = MENU_BUTTON[0].get_rect(topleft=(100, (window_height//2)-58))
+        Duo_button_rect = MENU_BUTTON[0].get_rect(topleft=(100, 370))
 
         window.blit(MENU_BUTTON[0], single_button_rect.topleft)
         window.blit(MENU_BUTTON[0], Duo_button_rect.topleft)
         
         # 繪製難度選擇按鈕及最高分的文本
-        Single_text = Text("Single", HEADING, BROWN, (200, 225))
+        Single_text = Text("Single", HEADING, BROWN, (200, (window_height//2) - 35))
         resource_text.draw(window)
-        Duo_text = Text("Duo", HEADING, BROWN, (200, 425))
+        Duo_text = Text("Duo", HEADING, BROWN, (200, 394))
         Single_text.draw(window)
         Duo_text.draw(window)
 
@@ -798,6 +796,7 @@ def menu():
                             introduo()
                         else:
                             mainDuo()
+
     pygame.quit()
     sys.exit()  
 
@@ -912,16 +911,16 @@ def difficulty():
     global TITLE, HEADING, BODY
     global needintrosingle
     
-    text_position1 = (650, (window_height//2) - 50)  # For "Choose The"
-    text_position2 = (650, (window_height//2) + 50)  # For "Game Difficulty"
+    text_position1 = (650, (window_height//2) - 50)  # "Choose The"
+    text_position2 = (650, (window_height//2) + 35)  # "Game Difficulty"
     
     run = True
     
     while run :
-        window.fill(WHITE)
+        # window.fill(WHITE)
         window.blit(MENUBG, (0, 0))
-        start_text_L1 = Text("Choose The", TITLE, BLACK, text_position1)
-        start_text_L2 = Text("Game Difficulty", TITLE, BLACK, text_position2)
+        start_text_L1 = Text("Choose The", TITLE, BROWN, text_position1)
+        start_text_L2 = Text("Game Difficulty", TITLE, BROWN, text_position2)
         start_text_L1.draw(window), start_text_L2.draw(window)
 
         # 繪製難度選擇按鈕及框框
@@ -943,23 +942,23 @@ def difficulty():
         if len(easy_score_list) > 0:
             easy_highest_name = easy_score_list[0][0]
             easy_highest_score = easy_score_list[0][1]
-            easy_highest_score_text = Text_body(f"Highest Score: {easy_highest_name} {easy_highest_score}",BODY, BLACK, (200, 185))
+            easy_highest_score_text = Text_body(f"Highest Score: {easy_highest_name} {easy_highest_score}",BODY, BROWN, (200, 185))
         else:
-            easy_highest_score_text = Text_body(f"Highest Score: no record", BODY, BLACK, (200, 185))
+            easy_highest_score_text = Text_body(f"Highest Score: no record", BODY, BROWN, (200, 185))
         medium_score_list = load_sorted_score_list("2.csv")
         if len(medium_score_list) > 0:
             medium_highest_name = medium_score_list[0][0]
             medium_highest_score = medium_score_list[0][1]
-            medium_highest_score_text = Text_body(f"Highest Score: {medium_highest_name} {medium_highest_score}",BODY, BLACK, (200, 285))
+            medium_highest_score_text = Text_body(f"Highest Score: {medium_highest_name} {medium_highest_score}",BODY, BROWN, (200, 285))
         else:
-            medium_highest_score_text = Text_body(f"Highest Score: no record", BODY, BLACK, (200, 285))
+            medium_highest_score_text = Text_body(f"Highest Score: no record", BODY, BROWN, (200, 285))
         hard_score_list = load_sorted_score_list("3.csv")
         if len(hard_score_list) > 0:
             hard_highest_name = hard_score_list[0][0]
             hard_highest_score = hard_score_list[0][1]
-            hard_highest_score_text = Text_body(f"Highest Score: {hard_highest_name} {hard_highest_score}",BODY, BLACK, (200, 385))
+            hard_highest_score_text = Text_body(f"Highest Score: {hard_highest_name} {hard_highest_score}",BODY, BROWN, (200, 385))
         else:
-            hard_highest_score_text = Text_body(f"Highest Score: no record", BODY, BLACK, (200, 385))
+            hard_highest_score_text = Text_body(f"Highest Score: no record", BODY, BROWN, (200, 385))
         
         easy_text.draw(window)
         medium_text.draw(window)
@@ -1009,7 +1008,7 @@ def countdown_timer(window, player, bg, x_bg_pos, y_bg_pos, countdown_time=3):
         window.blit(BACKGROUND_LIST[bg], (x_bg_pos, y_bg_pos))
         player.draw(window)
         pygame.mixer.Channel(2).play(count_down_sound)
-        count_text = Text(f"{countdown}", 300, BLACK, (485, 300))
+        count_text = Text(f"{countdown}", 300, BROWN, (485, 300))
         count_text.draw(window)
         pygame.display.update()
         time.sleep(1)
@@ -1040,9 +1039,9 @@ def pause_game(window, player, bg, x_bg_pos, y_bg_pos):
         window.blit(image[1], paused_button_rect2.topleft)
         window.blit(image[1], paused_button_rect3.topleft)
 
-        continue_text = Text_body("Press k again to continue", TITLE, BLACK, (500, 230))
-        restart_text = Text_body("Press r to restart", TITLE, BLACK, (500, 330))
-        exit_text = Text_body("Press e to exit", TITLE, BLACK, (500, 430))
+        continue_text = Text_body("Press k again to continue", TITLE, BROWN, (500, 230))
+        restart_text = Text_body("Press r to restart", TITLE, BROWN, (500, 330))
+        exit_text = Text_body("Press e to exit", TITLE, BROWN, (500, 430))
         continue_text.draw(window)
         restart_text.draw(window)
         exit_text.draw(window)
@@ -1238,8 +1237,8 @@ def mainDuo():
     paused = False
     exit = False
     pygame.draw.line(window, BLACK, (0, 325), (1000, 325), 3)
-    fog1 = Fog2()
-    fog2 = Fog1()
+    fog1 = Fog1()
+    fog2 = Fog2()
 
     count_down_sound = pygame.mixer.Sound(os.path.join("music/sounds", "count_down.wav"))
     small_obstacle_sound = pygame.mixer.Sound(os.path.join("music/sounds", "small.wav"))
@@ -1339,22 +1338,6 @@ def mainDuo():
             if obstacle.rect.x < -obstacle.rect.width:
                 obstacles1.remove(obstacle)
 
-        if len(blurs1) == 0:
-            if random.randint(0, 1000) < 2:
-                blurs1.append(blurobs(BLUROBSTACLE))
-        for blur in blurs1:
-            blur.update()
-            blur.draw(window)
-            if player1.ch_rect.colliderect(blur.rect):
-                pygame.mixer.Channel(3).play(fog_sound)
-                fog1.startfog()
-                blurs1.remove(blur)
-            if blur.rect.x < -blur.rect.width:
-                blurs1.remove(blur)
-        fog1.update()
-        if fog1.isfog():
-            fog1.draw(window)
-
         if len(obstacles2) == 0:
             rand2 = random.randint(0, 5)
             if rand2 in [0, 1]:
@@ -1374,22 +1357,6 @@ def mainDuo():
                     player2.take_damage()
             if obstacle.rect.x < -obstacle.rect.width:
                 obstacles2.remove(obstacle)
-
-        if len(blurs2) == 0:
-            if random.randint(0, 1000) < 2:
-                blurs2.append(blurobs2(BLUROBSTACLE))
-        for blur in blurs2:
-            blur.update()
-            blur.draw(window)
-            if player2.ch_rect.colliderect(blur.rect):
-                pygame.mixer.Channel(7).play(fog_sound)
-                fog2.startfog()
-                blurs2.remove(blur)
-            if blur.rect.x < -blur.rect.width:
-                blurs2.remove(blur)
-        fog2.update()
-        if fog2.isfog():
-            fog2.draw(window)
 
         if len(items1) == 0:
             if random.randint(0, 1000) < 2:
@@ -1428,6 +1395,40 @@ def mainDuo():
                 items2.remove(item)
             if item.rect.x < -item.rect.width:
                 items2.remove(item)
+
+        if len(blurs1) == 0:
+            if random.randint(0, 1000) < 2:
+                blurs1.append(blurobs(BLUROBSTACLE))
+        for blur in blurs1:
+            blur.update()
+            blur.draw(window)
+            if player1.ch_rect.colliderect(blur.rect):
+                pygame.mixer.Channel(3).play(fog_sound)
+                fog1.startfog()
+                blurs1.remove(blur)
+            if blur.rect.x < -blur.rect.width:
+                blurs1.remove(blur)
+
+        if len(blurs2) == 0:
+            if random.randint(0, 1000) < 2:
+                blurs2.append(blurobs2(BLUROBSTACLE))
+        for blur in blurs2:
+            blur.update()
+            blur.draw(window)
+            if player2.ch_rect.colliderect(blur.rect):
+                pygame.mixer.Channel(7).play(fog_sound)
+                fog2.startfog()
+                blurs2.remove(blur)
+            if blur.rect.x < -blur.rect.width:
+                blurs2.remove(blur)
+
+        fog1.update()
+        if fog1.isfog():
+            fog1.draw(window)
+
+        fog2.update()
+        if fog2.isfog():
+            fog2.draw(window)
 
         pygame.display.update()
         clock.tick(60)
